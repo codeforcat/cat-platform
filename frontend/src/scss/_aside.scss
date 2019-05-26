@@ -1,0 +1,27 @@
+.aside-block {
+  border-top: 2px solid lighten($color-base, 60%);
+  margin-top: 2em;
+}
+
+.aside-item {
+  @include aspect-ratio(100%, 60%);
+  box-shadow: 2px 2px 2px $color-gray;
+}
+
+.aside-item-link {
+  color: #fff;
+  text-decoration: none;
+}
+
+.aside-item-textWrap {
+  position: absolute;
+  left: .5em;
+  right: .5em;
+  bottom: .5em;
+}
+
+.aside-item-text {
+  font-weight: bold;
+  text-align: right;
+  padding: .2em .5em;
+}

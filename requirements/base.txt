@@ -1,0 +1,6 @@
+Django~=2.1.8
+PyMySQL
+djangorestframework
+django-filter
+django-mysql
+django-environ

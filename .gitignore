@@ -1,0 +1,17 @@
+*.pyc
+*~
+__pycache__
+/db-datadir
+/static
+.DS_Store
+/.idea
+
+/node_modules
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+!.gitkeep
+
+/env
