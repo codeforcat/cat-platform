@@ -35,7 +35,7 @@ module.exports = (env, argv) => {
               loader: 'css-loader',
               options: {
                 sourceMap: argv.mode === 'development' ? true : false,
-                importLoaders: 1,
+                importLoaders: 2,
                 modules: true,
                 localIdentName: '[name]__[local]___[hash:base64:5]'
               }
@@ -68,7 +68,7 @@ module.exports = (env, argv) => {
               loader: 'css-loader',
               options: {
                 sourceMap: argv.mode === 'development' ? true : false,
-                importLoaders: 1
+                importLoaders: 2
               }
             },
             {
