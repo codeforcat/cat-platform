@@ -1,6 +1,7 @@
 Django~=2.1.8
 PyMySQL
 djangorestframework
+drf-writable-nested
 django-filter
 django-mysql
 django-environ

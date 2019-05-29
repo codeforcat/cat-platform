@@ -2,20 +2,33 @@ from django.db import models
 from django_mysql.models import JSONField, Model
 
 
-class Question(Model):
+class Question(models.Model):
     class Meta:
         db_table = 'question'
 
     question_id = models.AutoField(db_column='QUESTION ID', primary_key=True)
     question_name = models.CharField(max_length=100, unique=True)
     intent_id = models.CharField(max_length=100, null=True, blank=True)
-    training_phrases = JSONField(default=list)
     parent_answer_id = models.IntegerField(null=True, blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return str(self.question_id)
+        return self.question_name
+
+
+class Phrase(models.Model):
+    class Meta:
+        db_table = 'phrase'
+
+    phrase_id = models.AutoField(db_column='PHRASE ID', primary_key=True)
+    question_id = models.ForeignKey(Question, on_delete=models.CASCADE)
+    phrase_text = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+    modified_date = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.phrase_text
 
 
 class Answer(Model):
@@ -24,13 +37,13 @@ class Answer(Model):
 
     answer_id = models.AutoField(db_column='ANSWER ID', primary_key=True)
     question_id = models.ForeignKey(Question, on_delete=models.CASCADE)
-    answer_texts = JSONField(default=list)
+    answer_text = models.TextField()
     additional_message = JSONField(default=dict)
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return str(self.answer_id)
+        return self.answer_text
 
 
 class Entity(models.Model):
@@ -44,18 +57,32 @@ class Entity(models.Model):
     modified_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return str(self.entity_id)
+        return self.entity_name
 
 
-class EntityValue(Model):
+class EntityValue(models.Model):
     class Meta:
         db_table = 'entity_value'
 
+    entity_value_id = models.AutoField(db_column='ENTITY VALUE ID', primary_key=True)
     entity_id = models.ForeignKey(Entity, on_delete=models.CASCADE)
-    value = models.CharField(max_length=50)
-    synonyms = JSONField(default=list)
+    value_text = models.CharField(max_length=50, null=True, blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return str(self.id)
+        return self.value
+
+
+class Synonym(models.Model):
+    class Meta:
+        db_table = 'synonym'
+
+    synonym_id = models.AutoField(db_column='SYNONYM ID', primary_key=True)
+    entity_value_id = models.ForeignKey(EntityValue, on_delete=models.CASCADE)
+    synonym_text = models.CharField(max_length=50, null=True, blank=True)
+    created_date = models.DateTimeField(auto_now_add=True)
+    modified_date = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.synonym_text
