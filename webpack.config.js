@@ -9,7 +9,7 @@ module.exports = (env, argv) => {
     devtool: 'source-map',
     resolve: resolve,
     entry: {
-      common: ['@babel/polyfill', './frontend/src/index.js']
+      common: ['./frontend/src/index.js']
     },
     output: {
       path: path.resolve(__dirname , 'frontend/static/frontend'),

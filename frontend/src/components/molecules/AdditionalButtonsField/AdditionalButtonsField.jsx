@@ -1,19 +1,23 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Grid from "@material-ui/core/Grid";
+import Grid from '@material-ui/core/Grid';
 import InputLabel from '@material-ui/core/InputLabel';
-import Input from "@material-ui/core/Input";
+import Input from '@material-ui/core/Input';
 import AdditionalLabelText from '../AdditionalLabelText/AdditionalLabelText.jsx';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(theme => ({
   label: {
     marginBottom: '1em',
+  },
+  button: {
+    marginTop: '1em',
   }
 }));
 
 export default function AdditionalButtonsField(props) {
   const classes = useStyles();
-  const button_list = [1,2,3,4];
+  const button_list = [1,2];
 
   return (
     <div className={props.className}>
@@ -30,6 +34,7 @@ export default function AdditionalButtonsField(props) {
           {button_list.map((item, index)=>
             <AdditionalLabelText key={index} index={index} delete/>
           )}
+          {button_list.length < 4 && <Button variant="contained" color="primary" className={classes.button}>add</Button>}
         </Grid>
       </Grid>
     </div>

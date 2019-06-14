@@ -7,6 +7,7 @@ import QuestionNameField from '../../molecules/QuestionNameField/QuestionNameFie
 import PhraseFields from '../../molecules/PhraseFields/PhraseFields.jsx';
 import AnswerTextField from '../../molecules/AnswerTextField/AnswerTextField.jsx';
 import AdditionalMessage from '../../molecules/AdditionalMessage/AdditionalMessage.jsx';
+import SendButton from '../../molecules/SendButton/SendButton.jsx';
 
 const useStyles = makeStyles(theme => ({
   field: {
@@ -25,6 +26,7 @@ export default function QAEntry(props) {
       <PhraseFields className={classes.field}/>
       <AnswerTextField className={classes.field}/>
       <AdditionalMessage className={classes.field}/>
+      <SendButton className={classes.field}/>
     </Container>
   );
 }
