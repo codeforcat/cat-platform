@@ -5,6 +5,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import AdditionalRadio from '../AdditionalRadio/AdditionalRadio.jsx';
 import AdditionalButtonsField from '../AdditionalButtonsField/AdditionalButtonsField.jsx';
 import AdditionalConfirmField from '../AdditionalConfirmField/AdditionalConfirmField.jsx';
+import AdditionalImageField from '../AdditionalImageField/AdditionalImageField.jsx';
 
 const useStyles = makeStyles(theme => ({
   label: {
@@ -25,7 +26,8 @@ export default function AdditionalMessage(props) {
         direction="row"
         justify="flex-start"
         alignItems="flex-start"
-        spacing={3}>
+        spacing={3}
+      >
         <Grid item xs={12} sm={3}>
           <InputLabel className={classes.label}>追加メッセージ</InputLabel>
         </Grid>
@@ -33,6 +35,7 @@ export default function AdditionalMessage(props) {
           <AdditionalRadio className={classes.radio}/>
           <AdditionalButtonsField/>
           <AdditionalConfirmField/>
+          <AdditionalImageField/>
         </Grid>
       </Grid>
     </div>

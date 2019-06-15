@@ -12,7 +12,6 @@ import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
-import Fab from '@material-ui/core/Fab';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
@@ -88,17 +87,15 @@ const useStyles2 = makeStyles(theme => ({
     width: '100%',
     marginTop: theme.spacing(3),
   },
-  fab: {
-    margin: theme.spacing(1),
+  icon: {
+    marginLeft: theme.spacing(1),
   },
 }));
 
 export default function TableList(props) {
   const classes = useStyles2();
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
-
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, props.rows.length - page * rowsPerPage);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   function handleChangePage(event, newPage) {
     setPage(newPage);
@@ -126,26 +123,20 @@ export default function TableList(props) {
               <TableCell>{row.calories}</TableCell>
               <TableCell>{row.fat}</TableCell>
               <TableCell align="right">
-                <Fab color="secondary" aria-label="Edit" className={classes.fab}>
+                <IconButton aria-label="Edit" className={classes.icon}>
                   <EditIcon/>
-                </Fab>
-                <Fab aria-label="Delete" className={classes.fab}>
+                </IconButton>
+                <IconButton aria-label="Delete" className={classes.icon}>
                   <DeleteForeverIcon/>
-                </Fab>
+                </IconButton>
               </TableCell>
             </TableRow>
           ))}
-
-          {emptyRows > 0 && (
-            <TableRow style={{ height: 48 * emptyRows }}>
-              <TableCell colSpan={4} />
-            </TableRow>
-          )}
         </TableBody>
         <TableFooter>
           <TableRow>
             <TablePagination
-              rowsPerPageOptions={[5, 10, 25]}
+              rowsPerPageOptions={[10, 25, 50]}
               colSpan={4}
               count={props.rows.length}
               rowsPerPage={rowsPerPage}

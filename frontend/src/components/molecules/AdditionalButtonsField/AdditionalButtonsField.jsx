@@ -24,7 +24,8 @@ export default function AdditionalButtonsField(props) {
       <Grid
         container
         direction="column"
-        spacing={3}>
+        spacing={3}
+      >
         <Grid item xs={12}>
           <InputLabel htmlFor="buttons-title" required>メッセージのタイトル</InputLabel>
           <Input id="buttons-title" required fullWidth/>

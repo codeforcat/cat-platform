@@ -12,7 +12,8 @@ export default function AdditionalLabelText(props) {
         direction="row"
         justify="flex-start"
         alignItems="center"
-        spacing={3}>
+        spacing={3}
+      >
         <Grid item xs={12} sm={5}>
           <InputLabel htmlFor="`label${props.index}`" required>ラベル</InputLabel>
           <Input id="`label${props.index}`" required fullWidth/>

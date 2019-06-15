@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import InputLabel from '@material-ui/core/InputLabel';
-import PhraseTextField from '../PhraseTextField/PhraseTextField.jsx';
+import EntityValueSynonymField from '../EntityValueSynonymField/EntityValueSynonymField.jsx';
 import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(theme => ({
@@ -11,9 +11,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function PhraseFields(props) {
+export default function EntityValueSynonyms(props) {
   const classes = useStyles();
-  const phrase_list = [1,2,3];
+  const value_list = [1,2];
 
   return (
     <div className={props.className}>
@@ -25,11 +25,11 @@ export default function PhraseFields(props) {
         spacing={3}
       >
         <Grid item xs={12} sm={3}>
-          <InputLabel required>Questionのフレーズ<br/>（言い替え）</InputLabel>
+          <InputLabel>Value</InputLabel>
         </Grid>
         <Grid item xs={12} sm={9}>
-          {phrase_list.map((item, index)=>
-            <PhraseTextField key={index} first={index === 0}/>
+          {value_list.map((item, index)=>
+            <EntityValueSynonymField key={index} index={index} delete/>
           )}
           <Button variant="contained" color="primary" className={classes.button}>add</Button>
         </Grid>

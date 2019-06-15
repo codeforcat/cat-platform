@@ -8,7 +8,8 @@ export default function SendButton(props) {
       <Grid
         container
         justify="center"
-        spacing={3}>
+        spacing={3}
+      >
         <Grid item xs={4} sm={3}>
           <Button variant="contained" color="primary" fullWidth>create</Button>
         </Grid>

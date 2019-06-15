@@ -24,7 +24,8 @@ export default function ParentAnswerIdField(props) {
         direction="row"
         justify="flex-start"
         alignItems="center"
-        spacing={3}>
+        spacing={3}
+      >
         <Grid item xs={12} sm={3}>
           <InputLabel htmlFor="parent-answer-id">親のAnswer ID</InputLabel>
         </Grid>

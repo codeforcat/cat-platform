@@ -16,10 +16,12 @@ export default function AdditionalRadio(props) {
         name="addition"
         value={value}
         onChange={handleChange}
-        row>
+        row
+      >
         <FormControlLabel value="none" control={<Radio color="primary" />} label="なし"/>
         <FormControlLabel value="buttons" control={<Radio color="primary" />} label="選択肢ボタン"/>
         <FormControlLabel value="confirm" control={<Radio color="primary" />} label="２択ボタン"/>
+        <FormControlLabel value="image" control={<Radio color="primary" />} label="画像"/>
       </RadioGroup>
     </div>
   );

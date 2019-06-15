@@ -10,7 +10,8 @@ export default function PhraseTextField(props) {
       direction="row"
       justify="flex-start"
       alignItems="center"
-      spacing={3}>
+      spacing={3}
+    >
       <Grid item xs={10}>
         <TextField fullWidth multiline rows={3} required={props.first}/>
       </Grid>
