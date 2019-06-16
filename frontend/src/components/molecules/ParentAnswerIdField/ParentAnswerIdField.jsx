@@ -6,15 +6,8 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
 export default function ParentAnswerIdField(props) {
-  const [values, setValues] = React.useState({
-    parent_answer: ''
-  });
-
   function handleChange(event) {
-    setValues(oldValues => ({
-      ...oldValues,
-      parent_answer: event.target.value,
-    }));
+    props.actions.inputParentAnswerId(event.target.value);
   }
 
   return (
@@ -31,14 +24,14 @@ export default function ParentAnswerIdField(props) {
         </Grid>
         <Grid item xs={12} sm={3}>
           <Select
-            value={values.parent_answer}
+            value={props.parent_answer_id}
             onChange={handleChange}
             input={<Input id="parent-answer-id"/>}
             autoWidth>
-            <MenuItem value=""><em>None</em></MenuItem>
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
+            <MenuItem value="-1">なし</MenuItem>
+            {props.exists_answers.map((item, index) =>
+              <MenuItem key={index} value={item.answer_id}>{item.answer_text}</MenuItem>
+            )}
           </Select>
         </Grid>
       </Grid>

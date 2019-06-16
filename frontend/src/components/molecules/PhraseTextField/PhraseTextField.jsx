@@ -13,10 +13,22 @@ export default function PhraseTextField(props) {
       spacing={3}
     >
       <Grid item xs={10}>
-        <TextField fullWidth multiline rows={3} required={props.first}/>
+        <TextField
+          value={props.text}
+          onChange={(e) => props.actions.inputPhraseText(e.target.value, props.idx)}
+          fullWidth
+          multiline
+          rows={3}
+          required={props.first}
+        />
       </Grid>
       <Grid item xs={2}>
-        <Button variant="contained">delete</Button>
+        <Button
+          variant="contained"
+          onClick={() => props.actions.deletePhraseText(props.idx, props.phrase_temp_id)}
+        >
+          delete
+        </Button>
       </Grid>
     </Grid>
   );

@@ -17,7 +17,15 @@ export default function AnswerTextField(props) {
           <InputLabel htmlFor="answer-text" required>Answer</InputLabel>
         </Grid>
         <Grid item xs={12} sm={9}>
-          <TextField id="answer-text" fullWidth multiline rows={3} required/>
+          <TextField
+            id="answer-text"
+            value={props.answer_text}
+            onChange={(e) => props.actions.inputAnswerText(e.target.value)}
+            fullWidth
+            multiline
+            rows={3}
+            required
+          />
         </Grid>
       </Grid>
     </div>

@@ -11,7 +11,22 @@ export default function SendButton(props) {
         spacing={3}
       >
         <Grid item xs={4} sm={3}>
-          <Button variant="contained" color="primary" fullWidth>create</Button>
+          {!props.isUpdateStateEnable && <Button
+            variant="contained"
+            color="primary"
+            fullWidth
+            onClick={() => props.actions.createDialogue(props.question_name, props.parent_answer_id, props.phrases, props.answer)}
+          >
+            create
+          </Button>}
+          {props.isUpdateStateEnable && <Button
+            variant="contained"
+            color="secondary"
+            fullWidth
+            onClick={() => props.actions.updateDialogue(props.question_id, props.question_name, props.parent_answer_id, props.phrases, props.answer)}
+          >
+            update
+          </Button>}
         </Grid>
       </Grid>
     </div>

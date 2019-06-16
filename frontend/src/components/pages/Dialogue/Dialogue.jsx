@@ -1,12 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import QAList from '../../organisms/QAList/QAList.jsx';
-import QAEntry from '../../organisms/QAEntry/QAEntry.jsx';
+import QAEntryContainer from '../../../containers/QAEntryContainer/QAEntryContainer';
 import EntityList from '../../organisms/EntityList/EntityList.jsx';
 import EntityEntry from '../../organisms/EntityEntry/EntityEntry.jsx';
 
 const qa_list = () => <QAList/>;
-const qa_entry = () => <QAEntry/>;
+const qa_entry = () => <QAEntryContainer/>;
 const entity_list = () => <EntityList/>;
 const entity_entry = () => <EntityEntry/>;
 

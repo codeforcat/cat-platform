@@ -17,7 +17,13 @@ export default function QuestionNameField(props) {
           <InputLabel htmlFor="question-name" required>Questionの名前</InputLabel>
         </Grid>
         <Grid item xs={12} sm={9}>
-          <Input id="question-name" required fullWidth/>
+          <Input
+            id="question-name"
+            value={props.name}
+            onChange={(e) => props.actions.inputQuestionName(e.target.value)}
+            required
+            fullWidth
+          />
         </Grid>
       </Grid>
     </div>

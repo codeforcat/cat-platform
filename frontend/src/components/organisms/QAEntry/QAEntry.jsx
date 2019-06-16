@@ -20,13 +20,48 @@ export default function QAEntry(props) {
 
   return (
     <Container>
-      <QuestionIdField className={classes.field}/>
-      <ParentAnswerIdField className={classes.field}/>
-      <QuestionNameField className={classes.field}/>
-      <PhraseFields className={classes.field}/>
-      <AnswerTextField className={classes.field}/>
-      <AdditionalMessage className={classes.field}/>
-      <SendButton className={classes.field}/>
+      <QuestionIdField
+        className={classes.field}
+        id={props.question_id}
+        actions={props.actions}
+      />
+      <ParentAnswerIdField
+        className={classes.field}
+        parent_answer_id={props.parent_answer_id}
+        exists_answers={props.exists_answers}
+        actions={props.actions}
+      />
+      <QuestionNameField
+        className={classes.field}
+        name={props.question_name}
+        actions={props.actions}
+      />
+      <PhraseFields
+        className={classes.field}
+        phrases={props.phrases}
+        actions={props.actions}
+      />
+      <AnswerTextField
+        className={classes.field}
+        answer_text={props.answer[0].answer_text}
+        actions={props.actions}
+      />
+      <AdditionalMessage
+        className={classes.field}
+        additional_state={props.answer.additional_state}
+        additional_message={props.answer.additional_message}
+        actions={props.actions}
+      />
+      <SendButton
+        className={classes.field}
+        isUpdateStateEnable={props.isUpdateStateEnable}
+        question_id={props.question_id}
+        question_name={props.question_name}
+        parent_answer_id={props.parent_answer_id}
+        phrases={props.phrases}
+        answer={props.answer}
+        actions={props.actions}
+      />
     </Container>
   );
 }

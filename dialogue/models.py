@@ -22,7 +22,8 @@ class Phrase(models.Model):
         db_table = 'phrase'
 
     phrase_id = models.AutoField(db_column='PHRASE ID', primary_key=True)
-    question_id = models.ForeignKey(Question, on_delete=models.CASCADE)
+    question_id = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='phrase')
+    phrase_temp_id = models.IntegerField(null=True, blank=True)
     phrase_text = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
@@ -36,9 +37,10 @@ class Answer(Model):
         db_table = 'answer'
 
     answer_id = models.AutoField(db_column='ANSWER ID', primary_key=True)
-    question_id = models.ForeignKey(Question, on_delete=models.CASCADE)
+    question_id = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='answer_field')
     answer_text = models.TextField()
-    additional_message = JSONField(default=dict)
+    additional_state = models.CharField(max_length=20, default='none')
+    additional_message = JSONField(default=dict, null=True, blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
 
@@ -65,7 +67,7 @@ class EntityValue(models.Model):
         db_table = 'entity_value'
 
     entity_value_id = models.AutoField(db_column='ENTITY VALUE ID', primary_key=True)
-    entity_id = models.ForeignKey(Entity, on_delete=models.CASCADE)
+    entity_id = models.ForeignKey(Entity, on_delete=models.CASCADE, related_name='entity_value')
     value_text = models.CharField(max_length=50, null=True, blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
@@ -79,7 +81,7 @@ class Synonym(models.Model):
         db_table = 'synonym'
 
     synonym_id = models.AutoField(db_column='SYNONYM ID', primary_key=True)
-    entity_value_id = models.ForeignKey(EntityValue, on_delete=models.CASCADE)
+    entity_value_id = models.ForeignKey(EntityValue, on_delete=models.CASCADE, related_name='synonym')
     synonym_text = models.CharField(max_length=50, null=True, blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)

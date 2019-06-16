@@ -4,17 +4,17 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 export default function AdditionalRadio(props) {
-  const [value, setValue] = useState('');
+  // const [value, setValue] = useState(props.state);
 
   function handleChange(event) {
-    setValue(event.target.value);
+    props.actions.inputAdditionalState(event.target.value);
   }
 
   return (
     <div className={props.className}>
       <RadioGroup
         name="addition"
-        value={value}
+        value={props.state}
         onChange={handleChange}
         row
       >

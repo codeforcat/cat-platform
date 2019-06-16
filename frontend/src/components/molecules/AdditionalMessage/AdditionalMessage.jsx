@@ -32,10 +32,14 @@ export default function AdditionalMessage(props) {
           <InputLabel className={classes.label}>追加メッセージ</InputLabel>
         </Grid>
         <Grid item xs={12} sm={9}>
-          <AdditionalRadio className={classes.radio}/>
-          <AdditionalButtonsField/>
-          <AdditionalConfirmField/>
-          <AdditionalImageField/>
+          <AdditionalRadio
+            className={classes.radio}
+            state={props.additional_state}
+            actions={props.actions}
+          />
+          {props.additional_state === 'buttons' && <AdditionalButtonsField/>}
+          {props.additional_state === 'confirm' && <AdditionalConfirmField/>}
+          {props.additional_state === 'image' && <AdditionalImageField/>}
         </Grid>
       </Grid>
     </div>

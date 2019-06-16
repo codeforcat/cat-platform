@@ -21,12 +21,13 @@ from dialogue import views
 
 router = routers.DefaultRouter()
 router.register('questions', views.QuestionViewSet)
+router.register('answers', views.AnswerDisplayViewSet)
 router.register('entities', views.EntityViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/', include(router.urls)),
-    re_path('^(?:.*)/?$', include('frontend.urls')),
+    re_path('^(?:.*)/?', include('frontend.urls')),
 ]
 
 if settings.DEBUG:

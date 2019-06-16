@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function PhraseFields(props) {
   const classes = useStyles();
-  const phrase_list = [1,2,3];
+  const phrase_list = props.phrases;
 
   return (
     <div className={props.className}>
@@ -29,9 +29,23 @@ export default function PhraseFields(props) {
         </Grid>
         <Grid item xs={12} sm={9}>
           {phrase_list.map((item, index)=>
-            <PhraseTextField key={index} first={index === 0}/>
+            <PhraseTextField
+              key={index}
+              first={index === 0}
+              text={item.phrase_text}
+              idx={index}
+              temp_id={item.phrase_temp_id}
+              actions={props.actions}
+            />
           )}
-          <Button variant="contained" color="primary" className={classes.button}>add</Button>
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.button}
+            onClick={() => props.actions.addPhraseText()}
+          >
+            add
+          </Button>
         </Grid>
       </Grid>
     </div>

@@ -18,7 +18,12 @@ export default function QuestionIdField(props) {
           <InputLabel htmlFor="question-id">Question ID</InputLabel>
         </Grid>
         <Grid item xs={12} sm={3}>
-          <Input id="question-id" aria-describedby="question-id-helper-text"/>
+          <Input
+            id="question-id"
+            aria-describedby="question-id-helper-text"
+            value={props.id}
+            onChange={(e) => props.actions.inputQuestionId(e.target.value)}
+          />
           <FormHelperText id="question-id-helper-text">※新規追加時は空欄</FormHelperText>
         </Grid>
       </Grid>

@@ -6,18 +6,24 @@ from .models import Question, Phrase, Answer, Entity, EntityValue, Synonym
 class AnswerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Answer
-        fields = ('answer_text', 'additional_message')
+        fields = ('answer_text', 'additional_state', 'additional_message')
+
+
+class AnswerDisplaySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Answer
+        fields = ('answer_id', 'answer_text', 'additional_state', 'additional_message')
 
 
 class PhraseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Phrase
-        fields = ('phrase_text',)
+        fields = ('phrase_temp_id', 'phrase_text')
 
 
 class QuestionSerializer(WritableNestedModelSerializer):
-    answer = AnswerSerializer(required=False, allow_null=True)
-    phrases = PhraseSerializer(many=True, required=False, allow_null=True)
+    answer = AnswerSerializer(many=True, required=False, allow_null=True, source='answer_field')
+    phrases = PhraseSerializer(many=True, required=False, allow_null=True, source='phrase')
 
     class Meta:
         model = Question
@@ -31,7 +37,7 @@ class SynonymSerializer(serializers.ModelSerializer):
 
 
 class EntityValueSerializer(serializers.ModelSerializer):
-    synonyms = SynonymSerializer(many=True, required=False, allow_null=True)
+    synonyms = SynonymSerializer(many=True, required=False, allow_null=True, source='synonym')
 
     class Meta:
         model = EntityValue
@@ -39,7 +45,7 @@ class EntityValueSerializer(serializers.ModelSerializer):
 
 
 class EntitySerializer(WritableNestedModelSerializer):
-    entity_values = EntityValueSerializer(many=True, required=False, allow_null=True)
+    entity_values = EntityValueSerializer(many=True, required=False, allow_null=True, source='entity_value')
 
     class Meta:
         model = Entity
