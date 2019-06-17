@@ -35,6 +35,7 @@ export default function AdditionalMessage(props) {
           <AdditionalRadio
             className={classes.radio}
             state={props.additional_state}
+            idx={props.idx}
             actions={props.actions}
           />
           {props.additional_state === 'buttons' && <AdditionalButtonsField/>}

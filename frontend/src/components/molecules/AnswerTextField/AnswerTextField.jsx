@@ -20,7 +20,7 @@ export default function AnswerTextField(props) {
           <TextField
             id="answer-text"
             value={props.answer_text}
-            onChange={(e) => props.actions.inputAnswerText(e.target.value)}
+            onChange={(e) => props.actions.inputAnswerText(e.target.value, props.idx)}
             fullWidth
             multiline
             rows={3}

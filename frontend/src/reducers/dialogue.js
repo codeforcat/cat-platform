@@ -106,10 +106,7 @@ export default function (state = initialState,action) {
         ]
       });
     case actionTypes.INPUT_ANSWER_TEXT:
-      // const answer_text = Object.assign({},state.answer[0],{answer_text: action.payload.answer_text, isValid: action.payload.answer_text !== ''});
-      // return Object.assign({},state,{answer: answer_text});
-
-      const makeAnswerState = (state,index,inputData) => {
+      const makeAnswerTextState = (state,index,inputData) => {
         const new_list = [
           ...state.answer.slice(0, index),
           Object.assign({}, state.answer[index], {answer_text: inputData, isValid: index === 0 ? inputData !== '' : false}),
@@ -119,15 +116,24 @@ export default function (state = initialState,action) {
           answer: new_list
         })
       };
-      return makeAnswerState(state,action.payload.idx,action.payload.answer_text);
+      return makeAnswerTextState(state,action.payload.idx,action.payload.answer_text);
     case actionTypes.INPUT_ADDITIONAL_STATE:
-      let additional_message;
-      switch (action.payload.state) {
-        case 'none':
-          additional_message = {};
-      }
-      const additional_state = Object.assign({},state.answer,{additional_state: action.payload.state, additional_message: additional_message});
-      return Object.assign({},state,{answer: additional_state});
+      const makeAdditionalStateState = (state,index,inputData) => {
+        let additional_message;
+        switch (inputData) {
+          case 'none':
+            additional_message = {};
+        }
+        const new_list = [
+          ...state.answer.slice(0, index),
+          Object.assign({}, state.answer[index], {additional_state: inputData, additional_message: additional_message}),
+          ...state.answer.slice(index + 1)
+        ];
+        return Object.assign({},state,{
+          answer: new_list
+        })
+      };
+      return makeAdditionalStateState(state,action.payload.idx,action.payload.state);
     case actionTypes.CLEAR_DIALOGUE:
       return Object.assign({},state,{
         question_id: 0,

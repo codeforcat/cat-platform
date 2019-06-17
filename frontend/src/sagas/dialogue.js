@@ -32,15 +32,14 @@ export function* createDialogue() {
   while (true) {
     const action = yield take(dialogueActions.CREATE_DIALOGUE);
     const state = yield select(getDialogueState,action.payload);
-    console.log(state);
-    // const isValid  = yield select(isValidState);
-    // if (isValid) {
+    const isValid  = yield select(isValidState);
+    if (isValid) {
       const { payload, error } = yield call(API.create,'questions',state.temp);
       yield call(_clearDialogue,payload,error);
-    // }
-    // else {
-    //   yield put(showError());
-    // }
+    }
+    else {
+      yield put(showError());
+    }
   }
 }
 

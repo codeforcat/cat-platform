@@ -13,7 +13,6 @@ function mapStateToProps(state) {
     phrases          : d.phrases,
     answer           : d.answer,
     isUpdateStateEnable: d.isUpdateStateEnable,
-    isRequired       : d.isRequired,
     isValid          : d.isValid,
     isShowError      : d.isShowError,
     errorCode        : d.errorCode,

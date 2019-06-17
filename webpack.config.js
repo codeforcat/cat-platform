@@ -6,7 +6,7 @@ const resolve = require('./resolve.js');
 
 module.exports = (env, argv) => {
   return {
-    mode: 'development',
+    mode: argv.mode,
     devtool: 'source-map',
     resolve: resolve,
     entry: {

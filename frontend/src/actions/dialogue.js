@@ -83,21 +83,22 @@ export function deletePhraseText(idx, phrase_temp_idx) {
   }
 }
 
-export function inputAnswerText(answer_text) {
+export function inputAnswerText(answer_text, idx) {
   return {
     type: INPUT_ANSWER_TEXT,
     payload:{
       answer_text: answer_text,
-      idx: 0
+      idx: parseInt(idx)
     }
   }
 }
 
-export function inputAdditionalState(state) {
+export function inputAdditionalState(state, idx) {
   return {
     type: INPUT_ADDITIONAL_STATE,
     payload:{
-      state: state
+      state: state,
+      idx: parseInt(idx)
     }
   }
 }

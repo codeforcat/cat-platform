@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import QuestionIdField from '../../molecules/QuestionIdField/QuestionIdField.jsx';
@@ -17,6 +17,10 @@ const useStyles = makeStyles(theme => ({
 
 export default function QAEntry(props) {
   const classes = useStyles();
+
+  useEffect(() => {
+    props.actions.fetchAnswers();
+  },[props.parent_answer_id]);
 
   return (
     <Container>
@@ -41,17 +45,23 @@ export default function QAEntry(props) {
         phrases={props.phrases}
         actions={props.actions}
       />
-      <AnswerTextField
-        className={classes.field}
-        answer_text={props.answer[0].answer_text}
-        actions={props.actions}
-      />
-      <AdditionalMessage
-        className={classes.field}
-        additional_state={props.answer.additional_state}
-        additional_message={props.answer.additional_message}
-        actions={props.actions}
-      />
+      {props.answer.map((item, index) =>
+        <div key={index}>
+          <AnswerTextField
+            className={classes.field}
+            answer_text={item.answer_text}
+            idx={index}
+            actions={props.actions}
+          />
+          <AdditionalMessage
+            className={classes.field}
+            additional_state={item.additional_state}
+            additional_message={item.additional_message}
+            idx={index}
+            actions={props.actions}
+          />
+        </div>
+      )}
       <SendButton
         className={classes.field}
         isUpdateStateEnable={props.isUpdateStateEnable}
