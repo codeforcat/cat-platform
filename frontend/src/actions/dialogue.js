@@ -103,14 +103,14 @@ export function inputAdditionalState(state, idx) {
   }
 }
 
-export function createDialogue(question_name, parent_answer_id, phrases, answer) {
+export function createDialogue(question_name, parent_answer_id, phrases, answers) {
   return {
     type: CREATE_DIALOGUE,
     payload:{
       question_name: question_name,
       parent_answer_id: parseInt(parent_answer_id),
       phrases: phrases,
-      answer: answer
+      answers: answers
     }
   }
 }
@@ -124,19 +124,19 @@ export function setDialogueState(question_id) {
   }
 }
 
-export function setDialogue(question_name, parent_answer_id, phrases, answer) {
+export function setDialogue(question_name, parent_answer_id, phrases, answers) {
   return {
     type: SET_DIALOGUE,
     payload:{
       question_name: question_name,
       parent_answer_id: parseInt(parent_answer_id),
       phrases: phrases,
-      answer: answer
+      answers: answers
     }
   }
 }
 
-export function updateDialogue(question_id, question_name, parent_answer_id, phrases, answer) {
+export function updateDialogue(question_id, question_name, parent_answer_id, phrases, answers) {
   return {
     type: UPDATE_DIALOGUE,
     payload:{
@@ -144,7 +144,7 @@ export function updateDialogue(question_id, question_name, parent_answer_id, phr
       question_name: question_name,
       parent_answer_id: parseInt(parent_answer_id),
       phrases: phrases,
-      answer: answer
+      answers: answers
     }
   }
 }

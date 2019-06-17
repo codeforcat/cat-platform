@@ -37,7 +37,7 @@ class Answer(Model):
         db_table = 'answer'
 
     answer_id = models.AutoField(db_column='ANSWER ID', primary_key=True)
-    question_id = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='answer_field')
+    question_id = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='answer')
     answer_text = models.TextField()
     additional_state = models.CharField(max_length=20, default='none')
     additional_message = JSONField(default=dict, null=True, blank=True)

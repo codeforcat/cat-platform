@@ -15,7 +15,7 @@ export default function SendButton(props) {
             variant="contained"
             color="primary"
             fullWidth
-            onClick={() => props.actions.createDialogue(props.question_name, props.parent_answer_id, props.phrases, props.answer)}
+            onClick={() => props.actions.createDialogue(props.question_name, props.parent_answer_id, props.phrases, props.answers)}
           >
             create
           </Button>}
@@ -23,7 +23,7 @@ export default function SendButton(props) {
             variant="contained"
             color="secondary"
             fullWidth
-            onClick={() => props.actions.updateDialogue(props.question_id, props.question_name, props.parent_answer_id, props.phrases, props.answer)}
+            onClick={() => props.actions.updateDialogue(props.question_id, props.question_name, props.parent_answer_id, props.phrases, props.answers)}
           >
             update
           </Button>}

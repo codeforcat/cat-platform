@@ -11,7 +11,7 @@ export function getDialogueState(state, payload) {
       question_name: payload.question_name,
       parent_answer_id: payload.parent_answer_id,
       phrases: payload.phrases,
-      answer: payload.answer
+      answers: payload.answers
     }
   });
 }

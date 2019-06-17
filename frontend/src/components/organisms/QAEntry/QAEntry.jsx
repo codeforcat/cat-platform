@@ -45,7 +45,7 @@ export default function QAEntry(props) {
         phrases={props.phrases}
         actions={props.actions}
       />
-      {props.answer.map((item, index) =>
+      {props.answers.map((item, index) =>
         <div key={index}>
           <AnswerTextField
             className={classes.field}
@@ -69,7 +69,7 @@ export default function QAEntry(props) {
         question_name={props.question_name}
         parent_answer_id={props.parent_answer_id}
         phrases={props.phrases}
-        answer={props.answer}
+        answers={props.answers}
         actions={props.actions}
       />
     </Container>

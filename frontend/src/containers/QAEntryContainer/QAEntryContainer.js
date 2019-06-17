@@ -11,7 +11,7 @@ function mapStateToProps(state) {
     parent_answer_id : d.parent_answer_id,
     exists_answers   : d.exists_answers,
     phrases          : d.phrases,
-    answer           : d.answer,
+    answers          : d.answers,
     isUpdateStateEnable: d.isUpdateStateEnable,
     isValid          : d.isValid,
     isShowError      : d.isShowError,

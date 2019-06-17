@@ -22,12 +22,12 @@ class PhraseSerializer(serializers.ModelSerializer):
 
 
 class QuestionSerializer(WritableNestedModelSerializer):
-    answer = AnswerSerializer(many=True, required=False, allow_null=True, source='answer_field')
+    answers = AnswerSerializer(many=True, required=False, allow_null=True, source='answer')
     phrases = PhraseSerializer(many=True, required=False, allow_null=True, source='phrase')
 
     class Meta:
         model = Question
-        fields = ('question_id', 'question_name', 'parent_answer_id', 'phrases', 'answer')
+        fields = ('question_id', 'question_name', 'parent_answer_id', 'phrases', 'answers')
 
 
 class SynonymSerializer(serializers.ModelSerializer):

@@ -20,7 +20,7 @@ const initialState = {
       errorCode: 'phrase_empty_error'
     }
   ],
-  answer: [
+  answers: [
     {
       answer_text: '',
       isValid: false,
@@ -33,7 +33,7 @@ const initialState = {
     question_name: '',
     parent_answer_id: -1,
     phrases: [],
-    answer: {}
+    answers: []
   },
   isUpdateStateEnable: false,
   isShowError: false,
@@ -63,7 +63,7 @@ export default function (state = initialState,action) {
         question_name: action.payload.question_name,
         parent_answer_id: action.payload.parent_answer_id,
         phrases: action.payload.phrases,
-        answer: action.payload.answer,
+        answers: action.payload.answers,
         isValid: action.payload.question_name !== ''
       });
     case actionTypes.SET_ANSWERS:
@@ -108,12 +108,12 @@ export default function (state = initialState,action) {
     case actionTypes.INPUT_ANSWER_TEXT:
       const makeAnswerTextState = (state,index,inputData) => {
         const new_list = [
-          ...state.answer.slice(0, index),
-          Object.assign({}, state.answer[index], {answer_text: inputData, isValid: index === 0 ? inputData !== '' : false}),
-          ...state.answer.slice(index + 1)
+          ...state.answers.slice(0, index),
+          Object.assign({}, state.answers[index], {answer_text: inputData, isValid: index === 0 ? inputData !== '' : false}),
+          ...state.answers.slice(index + 1)
         ];
         return Object.assign({},state,{
-          answer: new_list
+          answers: new_list
         })
       };
       return makeAnswerTextState(state,action.payload.idx,action.payload.answer_text);
@@ -125,12 +125,12 @@ export default function (state = initialState,action) {
             additional_message = {};
         }
         const new_list = [
-          ...state.answer.slice(0, index),
-          Object.assign({}, state.answer[index], {additional_state: inputData, additional_message: additional_message}),
-          ...state.answer.slice(index + 1)
+          ...state.answers.slice(0, index),
+          Object.assign({}, state.answers[index], {additional_state: inputData, additional_message: additional_message}),
+          ...state.answers.slice(index + 1)
         ];
         return Object.assign({},state,{
-          answer: new_list
+          answers: new_list
         })
       };
       return makeAdditionalStateState(state,action.payload.idx,action.payload.state);
@@ -148,7 +148,7 @@ export default function (state = initialState,action) {
             isValid: false
           }
         ],
-        answer: [
+        answers: [
           {
             answer_text: '',
             isValid: false,
@@ -160,7 +160,7 @@ export default function (state = initialState,action) {
           question_name: '',
           parent_answer_id: -1,
           phrases: [],
-          answer: {}
+          answers: []
         },
         isUpdateStateEnable: false,
         isShowError: false,
