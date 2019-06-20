@@ -1,33 +1,24 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import InputLabel from '@material-ui/core/InputLabel';
 import TextField from '@material-ui/core/TextField';
+import FormItem from '../FormItem/FormItem.jsx';
 
 export default function AnswerTextField(props) {
   return (
-    <div className={props.className}>
-      <Grid
-        container
-        direction="row"
-        justify="flex-start"
-        alignItems="flex-start"
-        spacing={3}
-      >
-        <Grid item xs={12} sm={3}>
-          <InputLabel htmlFor="answer-text" required>Answer</InputLabel>
-        </Grid>
-        <Grid item xs={12} sm={9}>
-          <TextField
-            id="answer-text"
-            value={props.answer_text}
-            onChange={(e) => props.actions.inputAnswerText(e.target.value, props.idx)}
-            fullWidth
-            multiline
-            rows={3}
-            required
-          />
-        </Grid>
-      </Grid>
-    </div>
+    <FormItem
+      label="answer-text"
+      titleText="Answer"
+      titleAlign="flex-start"
+      isRequired={true}
+    >
+      <TextField
+        id="answer-text"
+        value={props.answer_text}
+        onChange={(e) => props.actions.inputAnswerText(e.target.value, props.idx)}
+        fullWidth
+        multiline
+        rows={3}
+        required
+      />
+    </FormItem>
   );
 }

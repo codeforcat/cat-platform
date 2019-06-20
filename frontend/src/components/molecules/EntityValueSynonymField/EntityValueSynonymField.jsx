@@ -21,35 +21,33 @@ export default function EntityValueSynonymField(props) {
   };
 
   return (
-    <div className={props.className}>
-      <Grid
-        container
-        direction="row"
-        justify="flex-start"
-        alignItems="flex-start"
-        spacing={3}
-      >
-        <Grid item xs={12} sm={2}>
-          <InputLabel htmlFor="`value${props.index}`" required>Value</InputLabel>
-          <Input id="`value${props.index}`" required fullWidth/>
-        </Grid>
-        <Grid item xs={12} sm={8}>
-          <InputLabel htmlFor="`synonyms${props.index}`">Synonyms</InputLabel>
-          <Input id="`synonyms${props.index}`"/>
-          <div className={classes.chips}>
-            {chipData.map((item, index) =>
-              <Chip
-                key={index}
-                label={item}
-                onDelete={handleDelete(item)}
-              />
-            )}
-          </div>
-        </Grid>
-        {props.delete && <Grid item xs={12} sm={2}>
-          <Button variant="contained">delete</Button>
-        </Grid>}
+    <Grid
+      container
+      direction="row"
+      justify="flex-start"
+      alignItems="flex-start"
+      spacing={3}
+    >
+      <Grid item xs={12} sm={2}>
+        <InputLabel htmlFor="`value${props.index}`" required>Value</InputLabel>
+        <Input id="`value${props.index}`" required fullWidth/>
       </Grid>
-    </div>
+      <Grid item xs={12} sm={8}>
+        <InputLabel htmlFor="`synonyms${props.index}`">Synonyms</InputLabel>
+        <Input id="`synonyms${props.index}`"/>
+        <div className={classes.chips}>
+          {chipData.map((item, index) =>
+            <Chip
+              key={index}
+              label={item}
+              onDelete={handleDelete(item)}
+            />
+          )}
+        </div>
+      </Grid>
+      {props.delete && <Grid item xs={12} sm={2}>
+        <Button variant="contained">delete</Button>
+      </Grid>}
+    </Grid>
   );
 }

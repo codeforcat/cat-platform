@@ -1,11 +1,10 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import InputLabel from '@material-ui/core/InputLabel';
 import AdditionalRadio from '../AdditionalRadio/AdditionalRadio.jsx';
 import AdditionalButtonsField from '../AdditionalButtonsField/AdditionalButtonsField.jsx';
 import AdditionalConfirmField from '../AdditionalConfirmField/AdditionalConfirmField.jsx';
 import AdditionalImageField from '../AdditionalImageField/AdditionalImageField.jsx';
+import FormItem from '../FormItem/FormItem.jsx';
 
 const useStyles = makeStyles(theme => ({
   label: {
@@ -20,29 +19,20 @@ export default function AdditionalMessage(props) {
   const classes = useStyles();
 
   return (
-    <div className={props.className}>
-      <Grid
-        container
-        direction="row"
-        justify="flex-start"
-        alignItems="flex-start"
-        spacing={3}
-      >
-        <Grid item xs={12} sm={3}>
-          <InputLabel className={classes.label}>追加メッセージ</InputLabel>
-        </Grid>
-        <Grid item xs={12} sm={9}>
-          <AdditionalRadio
+    <FormItem
+      titleText="追加メッセージ"
+      titleAlign="flex-start"
+      titleClass={classes.label}
+    >
+      <AdditionalRadio
             className={classes.radio}
             state={props.additional_state}
             idx={props.idx}
             actions={props.actions}
-          />
-          {props.additional_state === 'buttons' && <AdditionalButtonsField/>}
-          {props.additional_state === 'confirm' && <AdditionalConfirmField/>}
-          {props.additional_state === 'image' && <AdditionalImageField/>}
-        </Grid>
-      </Grid>
-    </div>
+      />
+      {props.additional_state === 'buttons' && <AdditionalButtonsField/>}
+      {props.additional_state === 'confirm' && <AdditionalConfirmField/>}
+      {props.additional_state === 'image' && <AdditionalImageField/>}
+    </FormItem>
   );
 }
