@@ -10,7 +10,12 @@ export default function EntityIdField(props) {
       titleText="Entity ID"
       titleAlign="center"
     >
-      <Input id="entity-id" aria-describedby="entity-id-helper-text"/>
+      <Input
+        id="entity-id"
+        aria-describedby="entity-id-helper-text"
+        value={props.id}
+        onChange={(e) => props.actions.inputEntityId(e.target.value)}
+      />
       <FormHelperText id="entity-id-helper-text">※新規追加時は空欄</FormHelperText>
     </FormItem>
   );

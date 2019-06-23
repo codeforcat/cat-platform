@@ -9,7 +9,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function SendButton(props) {
+export default function DialogueSendButton(props) {
   const classes = useStyles();
 
   return (

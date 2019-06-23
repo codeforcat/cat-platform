@@ -10,7 +10,13 @@ export default function EntityNameField(props) {
       titleAlign="center"
       isRequired={true}
     >
-      <Input id="entity-name" required fullWidth/>
+      <Input
+        id="entity-name"
+        value={props.name}
+        onChange={(e) => props.actions.inputEntityName(e.target.value)}
+        required
+        fullWidth
+      />
     </FormItem>
   );
 }

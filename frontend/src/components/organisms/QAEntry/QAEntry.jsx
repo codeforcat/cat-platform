@@ -6,7 +6,7 @@ import QuestionNameField from '../../molecules/QuestionNameField/QuestionNameFie
 import PhraseFields from '../../molecules/PhraseFields/PhraseFields.jsx';
 import AnswerTextField from '../../molecules/AnswerTextField/AnswerTextField.jsx';
 import AdditionalMessage from '../../molecules/AdditionalMessage/AdditionalMessage.jsx';
-import SendButton from '../../molecules/SendButton/SendButton.jsx';
+import DialogueSendButton from '../../molecules/DialogueSendButton/DialogueSendButton.jsx';
 
 export default function QAEntry(props) {
   useEffect(() => {
@@ -47,7 +47,7 @@ export default function QAEntry(props) {
           />
         </div>
       )}
-      <SendButton
+      <DialogueSendButton
         isUpdateStateEnable={props.isUpdateStateEnable}
         question_id={props.question_id}
         question_name={props.question_name}

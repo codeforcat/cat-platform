@@ -68,6 +68,7 @@ class EntityValue(models.Model):
 
     entity_value_id = models.AutoField(db_column='ENTITY VALUE ID', primary_key=True)
     entity_id = models.ForeignKey(Entity, on_delete=models.CASCADE, related_name='entity_value')
+    value_temp_id = models.IntegerField(null=True, blank=True)
     value_text = models.CharField(max_length=50, null=True, blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
@@ -82,6 +83,8 @@ class Synonym(models.Model):
 
     synonym_id = models.AutoField(db_column='SYNONYM ID', primary_key=True)
     entity_value_id = models.ForeignKey(EntityValue, on_delete=models.CASCADE, related_name='synonym')
+    value_temp_id = models.IntegerField(null=True, blank=True)
+    synonym_temp_id = models.IntegerField(null=True, blank=True)
     synonym_text = models.CharField(max_length=50, null=True, blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)

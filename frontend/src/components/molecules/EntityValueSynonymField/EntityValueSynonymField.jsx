@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -14,11 +14,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function EntityValueSynonymField(props) {
   const classes = useStyles();
-  const [chipData, setChipData] = useState(['Angular', 'jQuery', 'Polymer', 'React', 'Vue.js']);
-
-  const handleDelete = chipToDelete => () => {
-    setChipData(chips => chips.filter(chip => chip !== chipToDelete));
-  };
 
   return (
     <Grid
@@ -29,24 +24,40 @@ export default function EntityValueSynonymField(props) {
       spacing={3}
     >
       <Grid item xs={12} sm={2}>
-        <InputLabel htmlFor="`value${props.index}`" required>Value</InputLabel>
-        <Input id="`value${props.index}`" required fullWidth/>
+        <InputLabel htmlFor="`value${props.idx}`" required>Value</InputLabel>
+        <Input
+          id="`value${props.idx}`"
+          value={props.item.value_text}
+          onChange={(e) => props.actions.inputValueText(e.target.value, props.idx)}
+          required
+          fullWidth
+        />
       </Grid>
       <Grid item xs={12} sm={8}>
-        <InputLabel htmlFor="`synonyms${props.index}`">Synonyms</InputLabel>
-        <Input id="`synonyms${props.index}`"/>
+        <InputLabel htmlFor="`synonyms${props.idx}`">Synonyms</InputLabel>
+        <Input
+          id="`synonyms${props.idx}`"
+          value={props.item.synonym_temp_text}
+          onChange={(e) => props.actions.inputSynonymText(e.target.value, props.idx)}
+          onKeyDown={(e) => {if(e.key === 'Enter') props.actions.addSynonym(e.target.value, props.idx)}}
+        />
         <div className={classes.chips}>
-          {chipData.map((item, index) =>
+          {props.synonyms.map((item, index) =>
             <Chip
               key={index}
-              label={item}
-              onDelete={handleDelete(item)}
+              label={item.synonym_text}
+              onDelete={() => props.actions.deleteSynonym(item.synonym_temp_id, props.idx)}
             />
           )}
         </div>
       </Grid>
       {props.delete && <Grid item xs={12} sm={2}>
-        <Button variant="contained">delete</Button>
+        <Button
+          variant="contained"
+          onClick={() => props.actions.deleteValue(props.idx, props.item.value_temp_id)}
+        >
+          delete
+        </Button>
       </Grid>}
     </Grid>
   );

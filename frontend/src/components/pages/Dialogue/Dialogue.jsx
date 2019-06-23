@@ -4,7 +4,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import QAList from '../../organisms/QAList/QAList.jsx';
 import QAEntryContainer from '../../../containers/QAEntryContainer/QAEntryContainer';
 import EntityList from '../../organisms/EntityList/EntityList.jsx';
-import EntityEntry from '../../organisms/EntityEntry/EntityEntry.jsx';
+import EntityEntryContainer from '../../../containers/EntityEntryContainer/EntityEntryContainer';
 
 const theme = createMuiTheme({
   overrides: {
@@ -44,7 +44,7 @@ export default function Dialogue() {
           <Route path="/" exact component={QAList}/>
           <Route path="/qa_entry/" component={QAEntryContainer}/>
           <Route path="/entity_list/" component={EntityList}/>
-          <Route path="/entity_entry/" component={EntityEntry}/>
+          <Route path="/entity_entry/" component={EntityEntryContainer}/>
         </Switch>
       </Router>
     </MuiThemeProvider>

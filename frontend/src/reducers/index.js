@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 import dialogue from './dialogue';
+import entity from './entity';
 
 const rootReducer = combineReducers({
-  dialogue
+  dialogue,
+  entity
 });
 
 export default rootReducer;

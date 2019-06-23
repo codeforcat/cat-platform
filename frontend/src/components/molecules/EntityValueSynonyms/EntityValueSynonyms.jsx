@@ -19,10 +19,24 @@ export default function EntityValueSynonyms(props) {
       titleText="Value"
       titleAlign="flex-start"
     >
-      {value_list.map((item, index)=>
-        <EntityValueSynonymField key={index} index={index} delete/>
+      {props.values.map((item, index)=>
+        <EntityValueSynonymField
+          key={index}
+          idx={index}
+          item={item}
+          synonyms={props.synonyms.filter((value, i) => value.value_temp_id === item.value_temp_id)}
+          actions={props.actions}
+          delete
+        />
       )}
-      <Button variant="contained" color="primary" className={classes.button}>add</Button>
+      <Button
+        variant="contained"
+        color="primary"
+        className={classes.button}
+        onClick={() => props.actions.addValue()}
+      >
+        add
+      </Button>
     </FormItem>
   );
 }

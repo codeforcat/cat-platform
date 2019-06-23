@@ -3,8 +3,6 @@ import {
   SHOW_ERROR
 } from '../actions/error';
 
-const message_obj = {}
-
 const initialState = {
   question_id: 0,
   question_name: '',
@@ -52,9 +50,6 @@ const initialState = {
  * @returns {*}
  */
 export default function (state = initialState,action) {
-  const phrase_temp_index = Math.max(...state.phrases.map((value) => value.phrase_temp_id)) + 1;
-  // const keyword_temp_index = Math.max(...state.keyword_list.map((value) => value.keyword_temp_id)) + 1;
-
   switch (action.type){
     case actionTypes.SET_DIALOGUE_STATE:
       return Object.assign({},state,{isUpdateStateEnable: true});
@@ -87,6 +82,7 @@ export default function (state = initialState,action) {
       };
       return makePhraseState(state,action.payload.idx,action.payload.phrase_text);
     case actionTypes.ADD_PHRASE_TEXT:
+      const phrase_temp_index = Math.max(...state.phrases.map((value) => value.phrase_temp_id)) + 1;
       return Object.assign({},state,{
         phrases:[
           ...state.phrases,

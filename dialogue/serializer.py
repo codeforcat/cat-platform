@@ -33,7 +33,7 @@ class QuestionSerializer(WritableNestedModelSerializer):
 class SynonymSerializer(serializers.ModelSerializer):
     class Meta:
         model = Synonym
-        fields = ('synonym_text',)
+        fields = ('value_temp_id', 'synonym_temp_id', 'synonym_text')
 
 
 class EntityValueSerializer(serializers.ModelSerializer):
@@ -41,7 +41,7 @@ class EntityValueSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = EntityValue
-        fields = ('value_text', 'synonyms')
+        fields = ('value_temp_id', 'value_text', 'synonyms')
 
 
 class EntitySerializer(WritableNestedModelSerializer):
