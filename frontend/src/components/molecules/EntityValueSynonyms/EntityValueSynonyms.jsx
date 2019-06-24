@@ -12,7 +12,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function EntityValueSynonyms(props) {
   const classes = useStyles();
-  const value_list = [1,2];
 
   return (
     <FormItem

@@ -62,7 +62,7 @@ export function inputSynonymText(synonym_temp_text, value_idx) {
   return {
     type: INPUT_SYNONYM_TEXT,
     payload:{
-      synonym_text: synonym_temp_text,
+      synonym_temp_text: synonym_temp_text,
       idx: parseInt(value_idx)
     }
   }

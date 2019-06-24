@@ -46,7 +46,6 @@ const initialState = {
  */
 export default function (state = initialState,action) {
   const value_temp_index = Math.max(...state.values_temp.map((value) => value.value_temp_id)) + 1;
-  const synonym_temp_index = Math.max(...state.synonyms_temp.map((value) => value.synonym_temp_id)) + 1;
 
   switch (action.type){
     case actionTypes.SET_ENTITY_STATE:
@@ -122,7 +121,7 @@ export default function (state = initialState,action) {
       return Object.assign({},state,{
         values_temp:[
           ...state.values_temp,
-          {value_temp_id: value_temp_index, value_text: '', isValid: false, errorCode: 'value_text_empty_error', synonyms: []}
+          {value_temp_id: value_temp_index, value_text: '', synonym_temp_text: '', isValid: false, errorCode: 'value_text_empty_error', synonyms: []}
         ],
         synonyms_temp:[
           ...state.synonyms_temp
@@ -139,12 +138,9 @@ export default function (state = initialState,action) {
         })
       : Object.assign({},state,{
         values_temp:[
-          {value_temp_id: action.payload.value_temp_idx, value_text: '', isValid: false, errorCode: 'value_text_empty_error', synonyms: []}
+          {value_temp_id: action.payload.value_temp_idx, value_text: '', synonym_temp_text: '', isValid: false, errorCode: 'value_text_empty_error', synonyms: []}
         ],
-        synonyms_temp: [
-          ...synonymRelatedValue,
-          {value_temp_id: action.payload.value_temp_idx, synonym_temp_id: synonym_temp_index, synonym_text: ''}
-        ]
+        synonyms_temp: synonymRelatedValue
       });
     case actionTypes.CLEAR_ENTITY:
       return Object.assign({},state,{
@@ -155,6 +151,7 @@ export default function (state = initialState,action) {
           {
             value_temp_id: 0,
             value_text: '',
+            synonym_temp_text: '',
             isValid: false,
             synonyms: []
           }
