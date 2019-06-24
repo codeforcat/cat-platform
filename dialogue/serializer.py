@@ -36,7 +36,7 @@ class SynonymSerializer(serializers.ModelSerializer):
         fields = ('value_temp_id', 'synonym_temp_id', 'synonym_text')
 
 
-class EntityValueSerializer(serializers.ModelSerializer):
+class EntityValueSerializer(WritableNestedModelSerializer):
     synonyms = SynonymSerializer(many=True, required=False, allow_null=True, source='synonym')
 
     class Meta:

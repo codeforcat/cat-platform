@@ -24,7 +24,7 @@ export default function EntitySendButton(props) {
             variant="contained"
             color="primary"
             fullWidth
-            onClick={() => props.actions.createDialogue(props.question_name, props.parent_answer_id, props.phrases, props.answers)}
+            onClick={() => props.actions.createEntity(props.entity_name, props.values_temp, props.synonyms_temp)}
           >
             create
           </Button>}
@@ -32,7 +32,7 @@ export default function EntitySendButton(props) {
             variant="contained"
             color="secondary"
             fullWidth
-            onClick={() => props.actions.updateDialogue(props.question_id, props.question_name, props.parent_answer_id, props.phrases, props.answers)}
+            onClick={() => props.actions.updateEntity(props.entity_id, props.entity_name, props.values_temp, props.synonyms_temp)}
           >
             update
           </Button>}

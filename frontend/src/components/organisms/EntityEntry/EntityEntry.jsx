@@ -22,6 +22,11 @@ export default function EntityEntry(props) {
         actions={props.actions}
       />
       <EntitySendButton
+        isUpdateStateEnable={props.isUpdateStateEnable}
+        entity_id={props.entity_id}
+        entity_name={props.entity_name}
+        values_temp={props.values_temp}
+        synonyms_temp={props.synonyms_temp}
         actions={props.actions}
       />
     </Container>
