@@ -13,7 +13,7 @@ export default function QuestionIdField(props) {
       <Input
         id="question-id"
         aria-describedby="question-id-helper-text"
-        value={props.id}
+        value={props.id || ''}
         onChange={(e) => props.actions.inputQuestionId(e.target.value)}
       />
       <FormHelperText id="question-id-helper-text">※新規追加時は空欄</FormHelperText>
