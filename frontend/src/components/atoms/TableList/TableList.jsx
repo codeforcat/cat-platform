@@ -119,9 +119,9 @@ export default function TableList(props) {
         <TableBody>
           {props.rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => (
             <TableRow key={index}>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.calories}</TableCell>
-              <TableCell>{row.fat}</TableCell>
+              <TableCell>{row.column1}</TableCell>
+              <TableCell>{row.column2}</TableCell>
+              <TableCell>{row.column3}</TableCell>
               <TableCell align="right">
                 <IconButton aria-label="Edit" className={classes.icon}>
                   <EditIcon/>

@@ -1,6 +1,6 @@
 import { fork, all } from 'redux-saga/effects';
 import { fetchAnswers, createDialogue, setDialogue, updateDialogue } from './dialogue';
-import { addSynonym, createEntity, setEntity, updateEntity } from './entity';
+import { initEntity, addSynonym, createEntity, setEntity, updateEntity } from './entity';
 
 export default function* rootSaga() {
   yield all([
@@ -8,6 +8,7 @@ export default function* rootSaga() {
     fork(createDialogue),
     // fork(setDialogue),
     fork(updateDialogue),
+    fork(initEntity),
     fork(addSynonym),
     fork(createEntity),
     fork(setEntity),

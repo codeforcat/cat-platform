@@ -29,6 +29,7 @@ const initialState = {
     entity_name: '',
     entity_values: []
   },
+  list: [],
   isUpdateStateEnable: false,
   isShowError: false,
   apiErrorMsg: '',
@@ -57,6 +58,8 @@ export default function (state = initialState,action) {
         synonyms_temp: action.payload.synonyms,
         isValid: action.payload.entity_name !== ''
       });
+    case actionTypes.SET_ENTITY_ALL:
+      return Object.assign({},state,{list: action.payload.data});
     case actionTypes.INPUT_ENTITY_ID:
       return Object.assign({},state,{entity_id: action.payload.entity_id});
     case actionTypes.INPUT_ENTITY_NAME:
@@ -75,10 +78,11 @@ export default function (state = initialState,action) {
       return makeValueState(state,action.payload.idx,action.payload.value_text);
     case actionTypes.INPUT_SYNONYM_TEXT:
       const makeInputSynonymState = (state,index,inputData) => {
+        const targetState = state.values_temp.filter((value, i) => value.value_temp_id === index);
+        const otherState = state.values_temp.filter((value, i) => value.value_temp_id !== index);
         const new_list = [
-          ...state.values_temp.slice(0, index),
-          Object.assign({}, state.values_temp[index], {synonym_temp_text: inputData}),
-          ...state.values_temp.slice(index + 1)
+          ...otherState,
+          Object.assign({}, targetState[0], {synonym_temp_text: inputData}),
         ];
         return Object.assign({},state,{
           values_temp: new_list
@@ -87,10 +91,11 @@ export default function (state = initialState,action) {
       return makeInputSynonymState(state,action.payload.idx,action.payload.synonym_temp_text);
     case actionTypes.CLEAR_SYNONYM_TEXT:
       const makeClearSynonymState = (state,index) => {
+        const targetState = state.values_temp.filter((value, i) => value.value_temp_id === index);
+        const otherState = state.values_temp.filter((value, i) => value.value_temp_id !== index);
         const new_list = [
-          ...state.values_temp.slice(0, index),
-          Object.assign({}, state.values_temp[index], {synonym_temp_text: ''}),
-          ...state.values_temp.slice(index + 1)
+          ...otherState,
+          Object.assign({}, targetState[0], {synonym_temp_text: ''}),
         ];
         return Object.assign({},state,{
           values_temp: new_list

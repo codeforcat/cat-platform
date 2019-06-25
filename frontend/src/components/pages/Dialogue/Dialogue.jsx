@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import QAList from '../../organisms/QAList/QAList.jsx';
 import QAEntryContainer from '../../../containers/QAEntryContainer/QAEntryContainer';
-import EntityList from '../../organisms/EntityList/EntityList.jsx';
+import EntityListContainer from '../../../containers/EntityListContainer/EntityListContainer';
 import EntityEntryContainer from '../../../containers/EntityEntryContainer/EntityEntryContainer';
 
 const theme = createMuiTheme({
@@ -43,7 +43,7 @@ export default function Dialogue() {
         <Switch>
           <Route path="/" exact component={QAList}/>
           <Route path="/qa_entry/" component={QAEntryContainer}/>
-          <Route path="/entity_list/" component={EntityList}/>
+          <Route path="/entity_list/" component={EntityListContainer}/>
           <Route path="/entity_entry/" component={EntityEntryContainer}/>
         </Switch>
       </Router>

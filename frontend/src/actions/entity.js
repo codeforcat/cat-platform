@@ -1,3 +1,4 @@
+export const INIT_ENTITY = 'INIT_ENTITY';
 export const INPUT_ENTITY_ID = 'INPUT_ENTITY_ID';
 export const INPUT_ENTITY_NAME = 'INPUT_ENTITY_NAME';
 export const INPUT_VALUE_TEXT = 'INPUT_VALUE_TEXT';
@@ -10,9 +11,25 @@ export const DELETE_SYNONYM = 'DELETE_SYNONYM';
 export const CREATE_ENTITY = 'CREATE_ENTITY';
 export const SET_ENTITY_STATE = 'SET_ENTITY_STATE';
 export const SET_ENTITY = 'SET_ENTITY';
+export const SET_ENTITY_ALL = 'SET_ENTITY_ALL';
 export const UPDATE_ENTITY = 'UPDATE_ENTITY';
 export const CLEAR_ENTITY = 'CLEAR_ENTITY';
 export const FETCH_ERROR_ENTITY = 'FETCH_ERROR_ENTITY';
+
+export function initEntity() {
+  return {
+    type: INIT_ENTITY
+  }
+}
+
+export function setEntityAll(data) {
+  return {
+    type: SET_ENTITY_ALL,
+    payload:{
+      data: data
+    }
+  }
+}
 
 export function inputEntityId(entity_id) {
   return {

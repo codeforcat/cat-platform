@@ -1,8 +1,17 @@
 import { take, call, put, select } from 'redux-saga/effects';
 import * as entityActions from '../actions/entity';
 import { showError } from '../actions/error';
-import { getEntityState, setEntityTemp, isValidState } from '../selectors/entity';
+import { setEntityList, getEntityState, setEntityTemp, isValidState } from '../selectors/entity';
 import * as API from '../apis/API';
+
+export function* initEntity() {
+  while (true) {
+    yield take(entityActions.INIT_ENTITY);
+    const { payload, error } = yield call(API.read,'entities');
+    const data = yield select(setEntityList,payload);
+    yield put(entityActions.setEntityAll(data));
+  }
+}
 
 export function* addSynonym() {
   while (true) {
