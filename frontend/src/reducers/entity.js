@@ -78,11 +78,11 @@ export default function (state = initialState,action) {
       return makeValueState(state,action.payload.idx,action.payload.value_text);
     case actionTypes.INPUT_SYNONYM_TEXT:
       const makeInputSynonymState = (state,index,inputData) => {
-        const targetState = state.values_temp.filter((value, i) => value.value_temp_id === index);
-        const otherState = state.values_temp.filter((value, i) => value.value_temp_id !== index);
+        const targetIndex = state.values_temp.findIndex((elm) => elm.value_temp_id === index);
         const new_list = [
-          ...otherState,
-          Object.assign({}, targetState[0], {synonym_temp_text: inputData}),
+          ...state.values_temp.slice(0, targetIndex),
+          Object.assign({}, state.values_temp[targetIndex], {synonym_temp_text: inputData}),
+          ...state.values_temp.slice(targetIndex + 1)
         ];
         return Object.assign({},state,{
           values_temp: new_list
@@ -91,11 +91,11 @@ export default function (state = initialState,action) {
       return makeInputSynonymState(state,action.payload.idx,action.payload.synonym_temp_text);
     case actionTypes.CLEAR_SYNONYM_TEXT:
       const makeClearSynonymState = (state,index) => {
-        const targetState = state.values_temp.filter((value, i) => value.value_temp_id === index);
-        const otherState = state.values_temp.filter((value, i) => value.value_temp_id !== index);
+        const targetIndex = state.values_temp.findIndex((elm) => elm.value_temp_id === index);
         const new_list = [
-          ...otherState,
-          Object.assign({}, targetState[0], {synonym_temp_text: ''}),
+          ...state.values_temp.slice(0, targetIndex),
+          Object.assign({}, state.values_temp[targetIndex], {synonym_temp_text: ''}),
+          ...state.values_temp.slice(targetIndex + 1)
         ];
         return Object.assign({},state,{
           values_temp: new_list
@@ -118,8 +118,8 @@ export default function (state = initialState,action) {
          const deletedSynonym = state.synonyms_temp.filter((value, i) => value.value_temp_id === value_index && value.synonym_temp_id !== index);
          const otherSynonymRelatedValue = state.synonyms_temp.filter((value, i) => value.value_temp_id !== value_index);
          return Object.assign({}, state, {
-             synonyms_temp: [...deletedSynonym, ...otherSynonymRelatedValue]
-           })
+           synonyms_temp: [...deletedSynonym, ...otherSynonymRelatedValue]
+         })
         };
       return makeDeleteSynonymState(state,action.payload.idx,action.payload.value_idx);
     case actionTypes.ADD_VALUE:
