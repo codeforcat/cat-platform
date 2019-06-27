@@ -2,7 +2,7 @@ from django.db import models
 from django_mysql.models import JSONField, Model
 
 
-class Question(models.Model):
+class Question(Model):
     class Meta:
         db_table = 'question'
 
@@ -10,6 +10,8 @@ class Question(models.Model):
     question_name = models.CharField(max_length=100, unique=True)
     intent_id = models.CharField(max_length=100, null=True, blank=True)
     parent_answer_id = models.IntegerField(null=True, blank=True)
+    additional_state = models.CharField(max_length=20, default='none')
+    additional_message = JSONField(default=dict, null=True, blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
 
@@ -32,15 +34,13 @@ class Phrase(models.Model):
         return self.phrase_text
 
 
-class Answer(Model):
+class Answer(models.Model):
     class Meta:
         db_table = 'answer'
 
     answer_id = models.AutoField(db_column='ANSWER ID', primary_key=True)
     question_id = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='answer')
     answer_text = models.TextField()
-    additional_state = models.CharField(max_length=20, default='none')
-    additional_message = JSONField(default=dict, null=True, blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
 

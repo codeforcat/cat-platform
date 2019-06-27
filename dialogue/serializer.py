@@ -6,13 +6,13 @@ from .models import Question, Phrase, Answer, Entity, EntityValue, Synonym
 class AnswerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Answer
-        fields = ('answer_text', 'additional_state', 'additional_message')
+        fields = ('answer_text',)
 
 
 class AnswerDisplaySerializer(serializers.ModelSerializer):
     class Meta:
         model = Answer
-        fields = ('answer_id', 'answer_text', 'additional_state', 'additional_message')
+        fields = ('answer_id', 'answer_text')
 
 
 class PhraseSerializer(serializers.ModelSerializer):
@@ -27,7 +27,8 @@ class QuestionSerializer(WritableNestedModelSerializer):
 
     class Meta:
         model = Question
-        fields = ('question_id', 'question_name', 'parent_answer_id', 'phrases', 'answers')
+        fields = ('question_id', 'question_name', 'parent_answer_id', 'phrases', 'answers',
+                  'additional_state', 'additional_message')
 
 
 class SynonymSerializer(serializers.ModelSerializer):
