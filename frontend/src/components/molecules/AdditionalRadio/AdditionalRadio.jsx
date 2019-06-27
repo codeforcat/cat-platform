@@ -5,7 +5,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 export default function AdditionalRadio(props) {
   function handleChange(event) {
-    props.actions.inputAdditionalState(event.target.value, props.idx);
+    props.actions.inputAdditionalState(event.target.value);
   }
 
   return (

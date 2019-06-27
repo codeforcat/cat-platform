@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import AdditionalLabelText from '../AdditionalLabelText/AdditionalLabelText.jsx';
-import Button from '@material-ui/core/Button';
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
 
 const useStyles = makeStyles(theme => ({
   label: {
@@ -17,7 +18,14 @@ const useStyles = makeStyles(theme => ({
 
 export default function AdditionalButtonsField(props) {
   const classes = useStyles();
-  const button_list = [1,2];
+  const array = new Array(props.buttons_number);
+  const [buttonList, setButtonList] = useState(array.fill(0));
+
+  function handleChange(event) {
+    props.actions.inputButtonsNumber(event.target.value);
+    const array = new Array(parseInt(event.target.value));
+    setButtonList(array.fill(0));
+  }
 
   return (
     <div className={props.className}>
@@ -31,11 +39,26 @@ export default function AdditionalButtonsField(props) {
           <Input id="buttons-title" required fullWidth/>
         </Grid>
         <Grid item xs={12}>
-          <InputLabel className={classes.label}>選択肢のテキスト（４つまで）</InputLabel>
-          {button_list.map((item, index)=>
-            <AdditionalLabelText key={index} index={index} delete/>
+          <InputLabel htmlFor="buttons-number" className={classes.label}>選択肢の数</InputLabel>
+          <Select
+            value={props.buttons_number}
+            onChange={handleChange}
+            input={<Input id="buttons-number"/>}
+            autoWidth
+          >
+            <MenuItem value="1">1</MenuItem>
+            <MenuItem value="2">2</MenuItem>
+            <MenuItem value="3">3</MenuItem>
+            <MenuItem value="4">4</MenuItem>
+          </Select>
+          {buttonList.map((item, index)=>
+            <AdditionalLabelText
+              key={index}
+              index={index}
+              actions={props.actions}
+              delete
+            />
           )}
-          {button_list.length < 4 && <Button variant="contained" color="primary" className={classes.button}>add</Button>}
         </Grid>
       </Grid>
     </div>

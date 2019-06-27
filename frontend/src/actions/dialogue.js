@@ -8,6 +8,7 @@ export const ADD_PHRASE_TEXT = 'ADD_PHRASE_TEXT';
 export const DELETE_PHRASE_TEXT = 'DELETE_PHRASE_TEXT';
 export const INPUT_ANSWER_TEXT = 'INPUT_ANSWER_TEXT';
 export const INPUT_ADDITIONAL_STATE = 'INPUT_ADDITIONAL_STATE';
+export const INPUT_BUTTONS_NUMBER = 'INPUT_BUTTONS_NUMBER';
 export const CREATE_DIALOGUE = 'CREATE_DIALOGUE';
 export const SET_DIALOGUE_STATE = 'SET_DIALOGUE_STATE';
 export const SET_DIALOGUE = 'SET_DIALOGUE';
@@ -93,12 +94,20 @@ export function inputAnswerText(answer_text, idx) {
   }
 }
 
-export function inputAdditionalState(state, idx) {
+export function inputAdditionalState(state) {
   return {
     type: INPUT_ADDITIONAL_STATE,
     payload:{
-      state: state,
-      idx: parseInt(idx)
+      state: state
+    }
+  }
+}
+
+export function inputButtonsNumber(number) {
+  return {
+    type: INPUT_BUTTONS_NUMBER,
+    payload:{
+      number: parseInt(number)
     }
   }
 }

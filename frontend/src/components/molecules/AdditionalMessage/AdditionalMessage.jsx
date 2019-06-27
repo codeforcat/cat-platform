@@ -25,12 +25,16 @@ export default function AdditionalMessage(props) {
       titleClass={classes.label}
     >
       <AdditionalRadio
-            className={classes.radio}
-            state={props.additional_state}
-            idx={props.idx}
-            actions={props.actions}
+        className={classes.radio}
+        state={props.additional_state}
+        idx={props.idx}
+        actions={props.actions}
       />
-      {props.additional_state === 'buttons' && <AdditionalButtonsField/>}
+      {props.additional_state === 'buttons' && <AdditionalButtonsField
+        buttons_number={props.buttons_number}
+        idx={props.idx}
+        actions={props.actions}
+      />}
       {props.additional_state === 'confirm' && <AdditionalConfirmField/>}
       {props.additional_state === 'image' && <AdditionalImageField/>}
     </FormItem>

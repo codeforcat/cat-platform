@@ -23,20 +23,45 @@ const initialState = {
       answer_text: '',
       isValid: false,
       errorCode: 'answer_empty_error',
-      additional_state: 'none',
-      additional_message: null
     }
   ],
-  temp:{
+  additional_state: 'none',
+  buttons_number: 1,
+  buttons: {
+    type: 'template',
+    altText: '',
+    template: {
+      type: 'buttons',
+      text: '',
+      actions: []
+    }
+  },
+  confirm: {
+    type: 'template',
+    altText: '',
+    template: {
+      type: 'confirm',
+      text: '',
+      actions: []
+    }
+  },
+  image: {
+    type: 'image',
+    originalContentUrl: '',
+    previewImageUrl: ''
+  },
+  temp: {
     question_name: '',
     parent_answer_id: -1,
     phrases: [],
-    answers: []
+    answers: [],
+    additional_state: 'none',
+    additional_message: null
   },
   isUpdateStateEnable: false,
   isShowError: false,
   apiErrorMsg: '',
-  errorMsg:{
+  errorMsg: {
     question_empty_error: '入力してください',
     phrase_empty_error: '入力してください',
     answer_empty_error: '入力してください'
@@ -114,22 +139,14 @@ export default function (state = initialState,action) {
       };
       return makeAnswerTextState(state,action.payload.idx,action.payload.answer_text);
     case actionTypes.INPUT_ADDITIONAL_STATE:
-      const makeAdditionalStateState = (state,index,inputData) => {
-        let additional_message;
-        switch (inputData) {
-          case 'none':
-            additional_message = {};
-        }
-        const new_list = [
-          ...state.answers.slice(0, index),
-          Object.assign({}, state.answers[index], {additional_state: inputData, additional_message: additional_message}),
-          ...state.answers.slice(index + 1)
-        ];
-        return Object.assign({},state,{
-          answers: new_list
-        })
-      };
-      return makeAdditionalStateState(state,action.payload.idx,action.payload.state);
+      let additional_message;
+      switch (action.payload.state) {
+        case 'none':
+          additional_message = {};
+      }
+      return Object.assign({},state,{additional_state: action.payload.state, additional_message: additional_message});
+    case actionTypes.INPUT_BUTTONS_NUMBER:
+      return Object.assign({},state,{buttons_number: action.payload.number});
     case actionTypes.CLEAR_DIALOGUE:
       return Object.assign({},state,{
         question_id: 0,
@@ -147,16 +164,21 @@ export default function (state = initialState,action) {
         answers: [
           {
             answer_text: '',
-            isValid: false,
-            additional_state: 'none',
-            additional_message: null
+            isValid: false
           }
         ],
-        temp:{
+        additional_state: 'none',
+        buttons_number: 1,
+        buttons: {},
+        confirm: {},
+        image: {},
+        temp: {
           question_name: '',
           parent_answer_id: -1,
           phrases: [],
-          answers: []
+          answers: [],
+          additional_state: 'none',
+          additional_message: null
         },
         isUpdateStateEnable: false,
         isShowError: false,

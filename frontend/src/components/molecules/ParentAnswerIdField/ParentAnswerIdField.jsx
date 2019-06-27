@@ -21,7 +21,8 @@ export default function ParentAnswerIdField(props) {
         value={props.parent_answer_id}
         onChange={handleChange}
         input={<Input id="parent-answer-id"/>}
-        autoWidth>
+        autoWidth
+      >
         <MenuItem value="-1">なし</MenuItem>
         {props.exists_answers.map((item, index) =>
           <MenuItem key={index} value={item.answer_id}>{item.answer_text}</MenuItem>

@@ -33,20 +33,19 @@ export default function QAEntry(props) {
         actions={props.actions}
       />
       {props.answers.map((item, index) =>
-        <div key={index}>
-          <AnswerTextField
-            answer_text={item.answer_text}
-            idx={index}
-            actions={props.actions}
-          />
-          <AdditionalMessage
-            additional_state={item.additional_state}
-            additional_message={item.additional_message}
-            idx={index}
-            actions={props.actions}
-          />
-        </div>
+        <AnswerTextField
+          key={index}
+          answer_text={item.answer_text}
+          idx={index}
+          actions={props.actions}
+        />
       )}
+      <AdditionalMessage
+        additional_state={props.additional_state}
+        buttons_number={props.buttons_number}
+        additional_message={props.additional_message}
+        actions={props.actions}
+      />
       <DialogueSendButton
         isUpdateStateEnable={props.isUpdateStateEnable}
         question_id={props.question_id}
