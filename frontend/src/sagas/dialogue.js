@@ -47,7 +47,6 @@ export function* setDialogue() {
   while (true) {
     const action = yield take(dialogueActions.SET_DIALOGUE_STATE);
     const { payload, error } = yield call(API.set,'questions',action.payload.question_id);
-    console.log(payload);
     if (payload && !error) {
       const data = yield select(setDialogueTemp,payload);
       yield put(dialogueActions.setDialogue(data.question_name, data.parent_answer_id, data.phrases, data.answers));
