@@ -6,7 +6,7 @@ export default function* rootSaga() {
   yield all([
     fork(fetchAnswers),
     fork(createDialogue),
-    // fork(setDialogue),
+    fork(setDialogue),
     fork(updateDialogue),
     fork(initEntity),
     fork(addSynonym),

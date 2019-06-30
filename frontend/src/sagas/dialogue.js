@@ -43,19 +43,20 @@ export function* createDialogue() {
   }
 }
 
-// export function* setDialogue() {
-//   while (true) {
-//     const action = yield take(dialogueActions.SET_DIALOGUE_STATE);
-//     const { payload, error } = yield call(API.set,'questions',action.payload.question_id);
-//     if (payload && !error) {
-//       const data = yield select(setDialogueTemp,payload);
-//       yield put(dialogueActions.setDialogue(data.question_text, data.parent_answer_id, data.answer_list, data.keyword_list));
-//     }
-//     else {
-//       yield put(dialogueActions.fetchDialogueError(error.response.data.detail));
-//     }
-//   }
-// }
+export function* setDialogue() {
+  while (true) {
+    const action = yield take(dialogueActions.SET_DIALOGUE_STATE);
+    const { payload, error } = yield call(API.set,'questions',action.payload.question_id);
+    console.log(payload);
+    if (payload && !error) {
+      const data = yield select(setDialogueTemp,payload);
+      yield put(dialogueActions.setDialogue(data.question_name, data.parent_answer_id, data.phrases, data.answers));
+    }
+    else {
+      yield put(dialogueActions.fetchDialogueError(error.response.data.detail));
+    }
+  }
+}
 
 export function* updateDialogue() {
   while (true) {
