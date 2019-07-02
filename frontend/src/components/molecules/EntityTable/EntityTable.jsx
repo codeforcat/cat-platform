@@ -19,7 +19,11 @@ export default function EntityTable(props) {
           </InputAdornment>
         }
       />
-      <TableList rows={props.list} header={header}/>
+      <TableList
+        rows={props.list}
+        header={header}
+        editUrl="entity_entry"
+      />
     </>
   );
 }

@@ -10,6 +10,7 @@ export default function EntityEntry(props) {
     <Container>
       <EntityIdField
         id={props.entity_id}
+        params={props.match.params.id}
         actions={props.actions}
       />
       <EntityNameField

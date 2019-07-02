@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { withRouter } from 'react-router-dom';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -92,7 +93,7 @@ const useStyles2 = makeStyles(theme => ({
   },
 }));
 
-export default function TableList(props) {
+function TableList(props) {
   const classes = useStyles2();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -103,6 +104,10 @@ export default function TableList(props) {
 
   function handleChangeRowsPerPage(event) {
     setRowsPerPage(parseInt(event.target.value, 10));
+  }
+
+  function handleToEditPage(id) {
+    props.history.push(`/${props.editUrl}/${id}`);
   }
 
   return (
@@ -123,7 +128,11 @@ export default function TableList(props) {
               <TableCell>{row.column2}</TableCell>
               <TableCell>{row.column3}</TableCell>
               <TableCell align="right">
-                <IconButton aria-label="Edit" className={classes.icon}>
+                <IconButton
+                  aria-label="Edit"
+                  className={classes.icon}
+                  onClick={() => handleToEditPage(row.id)}
+                >
                   <EditIcon/>
                 </IconButton>
                 <IconButton aria-label="Delete" className={classes.icon}>
@@ -155,3 +164,5 @@ export default function TableList(props) {
     </div>
   );
 }
+
+export default withRouter(TableList);

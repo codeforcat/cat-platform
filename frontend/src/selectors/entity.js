@@ -1,5 +1,5 @@
-function createData(column1, column2, column3) {
-  return { column1, column2, column3 };
+function createData(id, column1, column2, column3) {
+  return { id, column1, column2, column3 };
 }
 
 export function setEntityList(state, payload) {
@@ -10,7 +10,7 @@ export function setEntityList(state, payload) {
     entityObj[index].entity_values.map((item, i) => {
       valueTexts.push(item.value_text)
     });
-    rows.push(createData(entityObj[index].entity_id, entityObj[index].entity_name, valueTexts.join(', ')));
+    rows.push(createData(entityObj[index].entity_id, entityObj[index].entity_id, entityObj[index].entity_name, valueTexts.join(', ')));
   });
   return rows;
 }

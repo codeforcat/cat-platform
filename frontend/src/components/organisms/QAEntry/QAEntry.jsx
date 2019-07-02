@@ -17,6 +17,7 @@ export default function QAEntry(props) {
     <Container>
       <QuestionIdField
         id={props.question_id}
+        params={props.match.params.id}
         actions={props.actions}
       />
       <ParentAnswerIdField

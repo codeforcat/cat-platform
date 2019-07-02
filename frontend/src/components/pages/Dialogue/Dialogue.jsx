@@ -30,21 +30,23 @@ export default function Dialogue() {
               <Link to="/">Ｑ＆Ａ一覧</Link>
             </li>
             <li>
-              <Link to="/qa_entry">Ｑ＆Ａ入力修正</Link>
+              <Link to="/qa_entry">Ｑ＆Ａ新規入力</Link>
             </li>
             <li>
-              <Link to="/entity_list/">Entity一覧</Link>
+              <Link to="/entity_list">Entity一覧</Link>
             </li>
             <li>
-              <Link to="/entity_entry">Entity入力修正</Link>
+              <Link to="/entity_entry">Entity新規入力</Link>
             </li>
           </ul>
         </nav>
         <Switch>
-          <Route path="/" exact component={QAList}/>
-          <Route path="/qa_entry/" component={QAEntryContainer}/>
-          <Route path="/entity_list/" component={EntityListContainer}/>
-          <Route path="/entity_entry/" component={EntityEntryContainer}/>
+          <Route exact path="/" exact component={QAList}/>
+          <Route exact path="/qa_entry" component={QAEntryContainer}/>
+          <Route exact path="/qa_entry/:id" component={QAEntryContainer}/>
+          <Route exact path="/entity_list" component={EntityListContainer}/>
+          <Route exact path="/entity_entry" component={EntityEntryContainer}/>
+          <Route exact path="/entity_entry/:id" component={EntityEntryContainer}/>
         </Switch>
       </Router>
     </MuiThemeProvider>

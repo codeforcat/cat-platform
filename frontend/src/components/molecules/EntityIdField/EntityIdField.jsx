@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Input from '@material-ui/core/Input';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormItem from '../FormItem/FormItem.jsx';
 
 export default function EntityIdField(props) {
+  useEffect(() => {
+    if(props.params) {
+      props.actions.inputEntityId(props.params);
+      props.actions.setEntityState(props.params);
+    } else {
+      props.actions.clearEntity();
+    }
+  });
+
   return (
     <FormItem
       label="entity-id"
@@ -13,11 +21,11 @@ export default function EntityIdField(props) {
       <Input
         id="entity-id"
         aria-describedby="entity-id-helper-text"
-        value={props.id || ''}
+        value={props.params ? props.params : props.id || ''}
         onChange={(e) => props.actions.inputEntityId(e.target.value)}
         onKeyDown={(e) => {if(e.key === 'Enter' && e.target.value !== '') props.actions.setEntityState(e.target.value)}}
+        disabled
       />
-      <FormHelperText id="entity-id-helper-text">※新規追加時は空欄</FormHelperText>
     </FormItem>
   );
 }
