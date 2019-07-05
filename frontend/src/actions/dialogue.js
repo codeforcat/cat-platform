@@ -1,3 +1,4 @@
+export const INIT_DIALOGUE = 'INIT_DIALOGUE';
 export const FETCH_ANSWERS = 'FETCH_ANSWERS';
 export const SET_ANSWERS = 'SET_ANSWERS';
 export const INPUT_QUESTION_ID = 'INPUT_QUESTION_ID';
@@ -12,9 +13,25 @@ export const INPUT_BUTTONS_NUMBER = 'INPUT_BUTTONS_NUMBER';
 export const CREATE_DIALOGUE = 'CREATE_DIALOGUE';
 export const SET_DIALOGUE_STATE = 'SET_DIALOGUE_STATE';
 export const SET_DIALOGUE = 'SET_DIALOGUE';
+export const SET_DIALOGUE_ALL = 'SET_DIALOGUE_ALL';
 export const UPDATE_DIALOGUE = 'UPDATE_DIALOGUE';
 export const CLEAR_DIALOGUE = 'CLEAR_DIALOGUE';
 export const FETCH_ERROR_DIALOGUE = 'FETCH_ERROR_DIALOGUE';
+
+export function initDialogue() {
+  return {
+    type: INIT_DIALOGUE
+  }
+}
+
+export function setDialogueAll(data) {
+  return {
+    type: SET_DIALOGUE_ALL,
+    payload:{
+      data: data
+    }
+  }
+}
 
 export function fetchAnswers() {
   return {

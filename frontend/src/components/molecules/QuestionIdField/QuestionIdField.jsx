@@ -5,12 +5,11 @@ import FormItem from '../FormItem/FormItem.jsx';
 export default function QuestionIdField(props) {
   useEffect(() => {
     if(props.params) {
-      props.actions.inputQuestionId(props.params)
+      props.actions.inputQuestionId(props.params);
       props.actions.setDialogueState(props.params);
-    } else {
-      props.actions.clearDialogue();
     }
-  });
+    return () => props.actions.clearDialogue();
+  },[props.params]);
 
   return (
     <FormItem

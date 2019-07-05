@@ -1,16 +1,17 @@
 import { take, call, put, select } from 'redux-saga/effects';
 import * as dialogueActions from '../actions/dialogue';
 import { showError } from '../actions/error';
-import { getDialogueState, setDialogueTemp, isValidState } from '../selectors/dialogue';
+import { setDialogueList, getDialogueState, setDialogueTemp, isValidState } from '../selectors/dialogue';
 import * as API from '../apis/API';
 
-// export function* initQuestion() {
-//   while (true) {
-//     yield take(questionActions.INIT_ARTICLE);
-//     const { payload, error } = yield call(API.read,'article');
-//     yield call(_setQuestion,payload,error)
-//   }
-// }
+export function* initDialogue() {
+  while (true) {
+    yield take(dialogueActions.INIT_DIALOGUE);
+    const { payload, error } = yield call(API.read,'questions');
+    const data = yield select(setDialogueList,payload);
+    yield put(dialogueActions.setDialogueAll(data));
+  }
+}
 
 // export function* searchQuestion() {
 //   while (true) {

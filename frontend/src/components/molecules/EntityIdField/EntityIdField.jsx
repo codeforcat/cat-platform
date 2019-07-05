@@ -7,10 +7,9 @@ export default function EntityIdField(props) {
     if(props.params) {
       props.actions.inputEntityId(props.params);
       props.actions.setEntityState(props.params);
-    } else {
-      props.actions.clearEntity();
     }
-  });
+    return () => props.actions.clearEntity();
+  },[props.params]);
 
   return (
     <FormItem

@@ -9,9 +9,9 @@ import AdditionalMessage from '../../molecules/AdditionalMessage/AdditionalMessa
 import DialogueSendButton from '../../molecules/DialogueSendButton/DialogueSendButton.jsx';
 
 export default function QAEntry(props) {
-  useEffect(() => {
-    props.actions.fetchAnswers();
-  },[props.parent_answer_id]);
+  // useEffect(() => {
+  //   props.actions.fetchAnswers();
+  // },[props.exists_answers]);
 
   return (
     <Container>

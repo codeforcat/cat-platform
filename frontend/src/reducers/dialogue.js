@@ -58,6 +58,7 @@ const initialState = {
     additional_state: 'none',
     additional_message: null
   },
+  list: [],
   isUpdateStateEnable: false,
   isShowError: false,
   apiErrorMsg: '',
@@ -86,6 +87,8 @@ export default function (state = initialState,action) {
         answers: action.payload.answers,
         isValid: action.payload.question_name !== ''
       });
+    case actionTypes.SET_DIALOGUE_ALL:
+      return Object.assign({},state,{list: action.payload.data});
     case actionTypes.SET_ANSWERS:
       return Object.assign({},state,{exists_answers: action.payload.exists_answers});
     case actionTypes.INPUT_QUESTION_ID:

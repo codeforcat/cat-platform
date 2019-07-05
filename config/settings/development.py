@@ -23,7 +23,7 @@ INSTALLED_APPS += [
 ]
 
 MIDDLEWARE += [
-    'silk.middleware.SilkyMiddleware',
+    # 'silk.middleware.SilkyMiddleware',
 ]
 
 
