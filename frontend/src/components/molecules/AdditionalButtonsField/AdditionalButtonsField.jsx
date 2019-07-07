@@ -54,9 +54,12 @@ export default function AdditionalButtonsField(props) {
           {buttonList.map((item, index)=>
             <AdditionalLabelText
               key={index}
-              index={index}
-              actions={props.actions}
-              delete
+              item={item}
+              idx={index}
+              inputType={props.actions.inputButtonsType}
+              inputData={props.actions.inputButtonsData}
+              inputLabel={props.actions.inputButtonsLabel}
+              inputText={props.actions.inputButtonsText}
             />
           )}
         </Grid>

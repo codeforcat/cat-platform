@@ -29,7 +29,7 @@ export default function AdditionalConfirmField(props) {
         <Grid item xs={12}>
           <InputLabel className={classes.label}>２択ボタンのテキスト</InputLabel>
           {button_list.map((item, index)=>
-            <AdditionalLabelText key={index} index={index}/>
+            <AdditionalLabelText key={index} idx={index}/>
           )}
         </Grid>
       </Grid>

@@ -10,6 +10,10 @@ export const DELETE_PHRASE_TEXT = 'DELETE_PHRASE_TEXT';
 export const INPUT_ANSWER_TEXT = 'INPUT_ANSWER_TEXT';
 export const INPUT_ADDITIONAL_STATE = 'INPUT_ADDITIONAL_STATE';
 export const INPUT_BUTTONS_NUMBER = 'INPUT_BUTTONS_NUMBER';
+export const INPUT_BUTTONS_TYPE = 'INPUT_BUTTONS_TYPE';
+export const INPUT_BUTTONS_DATA = 'INPUT_BUTTONS_DATA';
+export const INPUT_BUTTONS_LABEL = 'INPUT_BUTTONS_LABEL';
+export const INPUT_BUTTONS_TEXT = 'INPUT_BUTTONS_TEXT';
 export const CREATE_DIALOGUE = 'CREATE_DIALOGUE';
 export const SET_DIALOGUE_STATE = 'SET_DIALOGUE_STATE';
 export const SET_DIALOGUE = 'SET_DIALOGUE';
@@ -125,6 +129,46 @@ export function inputButtonsNumber(number) {
     type: INPUT_BUTTONS_NUMBER,
     payload:{
       number: parseInt(number)
+    }
+  }
+}
+
+export function inputButtonsType(type, idx) {
+  return {
+    type: INPUT_BUTTONS_TYPE,
+    payload:{
+      type: type,
+      idx: parseInt(idx)
+    }
+  }
+}
+
+export function inputButtonsData(data, idx) {
+  return {
+    type: INPUT_BUTTONS_DATA,
+    payload:{
+      data: data,
+      idx: parseInt(idx)
+    }
+  }
+}
+
+export function inputButtonsLabel(label, idx) {
+  return {
+    type: INPUT_BUTTONS_LABEL,
+    payload:{
+      label: label,
+      idx: parseInt(idx)
+    }
+  }
+}
+
+export function inputButtonsText(text, idx) {
+  return {
+    type: INPUT_BUTTONS_TEXT,
+    payload:{
+      text: text,
+      idx: parseInt(idx)
     }
   }
 }
