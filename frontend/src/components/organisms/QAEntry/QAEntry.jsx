@@ -44,7 +44,9 @@ export default function QAEntry(props) {
       <AdditionalMessage
         additional_state={props.additional_state}
         buttons_number={props.buttons_number}
-        additional_message={props.additional_message}
+        buttons={props.buttons}
+        confirm={props.confirm}
+        image={props.image}
         actions={props.actions}
       />
       <DialogueSendButton

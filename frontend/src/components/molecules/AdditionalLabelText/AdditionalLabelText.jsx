@@ -7,12 +7,6 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 
 export default function AdditionalLabelText(props) {
-  const [type, setType] = useState('message');
-
-  function handleChange(event) {
-    setType(event.target.value);
-  }
-
   return (
     <div className={props.className}>
       <Grid
@@ -35,11 +29,11 @@ export default function AdditionalLabelText(props) {
           </Select>
         </Grid>
         <Grid item xs={12} sm={5}>
-          {type === 'postback' && <div>
+          {props.item.type === 'postback' && <div>
             <InputLabel htmlFor="`data${props.idx}`" required>データ</InputLabel>
             <Input
               id="`data${props.idx}`"
-              value={props.item.data}
+              value={props.item.data || ''}
               onChange={(e) => props.inputData(e.target.value, props.idx)}
               required
               fullWidth
@@ -50,33 +44,21 @@ export default function AdditionalLabelText(props) {
           <InputLabel htmlFor="`label${props.idx}`" required>ラベル</InputLabel>
           <Input
             id="`label${props.idx}`"
-            value={props.item.label}
+            value={props.item.label || ''}
             onChange={(e) => props.inputLabel(e.target.value, props.idx)}
             required
             fullWidth
           />
         </Grid>
         <Grid item xs={12} sm={5}>
-          {type === 'message' && <div>
-            <InputLabel htmlFor="`text${props.idx}`" required>送信されるテキスト</InputLabel>
-            <Input
-              id="`text${props.idx}`"
-              value={props.item.text}
-              onChange={(e) => props.inputText(e.target.value, props.idx)}
-              required
-              fullWidth
-            />
-          </div>}
-          {type === 'postback' && <div>
-            <InputLabel htmlFor="`displayText${props.idx}`" required>送信されるテキスト</InputLabel>
-            <Input
-              id="`displayText${props.idx}`"
-              value={props.item.text}
-              onChange={(e) => props.inputText(e.target.value, props.idx)}
-              required
-              fullWidth
-            />
-          </div>}
+          <InputLabel htmlFor="`text${props.idx}`" required>送信されるテキスト</InputLabel>
+          <Input
+            id="`text${props.idx}`"
+            value={props.item.text || ''}
+            onChange={(e) => props.inputText(e.target.value, props.idx)}
+            required
+            fullWidth
+          />
         </Grid>
         {props.delete && <Grid item xs={12} sm={2}>
           <Button variant="contained">delete</Button>

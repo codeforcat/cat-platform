@@ -18,14 +18,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function AdditionalButtonsField(props) {
   const classes = useStyles();
-  const array = new Array(props.buttons_number);
-  const [buttonList, setButtonList] = useState(array.fill(0));
-
-  function handleChange(event) {
-    props.actions.inputButtonsNumber(event.target.value);
-    const array = new Array(parseInt(event.target.value));
-    setButtonList(array.fill(0));
-  }
 
   return (
     <div className={props.className}>
@@ -36,13 +28,19 @@ export default function AdditionalButtonsField(props) {
       >
         <Grid item xs={12}>
           <InputLabel htmlFor="buttons-title" required>メッセージのタイトル</InputLabel>
-          <Input id="buttons-title" required fullWidth/>
+          <Input
+            id="buttons-title"
+            value={props.buttons.altText}
+            onChange={(e) => props.actions.inputButtonsAltText(e.target.value)}
+            required
+            fullWidth
+          />
         </Grid>
         <Grid item xs={12}>
           <InputLabel htmlFor="buttons-number" className={classes.label}>選択肢の数</InputLabel>
           <Select
             value={props.buttons_number}
-            onChange={handleChange}
+            onChange={(e) => props.actions.inputButtonsNumber(e.target.value)}
             input={<Input id="buttons-number"/>}
             autoWidth
           >
@@ -51,7 +49,7 @@ export default function AdditionalButtonsField(props) {
             <MenuItem value="3">3</MenuItem>
             <MenuItem value="4">4</MenuItem>
           </Select>
-          {buttonList.map((item, index)=>
+          {props.buttons.template.actions.map((item, index)=>
             <AdditionalLabelText
               key={index}
               item={item}

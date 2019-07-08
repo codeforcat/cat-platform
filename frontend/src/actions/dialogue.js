@@ -10,6 +10,7 @@ export const DELETE_PHRASE_TEXT = 'DELETE_PHRASE_TEXT';
 export const INPUT_ANSWER_TEXT = 'INPUT_ANSWER_TEXT';
 export const INPUT_ADDITIONAL_STATE = 'INPUT_ADDITIONAL_STATE';
 export const INPUT_BUTTONS_NUMBER = 'INPUT_BUTTONS_NUMBER';
+export const INPUT_BUTTONS_ALTTEXT = 'INPUT_BUTTONS_ALTTEXT';
 export const INPUT_BUTTONS_TYPE = 'INPUT_BUTTONS_TYPE';
 export const INPUT_BUTTONS_DATA = 'INPUT_BUTTONS_DATA';
 export const INPUT_BUTTONS_LABEL = 'INPUT_BUTTONS_LABEL';
@@ -129,6 +130,15 @@ export function inputButtonsNumber(number) {
     type: INPUT_BUTTONS_NUMBER,
     payload:{
       number: parseInt(number)
+    }
+  }
+}
+
+export function inputButtonsAltText(altText) {
+  return {
+    type: INPUT_BUTTONS_ALTTEXT,
+    payload:{
+      altText: altText
     }
   }
 }

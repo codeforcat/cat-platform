@@ -33,7 +33,11 @@ const initialState = {
     template: {
       type: 'buttons',
       text: '',
-      actions: []
+      actions: [
+        {
+          type: 'message'
+        }
+      ]
     }
   },
   confirm: {
@@ -142,14 +146,70 @@ export default function (state = initialState,action) {
       };
       return makeAnswerTextState(state,action.payload.idx,action.payload.answer_text);
     case actionTypes.INPUT_ADDITIONAL_STATE:
-      let additional_message;
-      switch (action.payload.state) {
-        case 'none':
-          additional_message = {};
-      }
-      return Object.assign({},state,{additional_state: action.payload.state, additional_message: additional_message});
+      return Object.assign({},state,{additional_state: action.payload.state});
     case actionTypes.INPUT_BUTTONS_NUMBER:
-      return Object.assign({},state,{buttons_number: action.payload.number});
+      const array_number = action.payload.number - state.buttons.template.actions.length;
+      const actions_array = new Array(array_number).fill({type: 'message'});
+      const merged_actions_array = [...state.buttons.template.actions, ...actions_array];
+      const new_template_actions = Object.assign({}, state.buttons.template, {actions: merged_actions_array});
+      const new_buttons_template = Object.assign({}, state.buttons, {template: new_template_actions});
+      return Object.assign({},state,{buttons_number: action.payload.number, buttons: new_buttons_template});
+    case actionTypes.INPUT_BUTTONS_ALTTEXT:
+      const new_template_text = Object.assign({}, state.buttons.template, {text: action.payload.altText});
+      const new_altText = Object.assign({}, state.buttons, {altText: action.payload.altText, template: new_template_text});
+      return Object.assign({},state,{buttons: new_altText});
+    case actionTypes.INPUT_BUTTONS_TYPE:
+      const makeButtonsTypeState = (state,index,inputData) => {
+        const buttons_actions = state.buttons.template.actions;
+        const new_actions = [
+          ...buttons_actions.slice(0, index),
+          Object.assign({}, buttons_actions[index], {type: inputData}),
+          ...buttons_actions.slice(index + 1)
+        ];
+        const new_template = Object.assign({}, state.buttons.template, {actions: new_actions});
+        const new_buttons = Object.assign({}, state.buttons, {template: new_template});
+        return Object.assign({},state,{buttons: new_buttons})
+      };
+      return makeButtonsTypeState(state,action.payload.idx,action.payload.type);
+    case actionTypes.INPUT_BUTTONS_DATA:
+      const makeButtonsDataState = (state,index,inputData) => {
+        const buttons_actions = state.buttons.template.actions;
+        const new_actions = [
+          ...buttons_actions.slice(0, index),
+          Object.assign({}, buttons_actions[index], {data: inputData}),
+          ...buttons_actions.slice(index + 1)
+        ];
+        const new_template = Object.assign({}, state.buttons.template, {actions: new_actions});
+        const new_buttons = Object.assign({}, state.buttons, {template: new_template});
+        return Object.assign({},state,{buttons: new_buttons})
+      };
+      return makeButtonsDataState(state,action.payload.idx,action.payload.data);
+    case actionTypes.INPUT_BUTTONS_LABEL:
+      const makeButtonsLabelState = (state,index,inputData) => {
+        const buttons_actions = state.buttons.template.actions;
+        const new_actions = [
+          ...buttons_actions.slice(0, index),
+          Object.assign({}, buttons_actions[index], {label: inputData}),
+          ...buttons_actions.slice(index + 1)
+        ];
+        const new_template = Object.assign({}, state.buttons.template, {actions: new_actions});
+        const new_buttons = Object.assign({}, state.buttons, {template: new_template});
+        return Object.assign({},state,{buttons: new_buttons})
+      };
+      return makeButtonsLabelState(state,action.payload.idx,action.payload.label);
+    case actionTypes.INPUT_BUTTONS_TEXT:
+      const makeButtonsTextState = (state,index,inputData) => {
+        const buttons_actions = state.buttons.template.actions;
+        const new_actions = [
+          ...buttons_actions.slice(0, index),
+          Object.assign({}, buttons_actions[index], buttons_actions[index].type === 'message' ? {text: inputData} : {displayText: inputData}),
+          ...buttons_actions.slice(index + 1)
+        ];
+        const new_template = Object.assign({}, state.buttons.template, {actions: new_actions});
+        const new_buttons = Object.assign({}, state.buttons, {template: new_template});
+        return Object.assign({},state,{buttons: new_buttons})
+      };
+      return makeButtonsTextState(state,action.payload.idx,action.payload.text);
     case actionTypes.CLEAR_DIALOGUE:
       return Object.assign({},state,{
         question_id: 0,
