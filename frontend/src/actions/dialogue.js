@@ -257,14 +257,16 @@ export function inputImagePreview(url) {
   }
 }
 
-export function createDialogue(question_name, parent_answer_id, phrases, answers) {
+export function createDialogue(question_name, parent_answer_id, phrases, answers, additional_state, additional_message) {
   return {
     type: CREATE_DIALOGUE,
     payload:{
       question_name: question_name,
       parent_answer_id: parseInt(parent_answer_id),
       phrases: phrases,
-      answers: answers
+      answers: answers,
+      additional_state: additional_state,
+      additional_message: additional_message
     }
   }
 }
@@ -278,19 +280,23 @@ export function setDialogueState(question_id) {
   }
 }
 
-export function setDialogue(question_name, parent_answer_id, phrases, answers) {
+export function setDialogue(question_name, parent_answer_id, phrases, answers, additional_state, buttons, confirm, image) {
   return {
     type: SET_DIALOGUE,
     payload:{
       question_name: question_name,
       parent_answer_id: parseInt(parent_answer_id),
       phrases: phrases,
-      answers: answers
+      answers: answers,
+      additional_state: additional_state,
+      buttons: buttons,
+      confirm: confirm,
+      image: image
     }
   }
 }
 
-export function updateDialogue(question_id, question_name, parent_answer_id, phrases, answers) {
+export function updateDialogue(question_id, question_name, parent_answer_id, phrases, answers, additional_state, additional_message) {
   return {
     type: UPDATE_DIALOGUE,
     payload:{
@@ -298,7 +304,9 @@ export function updateDialogue(question_id, question_name, parent_answer_id, phr
       question_name: question_name,
       parent_answer_id: parseInt(parent_answer_id),
       phrases: phrases,
-      answers: answers
+      answers: answers,
+      additional_state: additional_state,
+      additional_message: additional_message
     }
   }
 }

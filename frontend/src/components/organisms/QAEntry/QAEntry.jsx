@@ -56,6 +56,10 @@ export default function QAEntry(props) {
         parent_answer_id={props.parent_answer_id}
         phrases={props.phrases}
         answers={props.answers}
+        additional_state={props.additional_state}
+        buttons={props.buttons}
+        confirm={props.confirm}
+        image={props.image}
         actions={props.actions}
       />
     </Container>

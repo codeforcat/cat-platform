@@ -1,19 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 export default function AdditionalRadio(props) {
-  function handleChange(event) {
-    props.actions.inputAdditionalState(event.target.value);
-  }
-
   return (
     <div className={props.className}>
       <RadioGroup
         name="addition"
         value={props.state}
-        onChange={handleChange}
+        onChange={(e) => props.actions.inputAdditionalState(e.target.value)}
         row
       >
         <FormControlLabel value="none" control={<Radio color="primary" />} label="なし"/>

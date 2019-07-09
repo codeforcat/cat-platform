@@ -50,7 +50,16 @@ export function* setDialogue() {
     const { payload, error } = yield call(API.set,'questions',action.payload.question_id);
     if (payload && !error) {
       const data = yield select(setDialogueTemp,payload);
-      yield put(dialogueActions.setDialogue(data.question_name, data.parent_answer_id, data.phrases, data.answers));
+      yield put(dialogueActions.setDialogue(
+        data.question_name,
+        data.parent_answer_id,
+        data.phrases,
+        data.answers,
+        data.additional_state,
+        data.buttons,
+        data.confirm,
+        data.image
+      ));
     }
     else {
       yield put(dialogueActions.fetchDialogueError(error.response.data.detail));

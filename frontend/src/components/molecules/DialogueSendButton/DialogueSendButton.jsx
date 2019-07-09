@@ -11,6 +11,18 @@ const useStyles = makeStyles(theme => ({
 
 export default function DialogueSendButton(props) {
   const classes = useStyles();
+  const additional_message = () => {
+    switch (props.additional_state) {
+      case 'buttons':
+        return props.buttons;
+      case 'confirm':
+        return props.confirm;
+      case 'image':
+        return props.image;
+      default:
+        return null;
+    }
+  };
 
   return (
     <div className={classes.field}>
@@ -24,7 +36,14 @@ export default function DialogueSendButton(props) {
             variant="contained"
             color="primary"
             fullWidth
-            onClick={() => props.actions.createDialogue(props.question_name, props.parent_answer_id, props.phrases, props.answers)}
+            onClick={() => props.actions.createDialogue(
+              props.question_name,
+              props.parent_answer_id,
+              props.phrases,
+              props.answers,
+              props.additional_state,
+              additional_message()
+            )}
           >
             create
           </Button>}
@@ -32,7 +51,15 @@ export default function DialogueSendButton(props) {
             variant="contained"
             color="secondary"
             fullWidth
-            onClick={() => props.actions.updateDialogue(props.question_id, props.question_name, props.parent_answer_id, props.phrases, props.answers)}
+            onClick={() => props.actions.updateDialogue(
+              props.question_id,
+              props.question_name,
+              props.parent_answer_id,
+              props.phrases,
+              props.answers,
+              props.additional_state,
+              additional_message()
+            )}
           >
             update
           </Button>}
