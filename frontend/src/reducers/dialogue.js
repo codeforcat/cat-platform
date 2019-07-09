@@ -96,6 +96,10 @@ export default function (state = initialState,action) {
         parent_answer_id: action.payload.parent_answer_id,
         phrases: action.payload.phrases,
         answers: action.payload.answers,
+        additional_state: action.payload.additional_state,
+        buttons: action.payload.buttons,
+        confirm: action.payload.confirm,
+        image: action.payload.image,
         isValid: action.payload.question_name !== ''
       });
     case actionTypes.SET_DIALOGUE_ALL:
