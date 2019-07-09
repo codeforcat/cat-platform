@@ -15,6 +15,13 @@ export const INPUT_BUTTONS_TYPE = 'INPUT_BUTTONS_TYPE';
 export const INPUT_BUTTONS_DATA = 'INPUT_BUTTONS_DATA';
 export const INPUT_BUTTONS_LABEL = 'INPUT_BUTTONS_LABEL';
 export const INPUT_BUTTONS_TEXT = 'INPUT_BUTTONS_TEXT';
+export const INPUT_CONFIRM_ALTTEXT = 'INPUT_CONFIRM_ALTTEXT';
+export const INPUT_CONFIRM_TYPE = 'INPUT_CONFIRM_TYPE';
+export const INPUT_CONFIRM_DATA = 'INPUT_CONFIRM_DATA';
+export const INPUT_CONFIRM_LABEL = 'INPUT_CONFIRM_LABEL';
+export const INPUT_CONFIRM_TEXT = 'INPUT_CONFIRM_TEXT';
+export const INPUT_IMAGE_ORIGINAL = 'INPUT_IMAGE_ORIGINAL';
+export const INPUT_IMAGE_PREVIEW = 'INPUT_IMAGE_PREVIEW';
 export const CREATE_DIALOGUE = 'CREATE_DIALOGUE';
 export const SET_DIALOGUE_STATE = 'SET_DIALOGUE_STATE';
 export const SET_DIALOGUE = 'SET_DIALOGUE';
@@ -179,6 +186,73 @@ export function inputButtonsText(text, idx) {
     payload:{
       text: text,
       idx: parseInt(idx)
+    }
+  }
+}
+
+export function inputConfirmAltText(altText) {
+  return {
+    type: INPUT_CONFIRM_ALTTEXT,
+    payload:{
+      altText: altText
+    }
+  }
+}
+
+export function inputConfirmType(type, idx) {
+  return {
+    type: INPUT_CONFIRM_TYPE,
+    payload:{
+      type: type,
+      idx: parseInt(idx)
+    }
+  }
+}
+
+export function inputConfirmData(data, idx) {
+  return {
+    type: INPUT_CONFIRM_DATA,
+    payload:{
+      data: data,
+      idx: parseInt(idx)
+    }
+  }
+}
+
+export function inputConfirmLabel(label, idx) {
+  return {
+    type: INPUT_CONFIRM_LABEL,
+    payload:{
+      label: label,
+      idx: parseInt(idx)
+    }
+  }
+}
+
+export function inputConfirmText(text, idx) {
+  return {
+    type: INPUT_CONFIRM_TEXT,
+    payload:{
+      text: text,
+      idx: parseInt(idx)
+    }
+  }
+}
+
+export function inputImageOriginal(url) {
+  return {
+    type: INPUT_IMAGE_ORIGINAL,
+    payload:{
+      url: url
+    }
+  }
+}
+
+export function inputImagePreview(url) {
+  return {
+    type: INPUT_IMAGE_PREVIEW,
+    payload:{
+      url: url
     }
   }
 }

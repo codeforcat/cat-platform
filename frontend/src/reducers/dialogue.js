@@ -46,7 +46,14 @@ const initialState = {
     template: {
       type: 'confirm',
       text: '',
-      actions: []
+      actions: [
+        {
+          type: 'message'
+        },
+        {
+          type: 'message'
+        }
+      ]
     }
   },
   image: {
@@ -149,15 +156,15 @@ export default function (state = initialState,action) {
       return Object.assign({},state,{additional_state: action.payload.state});
     case actionTypes.INPUT_BUTTONS_NUMBER:
       const array_number = action.payload.number - state.buttons.template.actions.length;
-      const actions_array = new Array(array_number).fill({type: 'message'});
-      const merged_actions_array = [...state.buttons.template.actions, ...actions_array];
+      const actions_array = array_number >= 0 ? new Array(array_number).fill({type: 'message'}) : [];
+      const merged_actions_array = array_number >= 0 ? [...state.buttons.template.actions, ...actions_array] : state.buttons.template.actions.slice(0, action.payload.number);
       const new_template_actions = Object.assign({}, state.buttons.template, {actions: merged_actions_array});
       const new_buttons_template = Object.assign({}, state.buttons, {template: new_template_actions});
       return Object.assign({},state,{buttons_number: action.payload.number, buttons: new_buttons_template});
     case actionTypes.INPUT_BUTTONS_ALTTEXT:
-      const new_template_text = Object.assign({}, state.buttons.template, {text: action.payload.altText});
-      const new_altText = Object.assign({}, state.buttons, {altText: action.payload.altText, template: new_template_text});
-      return Object.assign({},state,{buttons: new_altText});
+      const new_buttons_template_text = Object.assign({}, state.buttons.template, {text: action.payload.altText});
+      const new_buttons_altText = Object.assign({}, state.buttons, {altText: action.payload.altText, template: new_buttons_template_text});
+      return Object.assign({},state,{buttons: new_buttons_altText});
     case actionTypes.INPUT_BUTTONS_TYPE:
       const makeButtonsTypeState = (state,index,inputData) => {
         const buttons_actions = state.buttons.template.actions;
@@ -210,6 +217,68 @@ export default function (state = initialState,action) {
         return Object.assign({},state,{buttons: new_buttons})
       };
       return makeButtonsTextState(state,action.payload.idx,action.payload.text);
+    case actionTypes.INPUT_CONFIRM_ALTTEXT:
+      const new_confirm_template_text = Object.assign({}, state.confirm.template, {text: action.payload.altText});
+      const new_confirm_altText = Object.assign({}, state.confirm, {altText: action.payload.altText, template: new_confirm_template_text});
+      return Object.assign({},state,{confirm: new_confirm_altText});
+    case actionTypes.INPUT_CONFIRM_TYPE:
+      const makeConfirmTypeState = (state,index,inputData) => {
+        const confirm_actions = state.confirm.template.actions;
+        const new_actions = [
+          ...confirm_actions.slice(0, index),
+          Object.assign({}, confirm_actions[index], {type: inputData}),
+          ...confirm_actions.slice(index + 1)
+        ];
+        const new_template = Object.assign({}, state.confirm.template, {actions: new_actions});
+        const new_confirm = Object.assign({}, state.confirm, {template: new_template});
+        return Object.assign({},state,{confirm: new_confirm})
+      };
+      return makeConfirmTypeState(state,action.payload.idx,action.payload.type);
+    case actionTypes.INPUT_CONFIRM_DATA:
+      const makeConfirmDataState = (state,index,inputData) => {
+        const confirm_actions = state.confirm.template.actions;
+        const new_actions = [
+          ...confirm_actions.slice(0, index),
+          Object.assign({}, confirm_actions[index], {data: inputData}),
+          ...confirm_actions.slice(index + 1)
+        ];
+        const new_template = Object.assign({}, state.confirm.template, {actions: new_actions});
+        const new_confirm = Object.assign({}, state.confirm, {template: new_template});
+        return Object.assign({},state,{confirm: new_confirm})
+      };
+      return makeConfirmDataState(state,action.payload.idx,action.payload.data);
+    case actionTypes.INPUT_CONFIRM_LABEL:
+      const makeConfirmLabelState = (state,index,inputData) => {
+        const confirm_actions = state.confirm.template.actions;
+        const new_actions = [
+          ...confirm_actions.slice(0, index),
+          Object.assign({}, confirm_actions[index], {label: inputData}),
+          ...confirm_actions.slice(index + 1)
+        ];
+        const new_template = Object.assign({}, state.confirm.template, {actions: new_actions});
+        const new_confirm = Object.assign({}, state.confirm, {template: new_template});
+        return Object.assign({},state,{confirm: new_confirm})
+      };
+      return makeConfirmLabelState(state,action.payload.idx,action.payload.label);
+    case actionTypes.INPUT_CONFIRM_TEXT:
+      const makeConfirmTextState = (state,index,inputData) => {
+        const confirm_actions = state.confirm.template.actions;
+        const new_actions = [
+          ...confirm_actions.slice(0, index),
+          Object.assign({}, confirm_actions[index], confirm_actions[index].type === 'message' ? {text: inputData} : {displayText: inputData}),
+          ...confirm_actions.slice(index + 1)
+        ];
+        const new_template = Object.assign({}, state.confirm.template, {actions: new_actions});
+        const new_confirm = Object.assign({}, state.confirm, {template: new_template});
+        return Object.assign({},state,{confirm: new_confirm})
+      };
+      return makeConfirmTextState(state,action.payload.idx,action.payload.text);
+    case actionTypes.INPUT_IMAGE_ORIGINAL:
+      const new_image_original = Object.assign({}, state.image, {originalContentUrl: action.payload.url});
+      return Object.assign({},state,{image: new_image_original});
+    case actionTypes.INPUT_IMAGE_PREVIEW:
+      const new_image_preview = Object.assign({}, state.image, {previewImageUrl: action.payload.url});
+      return Object.assign({},state,{image: new_image_preview});
     case actionTypes.CLEAR_DIALOGUE:
       return Object.assign({},state,{
         question_id: 0,
@@ -232,9 +301,40 @@ export default function (state = initialState,action) {
         ],
         additional_state: 'none',
         buttons_number: 1,
-        buttons: {},
-        confirm: {},
-        image: {},
+        buttons: {
+          type: 'template',
+          altText: '',
+          template: {
+            type: 'buttons',
+            text: '',
+            actions: [
+              {
+                type: 'message'
+              }
+            ]
+          }
+        },
+        confirm: {
+          type: 'template',
+          altText: '',
+          template: {
+            type: 'confirm',
+            text: '',
+            actions: [
+              {
+                type: 'message'
+              },
+              {
+                type: 'message'
+              }
+            ]
+          }
+        },
+        image: {
+          type: 'image',
+          originalContentUrl: '',
+          previewImageUrl: ''
+        },
         temp: {
           question_name: '',
           parent_answer_id: -1,

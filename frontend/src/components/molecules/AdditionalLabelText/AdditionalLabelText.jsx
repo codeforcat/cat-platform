@@ -52,13 +52,20 @@ export default function AdditionalLabelText(props) {
         </Grid>
         <Grid item xs={12} sm={5}>
           <InputLabel htmlFor="`text${props.idx}`" required>送信されるテキスト</InputLabel>
-          <Input
+          {props.item.type === 'message' && <Input
             id="`text${props.idx}`"
             value={props.item.text || ''}
             onChange={(e) => props.inputText(e.target.value, props.idx)}
             required
             fullWidth
-          />
+          />}
+          {props.item.type === 'postback' && <Input
+            id="`text${props.idx}`"
+            value={props.item.displayText || ''}
+            onChange={(e) => props.inputText(e.target.value, props.idx)}
+            required
+            fullWidth
+          />}
         </Grid>
         {props.delete && <Grid item xs={12} sm={2}>
           <Button variant="contained">delete</Button>

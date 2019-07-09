@@ -13,7 +13,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function AdditionalConfirmField(props) {
   const classes = useStyles();
-  const button_list = [1,2];
 
   return (
     <div className={props.className}>
@@ -24,12 +23,26 @@ export default function AdditionalConfirmField(props) {
       >
         <Grid item xs={12}>
           <InputLabel htmlFor="buttons-title" required>メッセージのタイトル</InputLabel>
-          <Input id="buttons-title" required fullWidth/>
+          <Input
+            id="buttons-title"
+            value={props.confirm.altText}
+            onChange={(e) => props.actions.inputConfirmAltText(e.target.value)}
+            required
+            fullWidth
+          />
         </Grid>
         <Grid item xs={12}>
           <InputLabel className={classes.label}>２択ボタンのテキスト</InputLabel>
-          {button_list.map((item, index)=>
-            <AdditionalLabelText key={index} idx={index}/>
+          {props.confirm.template.actions.map((item, index)=>
+            <AdditionalLabelText
+              key={index}
+              item={item}
+              idx={index}
+              inputType={props.actions.inputConfirmType}
+              inputData={props.actions.inputConfirmData}
+              inputLabel={props.actions.inputConfirmLabel}
+              inputText={props.actions.inputConfirmText}
+            />
           )}
         </Grid>
       </Grid>
