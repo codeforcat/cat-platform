@@ -53,7 +53,6 @@ export function* updateEntity() {
   while (true) {
     const action = yield take(entityActions.UPDATE_ENTITY);
     const state = yield select(getEntityState,action.payload);
-    console.log(state.temp);
     const isValid  = yield select(isValidState);
     if (isValid) {
       const { payload, error } = yield call(API.update,'entities',action.payload.entity_id,state.temp);
