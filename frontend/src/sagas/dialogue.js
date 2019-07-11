@@ -90,17 +90,14 @@ export function* updateDialogue() {
 //   }
 // }
 
-// export function* deleteQuestion() {
-//   while (true) {
-//     const action = yield take(questionActions.PRE_DELETE_ARTICLE);
-//     const questionAction = yield take(questionActions.DELETE_ARTICLE);
-//     if(questionAction.payload.ok) {
-//       yield call(API.destroy,'article',action.payload.index);
-//     }
-//     const { payload, error } = yield call(_searchWordToReadAPI,'article',action);
-//     yield call(_setQuestion,payload,error)
-//   }
-// }
+export function* deleteDialogue() {
+  while (true) {
+    const action = yield take(dialogueActions.DELETE_DIALOGUE);
+    yield call(API.destroy,'questions',action.payload.question_id);
+    yield put(dialogueActions.closeDeleteDialog());
+    yield put(dialogueActions.initDialogue());
+  }
+}
 
 function* _clearDialogue(api_payload,api_error) {
   if (api_payload && !api_error) {

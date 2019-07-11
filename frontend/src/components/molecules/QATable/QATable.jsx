@@ -23,6 +23,7 @@ export default function QATable(props) {
         rows={props.list}
         header={header}
         editUrl="qa_entry"
+        delete={props.actions.preDeleteDialogue}
       />
     </>
   );

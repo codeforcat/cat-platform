@@ -15,6 +15,9 @@ export const SET_ENTITY_ALL = 'SET_ENTITY_ALL';
 export const UPDATE_ENTITY = 'UPDATE_ENTITY';
 export const CLEAR_ENTITY = 'CLEAR_ENTITY';
 export const FETCH_ERROR_ENTITY = 'FETCH_ERROR_ENTITY';
+export const PRE_DELETE_ENTITY = 'PRE_DELETE_ENTITY';
+export const DELETE_ENTITY = 'DELETE_ENTITY';
+export const CLOSE_DELETE_DIALOG = 'CLOSE_DELETE_DIALOG';
 
 export function initEntity() {
   return {
@@ -175,5 +178,30 @@ export function fetchEntityError(error) {
     payload:{
       error: error
     }
+  }
+}
+
+export function preDeleteEntity(entity_id, entity_name) {
+  return {
+    type: PRE_DELETE_ENTITY,
+    payload:{
+      entity_id: parseInt(entity_id),
+      entity_name: entity_name
+    }
+  }
+}
+
+export function deleteEntity(entity_id) {
+  return {
+    type: DELETE_ENTITY,
+    payload:{
+      entity_id: parseInt(entity_id)
+    }
+  }
+}
+
+export function closeDeleteDialog() {
+  return {
+    type: CLOSE_DELETE_DIALOG
   }
 }

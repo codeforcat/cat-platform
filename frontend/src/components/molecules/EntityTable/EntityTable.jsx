@@ -5,7 +5,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import SearchIcon from '@material-ui/icons/Search';
 import TableList from '../../atoms/TableList/TableList.jsx';
 
-const header = ['Entity ID', 'Entityの名前', 'Value']
+const header = ['Entityの名前', 'Value', '']
 
 export default function EntityTable(props) {
   return (
@@ -23,6 +23,7 @@ export default function EntityTable(props) {
         rows={props.list}
         header={header}
         editUrl="entity_entry"
+        delete={props.actions.preDeleteEntity}
       />
     </>
   );

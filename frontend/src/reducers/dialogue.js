@@ -71,6 +71,9 @@ const initialState = {
   },
   list: [],
   isUpdateStateEnable: false,
+  isOpenDeleteDialog: false,
+  targetDeleteName: '',
+  targetDeleteId: 0,
   isShowError: false,
   apiErrorMsg: '',
   errorMsg: {
@@ -348,11 +351,26 @@ export default function (state = initialState,action) {
           additional_message: null
         },
         isUpdateStateEnable: false,
+        isOpenDeleteDialog: false,
+        targetDeleteName: '',
+        targetDeleteId: 0,
         isShowError: false,
         apiErrorMsg: ''
       });
     case actionTypes.FETCH_ERROR_DIALOGUE:
       return Object.assign({},state,{apiErrorMsg: action.payload.error});
+    case actionTypes.PRE_DELETE_DIALOGUE:
+      return Object.assign({},state,{
+        isOpenDeleteDialog: true,
+        targetDeleteName: action.payload.question_name,
+        targetDeleteId: action.payload.question_id
+      });
+    case actionTypes.CLOSE_DELETE_DIALOG:
+      return Object.assign({},state,{
+        isOpenDeleteDialog: false,
+        targetDeleteName: '',
+        targetDeleteId: 0
+      });
     case SHOW_ERROR:
       return Object.assign({},state,{isShowError: true});
   }

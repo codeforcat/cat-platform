@@ -7,7 +7,10 @@ function mapStateToProps(state) {
   const d = state.dialogue;
   return {
     list : d.list,
-    temp : d.temp
+    temp : d.temp,
+    isOpenDeleteDialog : d.isOpenDeleteDialog,
+    targetDeleteName : d.targetDeleteName,
+    targetDeleteId : d.targetDeleteId
   };
 }
 

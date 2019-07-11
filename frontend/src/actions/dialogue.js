@@ -29,6 +29,9 @@ export const SET_DIALOGUE_ALL = 'SET_DIALOGUE_ALL';
 export const UPDATE_DIALOGUE = 'UPDATE_DIALOGUE';
 export const CLEAR_DIALOGUE = 'CLEAR_DIALOGUE';
 export const FETCH_ERROR_DIALOGUE = 'FETCH_ERROR_DIALOGUE';
+export const PRE_DELETE_DIALOGUE = 'PRE_DELETE_DIALOGUE';
+export const DELETE_DIALOGUE = 'DELETE_DIALOGUE';
+export const CLOSE_DELETE_DIALOG = 'CLOSE_DELETE_DIALOG';
 
 export function initDialogue() {
   return {
@@ -328,5 +331,30 @@ export function fetchDialogueError(error) {
     payload:{
       error: error
     }
+  }
+}
+
+export function preDeleteDialogue(question_id, question_name) {
+  return {
+    type: PRE_DELETE_DIALOGUE,
+    payload:{
+      question_id: parseInt(question_id),
+      question_name: question_name
+    }
+  }
+}
+
+export function deleteDialogue(question_id) {
+  return {
+    type: DELETE_DIALOGUE,
+    payload:{
+      question_id: parseInt(question_id)
+    }
+  }
+}
+
+export function closeDeleteDialog() {
+  return {
+    type: CLOSE_DELETE_DIALOG
   }
 }

@@ -7,7 +7,10 @@ function mapStateToProps(state) {
   const e = state.entity;
   return {
     list : e.list,
-    temp : e.temp
+    temp : e.temp,
+    isOpenDeleteDialog : e.isOpenDeleteDialog,
+    targetDeleteName : e.targetDeleteName,
+    targetDeleteId : e.targetDeleteId
   };
 }
 

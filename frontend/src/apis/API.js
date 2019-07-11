@@ -35,10 +35,10 @@ export function update(repository,id,data) {
   return data_access(`/api/v1/${repository}/${id}/`,'PATCH',data)
 }
 
-// export function destroy(repository,id) {
-//   return access(`/api/v1/${repository}/${id}`,'DELETE')
-// }
-//
+export function destroy(repository,id) {
+  return access(`/api/v1/${repository}/${id}/`,'DELETE')
+}
+
 // export function restore(repository,id) {
 //   return access(`/api/v1/${repository}/${id}`,'PUT')
 // }

@@ -65,6 +65,15 @@ export function* updateEntity() {
   }
 }
 
+export function* deleteEntity() {
+  while (true) {
+    const action = yield take(entityActions.DELETE_ENTITY);
+    yield call(API.destroy,'entities',action.payload.entity_id);
+    yield put(entityActions.closeDeleteDialog());
+    yield put(entityActions.initEntity());
+  }
+}
+
 function* _clearEntity(api_payload,api_error) {
   if (api_payload && !api_error) {
     yield put(entityActions.clearEntity());

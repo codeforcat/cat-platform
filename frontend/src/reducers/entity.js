@@ -18,19 +18,16 @@ const initialState = {
       synonyms: []
     }
   ],
-  synonyms_temp: [
-    // {
-    //   value_temp_id: 0,
-    //   synonym_temp_id: 0,
-    //   synonym_text: ''
-    // }
-  ],
+  synonyms_temp: [],
   temp:{
     entity_name: '',
     entity_values: []
   },
   list: [],
   isUpdateStateEnable: false,
+  isOpenDeleteDialog: false,
+  targetDeleteName: '',
+  targetDeleteId: 0,
   isShowError: false,
   apiErrorMsg: '',
   errorMsg:{
@@ -161,23 +158,32 @@ export default function (state = initialState,action) {
             synonyms: []
           }
         ],
-        synonyms_temp: [
-          // {
-          //   value_temp_id: 0,
-          //   synonym_temp_id: 0,
-          //   synonym_text: ''
-          // }
-        ],
+        synonyms_temp: [],
         temp:{
           entity_name: '',
           entity_values: []
         },
         isUpdateStateEnable: false,
+        isOpenDeleteDialog: false,
+        targetDeleteName: '',
+        targetDeleteId: 0,
         isShowError: false,
         apiErrorMsg: ''
       });
     case actionTypes.FETCH_ERROR_ENTITY:
       return Object.assign({},state,{apiErrorMsg: action.payload.error});
+    case actionTypes.PRE_DELETE_ENTITY:
+      return Object.assign({},state,{
+        isOpenDeleteDialog: true,
+        targetDeleteName: action.payload.entity_name,
+        targetDeleteId: action.payload.entity_id
+      });
+    case actionTypes.CLOSE_DELETE_DIALOG:
+      return Object.assign({},state,{
+        isOpenDeleteDialog: false,
+        targetDeleteName: '',
+        targetDeleteId: 0
+      });
     case SHOW_ERROR:
       return Object.assign({},state,{isShowError: true});
   }

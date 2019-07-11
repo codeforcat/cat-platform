@@ -110,6 +110,10 @@ function TableList(props) {
     props.history.push(`/${props.editUrl}/${id}`);
   }
 
+  function handleDelete(id, name) {
+    props.delete(id, name);
+  }
+
   return (
     <div className={classes.tableWrapper}>
       <Table className={classes.table}>
@@ -135,7 +139,11 @@ function TableList(props) {
                 >
                   <EditIcon/>
                 </IconButton>
-                <IconButton aria-label="Delete" className={classes.icon}>
+                <IconButton
+                  aria-label="Delete"
+                  className={classes.icon}
+                  onClick={() => handleDelete(row.id, row.column1)}
+                >
                   <DeleteForeverIcon/>
                 </IconButton>
               </TableCell>
