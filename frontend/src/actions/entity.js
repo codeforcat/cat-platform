@@ -1,3 +1,5 @@
+import {SEARCH_DIALOGUE} from "./dialogue";
+
 export const INIT_ENTITY = 'INIT_ENTITY';
 export const INPUT_ENTITY_ID = 'INPUT_ENTITY_ID';
 export const INPUT_ENTITY_NAME = 'INPUT_ENTITY_NAME';
@@ -18,6 +20,7 @@ export const FETCH_ERROR_ENTITY = 'FETCH_ERROR_ENTITY';
 export const PRE_DELETE_ENTITY = 'PRE_DELETE_ENTITY';
 export const DELETE_ENTITY = 'DELETE_ENTITY';
 export const CLOSE_DELETE_DIALOG = 'CLOSE_DELETE_DIALOG';
+export const SEARCH_ENTITY = 'SEARCH_ENTITY';
 
 export function initEntity() {
   return {
@@ -203,5 +206,14 @@ export function deleteEntity(entity_id) {
 export function closeDeleteDialog() {
   return {
     type: CLOSE_DELETE_DIALOG
+  }
+}
+
+export function searchEntity(word) {
+  return {
+    type: SEARCH_ENTITY,
+    payload:{
+      word: word
+    }
   }
 }
