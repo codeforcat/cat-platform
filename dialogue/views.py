@@ -1,15 +1,19 @@
 from rest_framework import viewsets, generics
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
-from django_filters import rest_framework as filters
+from rest_framework import filters
 from .models import Question, Answer, Entity
 from .serializer import QuestionSerializer, AnswerDisplaySerializer, EntitySerializer
 
 
 class QuestionViewSet(viewsets.ViewSet, generics.ListCreateAPIView, generics.RetrieveUpdateDestroyAPIView):
     # permission_classes = (IsAuthenticatedOrReadOnly,)
-    queryset = Question.objects.all()
+    queryset = Question.objects.filter()
     serializer_class = QuestionSerializer
+    filter_backends = (filters.SearchFilter, filters.OrderingFilter)
+    search_fields = ('phrase__phrase_text', 'answer__answer_text')
+    ordering_fields = ('question_name', 'phrase__phrase_text', 'answer__answer_text')
+    ordering = ('question_name', 'phrase__phrase_text', 'answer__answer_text')
 
     def list(self, request):
         queryset = Question.objects.all()
@@ -44,8 +48,12 @@ class AnswerDisplayViewSet(viewsets.ViewSet, generics.ListCreateAPIView):
 
 class EntityViewSet(viewsets.ViewSet, generics.ListCreateAPIView, generics.RetrieveUpdateDestroyAPIView):
     # permission_classes = (IsAuthenticatedOrReadOnly,)
-    queryset = Entity.objects.all()
+    queryset = Entity.objects.filter()
     serializer_class = EntitySerializer
+    filter_backends = (filters.SearchFilter, filters.OrderingFilter)
+    search_fields = ('entity_name', 'entity_value__value_text', 'entity_value__synonym__synonym_text')
+    ordering_fields = ('entity_name', 'entity_value__value_text')
+    ordering = ('entity_name', 'entity_value__value_text')
 
     def list(self, request):
         queryset = Entity.objects.all()

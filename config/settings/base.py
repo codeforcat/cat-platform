@@ -124,6 +124,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ),
+    'SEARCH_PARAM': 'q',
 }
 
 CSRF_COOKIE_NAME = 'XSRF-TOKEN'
