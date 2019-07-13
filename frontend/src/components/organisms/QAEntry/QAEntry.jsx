@@ -36,7 +36,7 @@ export default function QAEntry(props) {
         actions={props.actions}
       />
       <EntityIdFieldForDialogue
-        entity_id={props.entity_id}
+        entities={props.entities}
         exists_entities={props.exists_entities}
         actions={props.actions}
       />
@@ -62,6 +62,7 @@ export default function QAEntry(props) {
         question_name={props.question_name}
         parent_answer_id={props.parent_answer_id}
         phrases={props.phrases}
+        entities={props.entities}
         answers={props.answers}
         additional_state={props.additional_state}
         buttons={props.buttons}

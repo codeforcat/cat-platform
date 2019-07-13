@@ -10,7 +10,7 @@ function mapStateToProps(state) {
     question_name    : d.question_name,
     parent_answer_id : d.parent_answer_id,
     exists_answers   : d.exists_answers,
-    entity_id        : d.entity_id,
+    entities         : d.entities,
     exists_entities  : d.exists_entities,
     phrases          : d.phrases,
     answers          : d.answers,

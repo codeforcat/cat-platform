@@ -10,7 +10,7 @@ const initialState = {
   errorCode: 'question_empty_error',
   parent_answer_id: -1,
   exists_answers: [],
-  entity_id: -1,
+  entities: [],
   exists_entities: [],
   phrases: [
     {
@@ -67,6 +67,7 @@ const initialState = {
     question_name: '',
     parent_answer_id: -1,
     phrases: [],
+    entities: [],
     answers: [],
     additional_state: 'none',
     additional_message: null
@@ -100,6 +101,7 @@ export default function (state = initialState,action) {
         question_name: action.payload.question_name,
         parent_answer_id: action.payload.parent_answer_id,
         phrases: action.payload.phrases,
+        entities: action.payload.entities,
         answers: action.payload.answers,
         additional_state: action.payload.additional_state,
         buttons: action.payload.buttons,
@@ -119,8 +121,11 @@ export default function (state = initialState,action) {
       return Object.assign({},state,{question_name: action.payload.question_name, isValid: action.payload.question_name !== ''});
     case actionTypes.INPUT_PARENT_ANSWER_ID:
       return Object.assign({},state,{parent_answer_id: action.payload.parent_answer_id});
-    case actionTypes.INPUT_ENTITY_ID:
-      return Object.assign({},state,{entity_id: action.payload.entity_id});
+    case actionTypes.INPUT_ENTITY:
+      const last = action.payload.entity.slice(-1)[0];
+      const sameEntities = action.payload.entity.filter((value, i) => value.entity_id === last.entity_id);
+      const filteredEntities = action.payload.entity.filter((value, i) => value.entity_id !== last.entity_id);
+      return Object.assign({},state,{entities: sameEntities.length > 1 ? filteredEntities : action.payload.entity});
     case actionTypes.INPUT_PHRASE_TEXT:
       const makePhraseState = (state,index,inputData) => {
         const new_list = [
@@ -299,6 +304,8 @@ export default function (state = initialState,action) {
         isValid: false,
         parent_answer_id: -1,
         exists_answers: [],
+        entities: [],
+        exists_entities: [],
         phrases: [
           {
             phrase_temp_id: 0,
@@ -352,6 +359,7 @@ export default function (state = initialState,action) {
           question_name: '',
           parent_answer_id: -1,
           phrases: [],
+          entities: [],
           answers: [],
           additional_state: 'none',
           additional_message: null

@@ -25,6 +25,7 @@ export function getDialogueState(state, payload) {
       question_name: payload.question_name,
       parent_answer_id: payload.parent_answer_id,
       phrases: payload.phrases,
+      entities: payload.entities,
       answers: payload.answers,
       additional_state: payload.additional_state,
       additional_message: payload.additional_message
@@ -51,6 +52,7 @@ export function setDialogueTemp(state, payload) {
     question_name: payload.question_name,
     parent_answer_id: payload.parent_answer_id,
     phrases: phrases,
+    entities: payload.entities,
     answers: answers,
     additional_state: payload.additional_state,
     buttons: payload.additional_state === 'buttons' ? payload.additional_message : {

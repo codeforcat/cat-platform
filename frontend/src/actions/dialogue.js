@@ -9,7 +9,7 @@ export const INPUT_PARENT_ANSWER_ID = 'INPUT_PARENT_ANSWER_ID';
 export const INPUT_PHRASE_TEXT = 'INPUT_PHRASE_TEXT';
 export const ADD_PHRASE_TEXT = 'ADD_PHRASE_TEXT';
 export const DELETE_PHRASE_TEXT = 'DELETE_PHRASE_TEXT';
-export const INPUT_ENTITY_ID = 'INPUT_ENTITY_ID';
+export const INPUT_ENTITY = 'INPUT_ENTITY';
 export const INPUT_ANSWER_TEXT = 'INPUT_ANSWER_TEXT';
 export const INPUT_ADDITIONAL_STATE = 'INPUT_ADDITIONAL_STATE';
 export const INPUT_BUTTONS_NUMBER = 'INPUT_BUTTONS_NUMBER';
@@ -135,11 +135,11 @@ export function deletePhraseText(idx, phrase_temp_idx) {
   }
 }
 
-export function inputEntityId(entity_id) {
+export function inputEntity(entity) {
   return {
-    type: INPUT_ENTITY_ID,
+    type: INPUT_ENTITY,
     payload:{
-      entity_id: parseInt(entity_id)
+      entity: entity
     }
   }
 }
@@ -288,13 +288,14 @@ export function inputImagePreview(url) {
   }
 }
 
-export function createDialogue(question_name, parent_answer_id, phrases, answers, additional_state, additional_message) {
+export function createDialogue(question_name, parent_answer_id, phrases, entities, answers, additional_state, additional_message) {
   return {
     type: CREATE_DIALOGUE,
     payload:{
       question_name: question_name,
       parent_answer_id: parseInt(parent_answer_id),
       phrases: phrases,
+      entities: entities,
       answers: answers,
       additional_state: additional_state,
       additional_message: additional_message
@@ -311,13 +312,14 @@ export function setDialogueState(question_id) {
   }
 }
 
-export function setDialogue(question_name, parent_answer_id, phrases, answers, additional_state, buttons, confirm, image) {
+export function setDialogue(question_name, parent_answer_id, phrases, entities, answers, additional_state, buttons, confirm, image) {
   return {
     type: SET_DIALOGUE,
     payload:{
       question_name: question_name,
       parent_answer_id: parseInt(parent_answer_id),
       phrases: phrases,
+      entities: entities,
       answers: answers,
       additional_state: additional_state,
       buttons: buttons,
@@ -327,7 +329,7 @@ export function setDialogue(question_name, parent_answer_id, phrases, answers, a
   }
 }
 
-export function updateDialogue(question_id, question_name, parent_answer_id, phrases, answers, additional_state, additional_message) {
+export function updateDialogue(question_id, question_name, parent_answer_id, phrases, entities, answers, additional_state, additional_message) {
   return {
     type: UPDATE_DIALOGUE,
     payload:{
@@ -335,6 +337,7 @@ export function updateDialogue(question_id, question_name, parent_answer_id, phr
       question_name: question_name,
       parent_answer_id: parseInt(parent_answer_id),
       phrases: phrases,
+      entities: entities,
       answers: answers,
       additional_state: additional_state,
       additional_message: additional_message

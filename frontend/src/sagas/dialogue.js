@@ -63,6 +63,7 @@ export function* setDialogue() {
         data.question_name,
         data.parent_answer_id,
         data.phrases,
+        data.entities,
         data.answers,
         data.additional_state,
         data.buttons,

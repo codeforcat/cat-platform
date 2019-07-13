@@ -13,7 +13,7 @@ export default function ParentAnswerIdField(props) {
     >
       <Select
         value={props.parent_answer_id}
-        onChange={(e) => props.actions.inputParentAnswerId(e.target.value)}
+        onChange={(e) => props.actions.inputParentAnswerId(e.target.value[0])}
         input={<Input id="parent-answer-id"/>}
         autoWidth
       >

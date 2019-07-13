@@ -40,6 +40,7 @@ export default function DialogueSendButton(props) {
               props.question_name,
               props.parent_answer_id,
               props.phrases,
+              props.entities,
               props.answers,
               props.additional_state,
               additional_message()
@@ -56,6 +57,7 @@ export default function DialogueSendButton(props) {
               props.question_name,
               props.parent_answer_id,
               props.phrases,
+              props.entities,
               props.answers,
               props.additional_state,
               additional_message()
