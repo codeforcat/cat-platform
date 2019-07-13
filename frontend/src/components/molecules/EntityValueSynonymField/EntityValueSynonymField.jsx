@@ -39,7 +39,7 @@ export default function EntityValueSynonymField(props) {
           id="`synonyms${props.idx}`"
           value={props.item.synonym_temp_text}
           onChange={(e) => props.actions.inputSynonymText(e.target.value, props.item.value_temp_id)}
-          onKeyDown={(e) => {if(e.key === 'Enter' && e.target.value !== '') props.actions.addSynonym(e.target.value, props.item.value_temp_id)}}
+          onKeyUp={(e) => {if(e.key === 'Enter' && e.target.value !== '') props.actions.addSynonym(e.target.value, props.item.value_temp_id)}}
         />
         <div className={classes.chips}>
           {props.synonyms.map((item, index) =>

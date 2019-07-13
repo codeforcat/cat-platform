@@ -22,7 +22,7 @@ export default function EntityIdField(props) {
         aria-describedby="entity-id-helper-text"
         value={props.params ? props.params : props.id || ''}
         onChange={(e) => props.actions.inputEntityId(e.target.value)}
-        onKeyDown={(e) => {if(e.key === 'Enter' && e.target.value !== '') props.actions.setEntityState(e.target.value)}}
+        onKeyUp={(e) => {if(e.key === 'Enter' && e.target.value !== '') props.actions.setEntityState(e.target.value)}}
         disabled
       />
     </FormItem>
