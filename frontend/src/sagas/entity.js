@@ -13,6 +13,15 @@ export function* initEntity() {
   }
 }
 
+export function* searchEntity() {
+  while (true) {
+    const action = yield take(entityActions.SEARCH_ENTITY);
+    const { payload, error } =yield call(API.search,'entities',action.payload.word);
+    const data = yield select(setEntityList,payload);
+    yield put(entityActions.setEntityAll(data));
+  }
+}
+
 export function* addSynonym() {
   while (true) {
     const action = yield take(entityActions.ADD_SYNONYM);

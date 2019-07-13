@@ -32,6 +32,7 @@ export const FETCH_ERROR_DIALOGUE = 'FETCH_ERROR_DIALOGUE';
 export const PRE_DELETE_DIALOGUE = 'PRE_DELETE_DIALOGUE';
 export const DELETE_DIALOGUE = 'DELETE_DIALOGUE';
 export const CLOSE_DELETE_DIALOG = 'CLOSE_DELETE_DIALOG';
+export const SEARCH_DIALOGUE = 'SEARCH_DIALOGUE';
 
 export function initDialogue() {
   return {
@@ -356,5 +357,14 @@ export function deleteDialogue(question_id) {
 export function closeDeleteDialog() {
   return {
     type: CLOSE_DELETE_DIALOG
+  }
+}
+
+export function searchDialogue(word) {
+  return {
+    type: SEARCH_DIALOGUE,
+    payload:{
+      word: word
+    }
   }
 }

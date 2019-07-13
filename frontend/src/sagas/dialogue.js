@@ -8,19 +8,19 @@ export function* initDialogue() {
   while (true) {
     yield take(dialogueActions.INIT_DIALOGUE);
     const { payload, error } = yield call(API.read,'questions');
-    console.log(payload);
     const data = yield select(setDialogueList,payload);
     yield put(dialogueActions.setDialogueAll(data));
   }
 }
 
-// export function* searchQuestion() {
-//   while (true) {
-//     const action = yield take(questionActions.SEARCH_ARTICLE);
-//     const { payload, error } =yield call(API.search,'article',action.payload);
-//     yield call(_setQuestion,payload,error)
-//   }
-// }
+export function* searchDialogue() {
+  while (true) {
+    const action = yield take(dialogueActions.SEARCH_DIALOGUE);
+    const { payload, error } =yield call(API.search,'questions',action.payload.word);
+    const data = yield select(setDialogueList,payload);
+    yield put(dialogueActions.setDialogueAll(data));
+  }
+}
 
 export function* fetchAnswers() {
   while (true) {

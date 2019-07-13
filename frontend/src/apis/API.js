@@ -18,10 +18,10 @@ export function read(repository) {
 // export function readAll(repository) {
 //   return access(`/api/v1/${repository}/all`,'GET')
 // }
-//
-// export function search(repository,word) {
-//   return access(`/api/v1/${repository}?word=${word}`,'GET')
-// }
+
+export function search(repository,word) {
+  return access(`/api/v1/${repository}/?q=${word}`,'GET')
+}
 
 export function set(repository,id) {
   return data_access(`/api/v1/${repository}/${id}/`,'GET')
