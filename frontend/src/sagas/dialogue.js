@@ -30,6 +30,14 @@ export function* fetchAnswers() {
   }
 }
 
+export function* fetchEntities() {
+  while (true) {
+    yield take(dialogueActions.FETCH_ENTITIES);
+    const { payload, error } = yield call(API.read,'entities');
+    yield put(dialogueActions.setEntities(payload));
+  }
+}
+
 export function* createDialogue() {
   while (true) {
     const action = yield take(dialogueActions.CREATE_DIALOGUE);

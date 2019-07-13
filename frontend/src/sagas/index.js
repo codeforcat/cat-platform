@@ -1,5 +1,5 @@
 import { fork, all } from 'redux-saga/effects';
-import { initDialogue, searchDialogue, fetchAnswers, createDialogue, setDialogue, updateDialogue, deleteDialogue } from './dialogue';
+import { initDialogue, searchDialogue, fetchAnswers, fetchEntities, createDialogue, setDialogue, updateDialogue, deleteDialogue } from './dialogue';
 import { initEntity, searchEntity, addSynonym, createEntity, setEntity, updateEntity, deleteEntity } from './entity';
 
 export default function* rootSaga() {
@@ -7,6 +7,7 @@ export default function* rootSaga() {
     fork(initDialogue),
     fork(searchDialogue),
     fork(fetchAnswers),
+    fork(fetchEntities),
     fork(createDialogue),
     fork(setDialogue),
     fork(updateDialogue),

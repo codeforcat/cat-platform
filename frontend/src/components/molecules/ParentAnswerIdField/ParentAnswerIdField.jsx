@@ -1,16 +1,10 @@
-import React, { useState } from 'react';
-import Grid from '@material-ui/core/Grid';
-import InputLabel from '@material-ui/core/InputLabel';
+import React from 'react';
 import Input from '@material-ui/core/Input';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormItem from '../FormItem/FormItem.jsx';
 
 export default function ParentAnswerIdField(props) {
-  function handleChange(event) {
-    props.actions.inputParentAnswerId(event.target.value);
-  }
-
   return (
     <FormItem
       label="parent-answer-id"
@@ -19,7 +13,7 @@ export default function ParentAnswerIdField(props) {
     >
       <Select
         value={props.parent_answer_id}
-        onChange={handleChange}
+        onChange={(e) => props.actions.inputParentAnswerId(e.target.value)}
         input={<Input id="parent-answer-id"/>}
         autoWidth
       >

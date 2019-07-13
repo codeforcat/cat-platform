@@ -10,6 +10,7 @@ class Question(Model):
     question_name = models.CharField(max_length=100, unique=True)
     intent_id = models.CharField(max_length=100, null=True, blank=True)
     parent_answer_id = models.IntegerField(null=True, blank=True)
+    entity_id = models.CharField(max_length=100, null=True, blank=True)
     additional_state = models.CharField(max_length=20, default='none')
     additional_message = JSONField(default=dict, null=True, blank=True)
     created_date = models.DateTimeField(auto_now_add=True)

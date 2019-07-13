@@ -4,6 +4,7 @@ import QuestionIdField from '../../molecules/QuestionIdField/QuestionIdField.jsx
 import ParentAnswerIdField from '../../molecules/ParentAnswerIdField/ParentAnswerIdField.jsx';
 import QuestionNameField from '../../molecules/QuestionNameField/QuestionNameField.jsx';
 import PhraseFields from '../../molecules/PhraseFields/PhraseFields.jsx';
+import EntityIdFieldForDialogue from '../../molecules/EntityIdFieldForDialogue/EntityIdFieldForDialogue.jsx';
 import AnswerTextField from '../../molecules/AnswerTextField/AnswerTextField.jsx';
 import AdditionalMessage from '../../molecules/AdditionalMessage/AdditionalMessage.jsx';
 import DialogueSendButton from '../../molecules/DialogueSendButton/DialogueSendButton.jsx';
@@ -11,6 +12,7 @@ import DialogueSendButton from '../../molecules/DialogueSendButton/DialogueSendB
 export default function QAEntry(props) {
   useEffect(() => {
     props.actions.fetchAnswers();
+    props.actions.fetchEntities();
   },[props.question_id]);
 
   return (
@@ -31,6 +33,11 @@ export default function QAEntry(props) {
       />
       <PhraseFields
         phrases={props.phrases}
+        actions={props.actions}
+      />
+      <EntityIdFieldForDialogue
+        entity_id={props.entity_id}
+        exists_entities={props.exists_entities}
         actions={props.actions}
       />
       {props.answers.map((item, index) =>

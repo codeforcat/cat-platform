@@ -10,6 +10,8 @@ const initialState = {
   errorCode: 'question_empty_error',
   parent_answer_id: -1,
   exists_answers: [],
+  entity_id: -1,
+  exists_entities: [],
   phrases: [
     {
       phrase_temp_id: 0,
@@ -109,12 +111,16 @@ export default function (state = initialState,action) {
       return Object.assign({},state,{list: action.payload.data});
     case actionTypes.SET_ANSWERS:
       return Object.assign({},state,{exists_answers: action.payload.exists_answers});
+    case actionTypes.SET_ENTITIES:
+      return Object.assign({},state,{exists_entities: action.payload.exists_entities});
     case actionTypes.INPUT_QUESTION_ID:
       return Object.assign({},state,{question_id: action.payload.question_id});
     case actionTypes.INPUT_QUESTION_NAME:
       return Object.assign({},state,{question_name: action.payload.question_name, isValid: action.payload.question_name !== ''});
     case actionTypes.INPUT_PARENT_ANSWER_ID:
       return Object.assign({},state,{parent_answer_id: action.payload.parent_answer_id});
+    case actionTypes.INPUT_ENTITY_ID:
+      return Object.assign({},state,{entity_id: action.payload.entity_id});
     case actionTypes.INPUT_PHRASE_TEXT:
       const makePhraseState = (state,index,inputData) => {
         const new_list = [

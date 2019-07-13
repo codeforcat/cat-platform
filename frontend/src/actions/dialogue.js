@@ -1,12 +1,15 @@
 export const INIT_DIALOGUE = 'INIT_DIALOGUE';
 export const FETCH_ANSWERS = 'FETCH_ANSWERS';
 export const SET_ANSWERS = 'SET_ANSWERS';
+export const FETCH_ENTITIES = 'FETCH_ENTITIES';
+export const SET_ENTITIES = 'SET_ENTITIES';
 export const INPUT_QUESTION_ID = 'INPUT_QUESTION_ID';
 export const INPUT_QUESTION_NAME = 'INPUT_QUESTION_NAME';
 export const INPUT_PARENT_ANSWER_ID = 'INPUT_PARENT_ANSWER_ID';
 export const INPUT_PHRASE_TEXT = 'INPUT_PHRASE_TEXT';
 export const ADD_PHRASE_TEXT = 'ADD_PHRASE_TEXT';
 export const DELETE_PHRASE_TEXT = 'DELETE_PHRASE_TEXT';
+export const INPUT_ENTITY_ID = 'INPUT_ENTITY_ID';
 export const INPUT_ANSWER_TEXT = 'INPUT_ANSWER_TEXT';
 export const INPUT_ADDITIONAL_STATE = 'INPUT_ADDITIONAL_STATE';
 export const INPUT_BUTTONS_NUMBER = 'INPUT_BUTTONS_NUMBER';
@@ -64,6 +67,21 @@ export function setAnswers(answers) {
   }
 }
 
+export function fetchEntities() {
+  return {
+    type: FETCH_ENTITIES
+  }
+}
+
+export function setEntities(entities) {
+  return {
+    type: SET_ENTITIES,
+    payload:{
+      exists_entities: entities
+    }
+  }
+}
+
 export function inputQuestionId(question_id) {
   return {
     type: INPUT_QUESTION_ID,
@@ -113,6 +131,15 @@ export function deletePhraseText(idx, phrase_temp_idx) {
     payload:{
       idx: parseInt(idx),
       phrase_temp_idx: parseInt(phrase_temp_idx)
+    }
+  }
+}
+
+export function inputEntityId(entity_id) {
+  return {
+    type: INPUT_ENTITY_ID,
+    payload:{
+      entity_id: parseInt(entity_id)
     }
   }
 }
