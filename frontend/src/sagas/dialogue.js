@@ -8,6 +8,7 @@ export function* initDialogue() {
   while (true) {
     yield take(dialogueActions.INIT_DIALOGUE);
     const { payload, error } = yield call(API.read,'questions');
+    console.log(payload);
     const data = yield select(setDialogueList,payload);
     yield put(dialogueActions.setDialogueAll(data));
   }
