@@ -13,7 +13,7 @@ class QuestionViewSet(viewsets.ViewSet, generics.ListCreateAPIView, generics.Ret
     filter_backends = (filters.SearchFilter, filters.OrderingFilter)
     search_fields = ('phrase__phrase_text', 'answer__answer_text')
     ordering_fields = ('question_name', 'phrase__phrase_text', 'answer__answer_text')
-    ordering = ('question_name', 'phrase__phrase_text', 'answer__answer_text')
+    ordering = ('question_id',)
 
     def list(self, request):
         queryset = Question.objects.all()
@@ -53,7 +53,7 @@ class EntityViewSet(viewsets.ViewSet, generics.ListCreateAPIView, generics.Retri
     filter_backends = (filters.SearchFilter, filters.OrderingFilter)
     search_fields = ('entity_name', 'entity_value__value_text', 'entity_value__synonym__synonym_text')
     ordering_fields = ('entity_name', 'entity_value__value_text')
-    ordering = ('entity_name', 'entity_value__value_text')
+    ordering = ('entity_id',)
 
     def list(self, request):
         queryset = Entity.objects.all()
