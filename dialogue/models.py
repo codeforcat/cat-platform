@@ -10,7 +10,6 @@ class Question(Model):
     question_name = models.CharField(max_length=100, unique=True)
     intent_id = models.CharField(max_length=100, null=True, blank=True)
     parent_answer_id = models.IntegerField(null=True, blank=True)
-    entities = JSONField(default=dict, null=True, blank=True)
     additional_state = models.CharField(max_length=20, default='none')
     additional_message = JSONField(default=dict, null=True, blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
@@ -33,6 +32,21 @@ class Phrase(models.Model):
 
     def __str__(self):
         return self.phrase_text
+
+
+class Entities(models.Model):
+    class Meta:
+        db_table = 'entities'
+
+    entities_id = models.AutoField(db_column='ENTITIES ID', primary_key=True)
+    question_id = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='entities')
+    entity_id = models.IntegerField(null=True, blank=True)
+    entity_name = models.CharField(max_length=50, null=True, blank=True)
+    created_date = models.DateTimeField(auto_now_add=True)
+    modified_date = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.entity_name
 
 
 class Answer(models.Model):
