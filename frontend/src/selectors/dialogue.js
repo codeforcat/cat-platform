@@ -26,11 +26,29 @@ export function isValidAdditionalState(state, data){
     // }
 
     let flag = false;
+    let flagArray = [];
     for(let key in data){
-      if(data[key] !== '') return true;
-      if(emptyData(data[key])){
+      console.log(data[key]);
+      if(data[key] !== ''){
         flag = true;
       }
+      else {
+        flag = false;
+      }
+      flagArray.push(flag);
+      let child = data[key];
+      if(typeof child === 'object') {
+        for (let i in child) {
+          console.log(child[i]);
+          if (child[i] !== '') {
+            flag = true;
+          } else {
+            flag = false;
+          }
+          flagArray.push(flag);
+        }
+      }
+      // emptyData(data[key]);
     }
     return flag;
   };
@@ -82,7 +100,11 @@ export function setDialogueTemp(state, payload) {
         text: '',
         actions: [
           {
-            type: 'message'
+            type: 'message',
+            label: '',
+            text: '',
+            displayText: '',
+            data: ''
           }
         ]
       }
@@ -95,10 +117,18 @@ export function setDialogueTemp(state, payload) {
         text: '',
         actions: [
           {
-            type: 'message'
+            type: 'message',
+            label: '',
+            text: '',
+            displayText: '',
+            data: ''
           },
           {
-            type: 'message'
+            type: 'message',
+            label: '',
+            text: '',
+            displayText: '',
+            data: ''
           }
         ]
       }

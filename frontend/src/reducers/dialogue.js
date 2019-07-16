@@ -39,7 +39,11 @@ const initialState = {
       text: '',
       actions: [
         {
-          type: 'message'
+          type: 'message',
+          label: '',
+          text: '',
+          displayText: '',
+          data: ''
         }
       ]
     }
@@ -52,10 +56,18 @@ const initialState = {
       text: '',
       actions: [
         {
-          type: 'message'
+          type: 'message',
+          label: '',
+          text: '',
+          displayText: '',
+          data: ''
         },
         {
-          type: 'message'
+          type: 'message',
+          label: '',
+          text: '',
+          displayText: '',
+          data: ''
         }
       ]
     }
@@ -177,7 +189,7 @@ export default function (state = initialState,action) {
       return Object.assign({},state,{additional_state: action.payload.state});
     case actionTypes.INPUT_BUTTONS_NUMBER:
       const array_number = action.payload.number - state.buttons.template.actions.length;
-      const actions_array = array_number >= 0 ? new Array(array_number).fill({type: 'message'}) : [];
+      const actions_array = array_number >= 0 ? new Array(array_number).fill({type: 'message', label: '', text: '', displayText: '', data: ''}) : [];
       const merged_actions_array = array_number >= 0 ? [...state.buttons.template.actions, ...actions_array] : state.buttons.template.actions.slice(0, action.payload.number);
       const new_template_actions = Object.assign({}, state.buttons.template, {actions: merged_actions_array});
       const new_buttons_template = Object.assign({}, state.buttons, {template: new_template_actions});
