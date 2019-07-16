@@ -96,7 +96,7 @@ export default function Dialogue() {
     <MuiThemeProvider theme={theme}>
       <Router>
         <AppBar
-          position="fixed"
+          position="static"
           className={clsx(classes.appBar, {
             [classes.appBarShift]: open,
           })}
