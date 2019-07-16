@@ -13,7 +13,7 @@ export default function EntityTable(props) {
       <InputLabel htmlFor="search">Search</InputLabel>
       <Input
         id="search"
-        onKeyUp={(e) => {if(e.key === 'Enter' && e.target.value !== '') props.actions.searchEntity(e.target.value)}}
+        onKeyUp={(e) => {if(e.key === 'Enter') props.actions.searchEntity(e.target.value)}}
         startAdornment={
           <InputAdornment position="start">
             <SearchIcon/>
