@@ -1,5 +1,6 @@
 import React from 'react';
 import Input from '@material-ui/core/Input';
+import FormHelperText from '@material-ui/core/FormHelperText';
 import FormItem from '../FormItem/FormItem.jsx';
 
 export default function QuestionNameField(props) {
@@ -16,7 +17,10 @@ export default function QuestionNameField(props) {
         onChange={(e) => props.actions.inputQuestionName(e.target.value)}
         required
         fullWidth
+        error={!props.isValid}
+        aria-describedby="question-name-error"
       />
+      {(!props.isValid && props.isShowError) && <FormHelperText error id="question-name-error">{props.errorMsg[props.errorCode]}</FormHelperText>}
     </FormItem>
   );
 }

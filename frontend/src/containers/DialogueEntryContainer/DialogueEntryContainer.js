@@ -15,6 +15,8 @@ function mapStateToProps(state) {
     phrases          : d.phrases,
     answers          : d.answers,
     additional_state : d.additional_state,
+    isValidAdditional: d.isValidAdditional,
+    errorCodeAdditional: d.errorCodeAdditional,
     buttons_number   : d.buttons_number,
     buttons          : d.buttons,
     confirm          : d.confirm,

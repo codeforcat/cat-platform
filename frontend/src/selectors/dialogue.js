@@ -19,6 +19,25 @@ export function setDialogueList(state, payload) {
   return rows;
 }
 
+export function isValidAdditionalState(state, data){
+  function emptyData(data) {
+    // if(data !== ''){
+    //   return true;
+    // }
+
+    let flag = false;
+    for(let key in data){
+      if(data[key] !== '') return true;
+      if(emptyData(data[key])){
+        flag = true;
+      }
+    }
+    return flag;
+  };
+
+  return emptyData(data);
+}
+
 export function getDialogueState(state, payload) {
   return Object.assign({},state,{
     temp:{

@@ -27,6 +27,10 @@ export default function PhraseFields(props) {
           text={item.phrase_text}
           idx={index}
           temp_id={item.phrase_temp_id}
+          isValid={item.isValid}
+          errorCode={item.errorCode}
+          errorMsg={props.errorMsg}
+          isShowError={props.isShowError}
           actions={props.actions}
         />
       )}

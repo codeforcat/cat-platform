@@ -5,6 +5,7 @@ import AdditionalButtonsField from '../AdditionalButtonsField/AdditionalButtonsF
 import AdditionalConfirmField from '../AdditionalConfirmField/AdditionalConfirmField.jsx';
 import AdditionalImageField from '../AdditionalImageField/AdditionalImageField.jsx';
 import FormItem from '../FormItem/FormItem.jsx';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 const useStyles = makeStyles(theme => ({
   label: {
@@ -42,6 +43,7 @@ export default function AdditionalMessage(props) {
         image={props.image}
         actions={props.actions}
       />}
+      {(!props.isValid && props.isShowError) && <FormHelperText error>{props.errorMsg[props.errorCode]}</FormHelperText>}
     </FormItem>
   );
 }

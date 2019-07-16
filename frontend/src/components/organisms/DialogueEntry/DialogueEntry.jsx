@@ -29,10 +29,16 @@ export default function DialogueEntry(props) {
       />
       <QuestionNameField
         name={props.question_name}
+        isValid={props.isValid}
+        errorCode={props.errorCode}
+        errorMsg={props.errorMsg}
+        isShowError={props.isShowError}
         actions={props.actions}
       />
       <PhraseFields
         phrases={props.phrases}
+        errorMsg={props.errorMsg}
+        isShowError={props.isShowError}
         actions={props.actions}
       />
       <EntityIdFieldForDialogue
@@ -45,6 +51,10 @@ export default function DialogueEntry(props) {
           key={index}
           answer_text={item.answer_text}
           idx={index}
+          isValid={item.isValid}
+          errorCode={item.errorCode}
+          errorMsg={props.errorMsg}
+          isShowError={props.isShowError}
           actions={props.actions}
         />
       )}
@@ -54,6 +64,10 @@ export default function DialogueEntry(props) {
         buttons={props.buttons}
         confirm={props.confirm}
         image={props.image}
+        isValid={props.isValidAdditional}
+        errorCode={props.errorCodeAdditional}
+        errorMsg={props.errorMsg}
+        isShowError={props.isShowError}
         actions={props.actions}
       />
       <DialogueSendButton

@@ -1,7 +1,7 @@
 import { take, call, put, select } from 'redux-saga/effects';
 import * as dialogueActions from '../actions/dialogue';
 import { showError } from '../actions/error';
-import { setDialogueList, getDialogueState, setDialogueTemp, isValidState } from '../selectors/dialogue';
+import { setDialogueList, isValidAdditionalState, getDialogueState, setDialogueTemp, isValidState } from '../selectors/dialogue';
 import * as API from '../apis/API';
 
 export function* initDialogue() {
@@ -42,7 +42,9 @@ export function* createDialogue() {
   while (true) {
     const action = yield take(dialogueActions.CREATE_DIALOGUE);
     const state = yield select(getDialogueState,action.payload);
+    const isValidAdditional = yield select(isValidAdditionalState,state.temp.additional_message);
     const isValid  = yield select(isValidState);
+    console.log(isValidAdditional);
     if (isValid) {
       const { payload, error } = yield call(API.create,'questions',state.temp);
       yield call(_clearDialogue,payload,error);

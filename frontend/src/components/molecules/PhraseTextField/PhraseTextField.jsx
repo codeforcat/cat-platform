@@ -1,6 +1,7 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
+import FormHelperText from '@material-ui/core/FormHelperText';
 import Button from '@material-ui/core/Button';
 
 export default function PhraseTextField(props) {
@@ -20,7 +21,10 @@ export default function PhraseTextField(props) {
           multiline
           rows={3}
           required={props.first}
+          error={!props.isValid}
+          aria-describedby="`phrase-text-error${props.idx}`"
         />
+        {(!props.isValid && props.isShowError) && <FormHelperText error id="`phrase-text-error${props.idx}`">{props.errorMsg[props.errorCode]}</FormHelperText>}
       </Grid>
       <Grid item xs={2}>
         <Button

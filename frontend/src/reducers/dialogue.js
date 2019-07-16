@@ -28,6 +28,8 @@ const initialState = {
     }
   ],
   additional_state: 'none',
+  isValidAdditional: true,
+  errorCodeAdditional: 'additional_empty_error',
   buttons_number: 1,
   buttons: {
     type: 'template',
@@ -82,7 +84,8 @@ const initialState = {
   errorMsg: {
     question_empty_error: '入力してください',
     phrase_empty_error: '入力してください',
-    answer_empty_error: '入力してください'
+    answer_empty_error: '入力してください',
+    additional_empty_error: '追加メッセージのすべての欄に入力してください'
   }
 };
 
@@ -320,6 +323,7 @@ export default function (state = initialState,action) {
           }
         ],
         additional_state: 'none',
+        isValidAdditional: true,
         buttons_number: 1,
         buttons: {
           type: 'template',
@@ -385,6 +389,8 @@ export default function (state = initialState,action) {
         targetDeleteName: '',
         targetDeleteId: 0
       });
+    case actionTypes.SET_ADDITIONAL_ERROR:
+      return Object.assign({},state,{isValidAdditional: false});
     case SHOW_ERROR:
       return Object.assign({},state,{isShowError: true});
   }

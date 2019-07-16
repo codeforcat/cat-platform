@@ -26,6 +26,7 @@ export const INPUT_CONFIRM_TEXT = 'INPUT_CONFIRM_TEXT';
 export const INPUT_IMAGE_ORIGINAL = 'INPUT_IMAGE_ORIGINAL';
 export const INPUT_IMAGE_PREVIEW = 'INPUT_IMAGE_PREVIEW';
 export const CREATE_DIALOGUE = 'CREATE_DIALOGUE';
+export const SET_ADDITIONAL_ERROR = 'SET_ADDITIONAL_ERROR';
 export const SET_DIALOGUE_STATE = 'SET_DIALOGUE_STATE';
 export const SET_DIALOGUE = 'SET_DIALOGUE';
 export const SET_DIALOGUE_ALL = 'SET_DIALOGUE_ALL';
@@ -300,6 +301,12 @@ export function createDialogue(question_name, parent_answer_id, phrases, entitie
       additional_state: additional_state,
       additional_message: additional_message
     }
+  }
+}
+
+export function setAdditionalError() {
+  return {
+    type: SET_ADDITIONAL_ERROR
   }
 }
 
