@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import QAListContainer from '../../../containers/QAListContainer/QAListContainer';
-import QAEntryContainer from '../../../containers/QAEntryContainer/QAEntryContainer';
+import DialogueListContainer from '../../../containers/DialogueListContainer/DialogueListContainer';
+import DialogueEntryContainer from '../../../containers/DialogueEntryContainer/DialogueEntryContainer';
 import EntityListContainer from '../../../containers/EntityListContainer/EntityListContainer';
 import EntityEntryContainer from '../../../containers/EntityEntryContainer/EntityEntryContainer';
 
@@ -41,9 +41,9 @@ export default function Dialogue() {
           </ul>
         </nav>
         <Switch>
-          <Route exact path="/" component={QAListContainer}/>
-          <Route exact path="/qa_entry" component={QAEntryContainer}/>
-          <Route exact path="/qa_entry/:id" component={QAEntryContainer}/>
+          <Route exact path="/" component={DialogueListContainer}/>
+          <Route exact path="/qa_entry" component={DialogueEntryContainer}/>
+          <Route exact path="/qa_entry/:id" component={DialogueEntryContainer}/>
           <Route exact path="/entity_list" component={EntityListContainer}/>
           <Route exact path="/entity_entry" component={EntityEntryContainer}/>
           <Route exact path="/entity_entry/:id" component={EntityEntryContainer}/>

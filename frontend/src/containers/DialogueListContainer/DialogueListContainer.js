@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as dialogueActionCreators from '../../actions/dialogue';
-import QAList from '../../components/organisms/QAList/QAList.jsx';
+import DialogueList from '../../components/organisms/DialogueList/DialogueList.jsx';
 
 function mapStateToProps(state) {
   const d = state.dialogue;
@@ -20,4 +20,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(QAList);
+export default connect(mapStateToProps, mapDispatchToProps)(DialogueList);

@@ -7,7 +7,7 @@ import TableList from '../../atoms/TableList/TableList.jsx';
 
 const header = ['Questionの名前', 'Phrases', 'Answer']
 
-export default function QATable(props) {
+export default function DialogueTable(props) {
   return (
     <>
       <InputLabel htmlFor="search">Search</InputLabel>

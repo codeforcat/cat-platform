@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react';
 import Container from '@material-ui/core/Container';
-import QATable from '../../molecules/QATable/QATable.jsx';
+import DialogueTable from '../../molecules/DialogueTable/DialogueTable.jsx';
 import DeleteDialog from '../../molecules/DeleteDialog/DeleteDialog.jsx';
 
-export default function QAList(props) {
+export default function DialogueList(props) {
   useEffect(() => {
     props.actions.initDialogue();
   },[props.temp]);
 
   return (
     <Container>
-      <QATable
+      <DialogueTable
         list={props.list}
         actions={props.actions}
       />

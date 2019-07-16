@@ -9,7 +9,7 @@ import AnswerTextField from '../../molecules/AnswerTextField/AnswerTextField.jsx
 import AdditionalMessage from '../../molecules/AdditionalMessage/AdditionalMessage.jsx';
 import DialogueSendButton from '../../molecules/DialogueSendButton/DialogueSendButton.jsx';
 
-export default function QAEntry(props) {
+export default function DialogueEntry(props) {
   useEffect(() => {
     props.actions.fetchAnswers();
     props.actions.fetchEntities();

@@ -5,7 +5,7 @@ import { configureStore } from './store/configureStore';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import './scss/styles.scss';
-import './components/organisms/QAEntry/QAEntry.jsx';
+import './components/organisms/DialogueEntry/DialogueEntry.jsx';
 import Dialogue from './components/pages/Dialogue/Dialogue.jsx';
 
 const store = configureStore();

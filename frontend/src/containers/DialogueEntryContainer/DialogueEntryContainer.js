@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as dialogueActionCreators from '../../actions/dialogue';
-import QAEntry from '../../components/organisms/QAEntry/QAEntry.jsx';
+import DialogueEntry from '../../components/organisms/DialogueEntry/DialogueEntry.jsx';
 
 function mapStateToProps(state) {
   const d = state.dialogue;
@@ -35,4 +35,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(QAEntry);
+export default connect(mapStateToProps, mapDispatchToProps)(DialogueEntry);
