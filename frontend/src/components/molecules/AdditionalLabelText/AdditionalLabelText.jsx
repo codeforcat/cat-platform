@@ -37,6 +37,7 @@ export default function AdditionalLabelText(props) {
               onChange={(e) => props.inputData(e.target.value, props.idx)}
               required
               fullWidth
+              error={props.item.data === '' && !props.isValid}
             />
           </div>}
         </Grid>
@@ -48,6 +49,7 @@ export default function AdditionalLabelText(props) {
             onChange={(e) => props.inputLabel(e.target.value, props.idx)}
             required
             fullWidth
+            error={props.item.label === '' && !props.isValid}
           />
         </Grid>
         <Grid item xs={12} sm={5}>
@@ -58,6 +60,7 @@ export default function AdditionalLabelText(props) {
             onChange={(e) => props.inputText(e.target.value, props.idx)}
             required
             fullWidth
+            error={props.item.text === '' && !props.isValid}
           />}
           {props.item.type === 'postback' && <Input
             id="`text${props.idx}`"
@@ -65,6 +68,7 @@ export default function AdditionalLabelText(props) {
             onChange={(e) => props.inputText(e.target.value, props.idx)}
             required
             fullWidth
+            error={props.item.displayText === '' && !props.isValid}
           />}
         </Grid>
         {props.delete && <Grid item xs={12} sm={2}>

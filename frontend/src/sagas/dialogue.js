@@ -42,14 +42,16 @@ export function* createDialogue() {
   while (true) {
     const action = yield take(dialogueActions.CREATE_DIALOGUE);
     const state = yield select(getDialogueState,action.payload);
-    const isValidAdditional = yield select(isValidAdditionalState,state.temp.additional_message);
+    const isValidAdditional = state.temp.additional_message ? yield select(isValidAdditionalState,state.temp.additional_message) : true;
     const isValid  = yield select(isValidState);
-    console.log(isValidAdditional);
-    if (isValid) {
+    if (isValid && isValidAdditional) {
       const { payload, error } = yield call(API.create,'questions',state.temp);
       yield call(_clearDialogue,payload,error);
     }
     else {
+      if(!isValidAdditional) {
+        yield put(dialogueActions.setAdditionalError());
+      }
       yield put(showError());
     }
   }
@@ -83,12 +85,16 @@ export function* updateDialogue() {
   while (true) {
     const action = yield take(dialogueActions.UPDATE_DIALOGUE);
     const state = yield select(getDialogueState,action.payload);
+    const isValidAdditional = state.temp.additional_message ? yield select(isValidAdditionalState,state.temp.additional_message) : true;
     const isValid  = yield select(isValidState);
-    if (isValid) {
+    if (isValid && isValidAdditional) {
       const { payload, error } = yield call(API.update,'questions',action.payload.question_id,state.temp);
       yield call(_clearDialogue,payload,error);
     }
     else {
+      if(!isValidAdditional) {
+        yield put(dialogueActions.setAdditionalError());
+      }
       yield put(showError());
     }
   }

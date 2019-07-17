@@ -33,14 +33,17 @@ export default function AdditionalMessage(props) {
       {props.additional_state === 'buttons' && <AdditionalButtonsField
         buttons_number={props.buttons_number}
         buttons={props.buttons}
+        isValid={props.isValid}
         actions={props.actions}
       />}
       {props.additional_state === 'confirm' && <AdditionalConfirmField
         confirm={props.confirm}
+        isValid={props.isValid}
         actions={props.actions}
       />}
       {props.additional_state === 'image' && <AdditionalImageField
         image={props.image}
+        isValid={props.isValid}
         actions={props.actions}
       />}
       {(!props.isValid && props.isShowError) && <FormHelperText error>{props.errorMsg[props.errorCode]}</FormHelperText>}

@@ -20,6 +20,7 @@ export default function AdditionalImageField(props) {
             aria-describedby="original-helper-text"
             required
             fullWidth
+            error={props.image.originalContentUrl === '' && !props.isValid}
           />
           <FormHelperText id="original-helper-text">HTTPS<br/>JPEG<br/>最大画像サイズ：4096×4096<br/>最大ファイルサイズ：1MB</FormHelperText>
         </Grid>
@@ -32,6 +33,7 @@ export default function AdditionalImageField(props) {
             aria-describedby="preview-helper-text"
             required
             fullWidth
+            error={props.image.previewImageUrl === '' && !props.isValid}
           />
           <FormHelperText id="preview-helper-text">HTTPS<br/>JPEG<br/>最大画像サイズ：240×240<br/>最大ファイルサイズ：1MB</FormHelperText>
         </Grid>

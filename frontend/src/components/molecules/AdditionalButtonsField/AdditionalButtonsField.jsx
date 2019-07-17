@@ -34,6 +34,7 @@ export default function AdditionalButtonsField(props) {
             onChange={(e) => props.actions.inputButtonsAltText(e.target.value)}
             required
             fullWidth
+            error={props.buttons.altText === '' && !props.isValid}
           />
         </Grid>
         <Grid item xs={12}>
@@ -54,6 +55,7 @@ export default function AdditionalButtonsField(props) {
               key={index}
               item={item}
               idx={index}
+              isValid={props.isValid}
               inputType={props.actions.inputButtonsType}
               inputData={props.actions.inputButtonsData}
               inputLabel={props.actions.inputButtonsLabel}

@@ -20,40 +20,39 @@ export function setDialogueList(state, payload) {
 }
 
 export function isValidAdditionalState(state, data){
-  function emptyData(data) {
-    // if(data !== ''){
-    //   return true;
-    // }
+  return !containEmpty(data);
+}
 
-    let flag = false;
-    let flagArray = [];
-    for(let key in data){
-      console.log(data[key]);
-      if(data[key] !== ''){
-        flag = true;
-      }
-      else {
-        flag = false;
-      }
-      flagArray.push(flag);
-      let child = data[key];
-      if(typeof child === 'object') {
-        for (let i in child) {
-          console.log(child[i]);
-          if (child[i] !== '') {
-            flag = true;
-          } else {
-            flag = false;
-          }
-          flagArray.push(flag);
-        }
-      }
-      // emptyData(data[key]);
+function containEmpty(json_data){
+  if(json_data.length === 0){
+    return true;
+  }
+
+  if(typeof json_data !== 'object'){
+    return false;
+  }
+
+  let flag = false;
+  let flagMessage = 1;
+  for(let key in json_data){
+    if(key === 'type' && json_data[key] === 'message'){
+      flagMessage = 1;
     }
-    return flag;
-  };
+    else if(key === 'type' && json_data[key] === 'postback') {
+      flagMessage = 2;
+    }
 
-  return emptyData(data);
+    if(containEmpty(json_data[key])){
+      if(flagMessage === 1 && (key === 'displayText' || key === 'data')) {
+        continue;
+      }
+      else if(flagMessage === 2 && key === 'text') {
+        continue;
+      }
+      flag = true;
+    }
+  }
+  return flag;
 }
 
 export function getDialogueState(state, payload) {

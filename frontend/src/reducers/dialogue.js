@@ -186,7 +186,7 @@ export default function (state = initialState,action) {
       };
       return makeAnswerTextState(state,action.payload.idx,action.payload.answer_text);
     case actionTypes.INPUT_ADDITIONAL_STATE:
-      return Object.assign({},state,{additional_state: action.payload.state});
+      return Object.assign({},state,{additional_state: action.payload.state, isValidAdditional: action.payload.state === 'none'});
     case actionTypes.INPUT_BUTTONS_NUMBER:
       const array_number = action.payload.number - state.buttons.template.actions.length;
       const actions_array = array_number >= 0 ? new Array(array_number).fill({type: 'message', label: '', text: '', displayText: '', data: ''}) : [];
@@ -345,7 +345,11 @@ export default function (state = initialState,action) {
             text: '',
             actions: [
               {
-                type: 'message'
+                type: 'message',
+                label: '',
+                text: '',
+                displayText: '',
+                data: ''
               }
             ]
           }
@@ -358,10 +362,18 @@ export default function (state = initialState,action) {
             text: '',
             actions: [
               {
-                type: 'message'
+                type: 'message',
+                label: '',
+                text: '',
+                displayText: '',
+                data: ''
               },
               {
-                type: 'message'
+                type: 'message',
+                label: '',
+                text: '',
+                displayText: '',
+                data: ''
               }
             ]
           }

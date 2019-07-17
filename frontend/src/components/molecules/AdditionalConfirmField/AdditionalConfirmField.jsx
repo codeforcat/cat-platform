@@ -29,6 +29,7 @@ export default function AdditionalConfirmField(props) {
             onChange={(e) => props.actions.inputConfirmAltText(e.target.value)}
             required
             fullWidth
+            error={props.confirm.altText === '' && !props.isValid}
           />
         </Grid>
         <Grid item xs={12}>
@@ -38,6 +39,7 @@ export default function AdditionalConfirmField(props) {
               key={index}
               item={item}
               idx={index}
+              isValid={props.isValid}
               inputType={props.actions.inputConfirmType}
               inputData={props.actions.inputConfirmData}
               inputLabel={props.actions.inputConfirmLabel}
