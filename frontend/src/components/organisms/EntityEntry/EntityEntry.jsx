@@ -15,11 +15,17 @@ export default function EntityEntry(props) {
       />
       <EntityNameField
         name={props.entity_name}
+        isValid={props.isValid}
+        errorCode={props.errorCode}
+        errorMsg={props.errorMsg}
+        isShowError={props.isShowError}
         actions={props.actions}
       />
       <EntityValueSynonyms
         values={props.values_temp}
         synonyms={props.synonyms_temp}
+        errorMsg={props.errorMsg}
+        isShowError={props.isShowError}
         actions={props.actions}
       />
       <EntitySendButton

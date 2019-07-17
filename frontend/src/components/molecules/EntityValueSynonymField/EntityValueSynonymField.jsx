@@ -5,6 +5,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 const useStyles = makeStyles(theme => ({
   chips: {
@@ -31,7 +32,10 @@ export default function EntityValueSynonymField(props) {
           onChange={(e) => props.actions.inputValueText(e.target.value, props.idx)}
           required
           fullWidth
+          error={!props.isValid}
+          aria-describedby="`value-error${props.idx}`"
         />
+        {(!props.isValid && props.isShowError) && <FormHelperText error id="`value-error${props.idx}`">{props.errorMsg[props.errorCode]}</FormHelperText>}
       </Grid>
       <Grid item xs={12} sm={8}>
         <InputLabel htmlFor="`synonyms${props.idx}`">Synonyms</InputLabel>

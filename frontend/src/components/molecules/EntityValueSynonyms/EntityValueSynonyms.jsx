@@ -23,6 +23,10 @@ export default function EntityValueSynonyms(props) {
           key={index}
           idx={index}
           item={item}
+          isValid={item.isValid}
+          errorCode={item.errorCode}
+          errorMsg={props.errorMsg}
+          isShowError={props.isShowError}
           synonyms={props.synonyms.filter((value, i) => value.value_temp_id === item.value_temp_id)}
           actions={props.actions}
           delete

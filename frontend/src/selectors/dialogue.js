@@ -142,6 +142,8 @@ export function setDialogueTemp(state, payload) {
 
 export function isValidState(state) {
   return [
-    state.dialogue.isValid
+    state.dialogue.isValid,
+    state.dialogue.phrases.filter(item=>item.isValid === true).length === state.dialogue.phrases.length,
+    state.dialogue.answers.filter(item=>item.isValid === true).length === state.dialogue.answers.length
   ].every(item=>item);
 }

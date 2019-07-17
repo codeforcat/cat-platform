@@ -1,5 +1,6 @@
 import React from 'react';
 import Input from '@material-ui/core/Input';
+import FormHelperText from '@material-ui/core/FormHelperText';
 import FormItem from '../FormItem/FormItem.jsx';
 
 export default function EntityNameField(props) {
@@ -16,7 +17,10 @@ export default function EntityNameField(props) {
         onChange={(e) => props.actions.inputEntityName(e.target.value)}
         required
         fullWidth
+        error={!props.isValid}
+        aria-describedby="entity-name-error"
       />
+      {(!props.isValid && props.isShowError) && <FormHelperText error id="entity-name-error">{props.errorMsg[props.errorCode]}</FormHelperText>}
     </FormItem>
   );
 }
