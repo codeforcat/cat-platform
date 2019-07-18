@@ -41,10 +41,10 @@ export function* fetchEntities() {
 export function* createDialogue() {
   while (true) {
     const action = yield take(dialogueActions.CREATE_DIALOGUE);
-    const state = yield select(getDialogueState,action.payload);
-    const isValidAdditional = state.temp.additional_message ? yield select(isValidAdditionalState,state.temp.additional_message) : true;
+    const isValidAdditional = action.payload.additional_message ? yield select(isValidAdditionalState,action.payload.additional_message) : true;
     const isValid  = yield select(isValidState);
     if (isValid && isValidAdditional) {
+      const state = yield select(getDialogueState,action.payload);
       const { payload, error } = yield call(API.create,'questions',state.temp);
       yield call(_clearDialogue,payload,error);
     }
@@ -84,10 +84,10 @@ export function* setDialogue() {
 export function* updateDialogue() {
   while (true) {
     const action = yield take(dialogueActions.UPDATE_DIALOGUE);
-    const state = yield select(getDialogueState,action.payload);
-    const isValidAdditional = state.temp.additional_message ? yield select(isValidAdditionalState,state.temp.additional_message) : true;
+    const isValidAdditional = action.payload.additional_message ? yield select(isValidAdditionalState,action.payload.additional_message) : true;
     const isValid  = yield select(isValidState);
     if (isValid && isValidAdditional) {
+      const state = yield select(getDialogueState,action.payload);
       const { payload, error } = yield call(API.update,'questions',action.payload.question_id,state.temp);
       yield call(_clearDialogue,payload,error);
     }

@@ -20,34 +20,56 @@ export function setDialogueList(state, payload) {
 }
 
 function containEmpty(json_data){
-  if(json_data.length === 0){
+  if(json_data.length === 0) {
     return true;
   }
 
-  if(typeof json_data !== 'object'){
+  if(typeof json_data !== 'object') {
     return false;
   }
 
   let flag = false;
-  let flagMessage = 1;
-  for(let key in json_data){
-    if(key === 'type' && json_data[key] === 'message'){
-      flagMessage = 1;
-    }
-    else if(key === 'type' && json_data[key] === 'postback') {
-      flagMessage = 2;
-    }
 
-    if(containEmpty(json_data[key])){
-      if(flagMessage === 1 && (key === 'displayText' || key === 'data')) {
-        continue;
+  for(let key0 in json_data){
+    if(key0 === 'actions') {
+      Object.keys(json_data[key0]).forEach((index) => {
+        const obj = json_data[key0][index];
+        const keyOrder = ['type', 'label', 'text', 'displayText', 'data'];
+        let orderedObj = keyOrder.map(function(item){
+          return obj[item];
+        });
+
+        let flagType = 0;
+        for (let key in orderedObj) {
+          if(orderedObj[key] === 'message') {
+            flagType = 1;
+          }
+          else if(orderedObj[key] === 'postback') {
+            flagType = 2;
+          }
+          if(flagType === 1) {
+            if(key == 3 || key == 4) {
+              continue;
+            }
+          }
+          else if(flagType === 2) {
+            if(key == 2) {
+              continue;
+            }
+          }
+          if(orderedObj[key].length === 0) {
+            flag = true;
+          }
+        }
+      });
+    }
+    else {
+      if(containEmpty(json_data[key0])) {
+        flag = true;
       }
-      else if(flagMessage === 2 && key === 'text') {
-        continue;
-      }
-      flag = true;
     }
   }
+
   return flag;
 }
 
@@ -56,6 +78,14 @@ export function isValidAdditionalState(state, data){
 }
 
 export function getDialogueState(state, payload) {
+  const removeEmpty = obj => {
+    Object.keys(obj).forEach(key => {
+      if (obj[key] && typeof obj[key] === "object") removeEmpty(obj[key]); // recurse
+      else if (obj[key] === '') delete obj[key]; // delete
+    });
+    return obj;
+  };
+
   return Object.assign({},state,{
     temp:{
       question_name: payload.question_name,
@@ -64,7 +94,7 @@ export function getDialogueState(state, payload) {
       entities: payload.entities,
       answers: payload.answers,
       additional_state: payload.additional_state,
-      additional_message: payload.additional_message
+      additional_message: removeEmpty(payload.additional_message)
     }
   });
 }

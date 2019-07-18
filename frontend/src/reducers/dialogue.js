@@ -242,7 +242,7 @@ export default function (state = initialState,action) {
         const buttons_actions = state.buttons.template.actions;
         const new_actions = [
           ...buttons_actions.slice(0, index),
-          Object.assign({}, buttons_actions[index], buttons_actions[index].type === 'message' ? {text: inputData} : {displayText: inputData}),
+          Object.assign({}, buttons_actions[index], buttons_actions[index].type === 'message' ? {text: inputData, displayText: ''} : {text: '', displayText: inputData}),
           ...buttons_actions.slice(index + 1)
         ];
         const new_template = Object.assign({}, state.buttons.template, {actions: new_actions});
@@ -298,7 +298,7 @@ export default function (state = initialState,action) {
         const confirm_actions = state.confirm.template.actions;
         const new_actions = [
           ...confirm_actions.slice(0, index),
-          Object.assign({}, confirm_actions[index], confirm_actions[index].type === 'message' ? {text: inputData} : {displayText: inputData}),
+          Object.assign({}, confirm_actions[index], confirm_actions[index].type === 'message' ? {text: inputData, displayText: ''} : {text: '', displayText: inputData}),
           ...confirm_actions.slice(index + 1)
         ];
         const new_template = Object.assign({}, state.confirm.template, {actions: new_actions});
