@@ -19,10 +19,6 @@ export function setDialogueList(state, payload) {
   return rows;
 }
 
-export function isValidAdditionalState(state, data){
-  return !containEmpty(data);
-}
-
 function containEmpty(json_data){
   if(json_data.length === 0){
     return true;
@@ -53,6 +49,10 @@ function containEmpty(json_data){
     }
   }
   return flag;
+}
+
+export function isValidAdditionalState(state, data){
+  return !containEmpty(data);
 }
 
 export function getDialogueState(state, payload) {

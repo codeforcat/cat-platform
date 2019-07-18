@@ -1,3 +1,4 @@
 from django.contrib import admin
+from .models import Question, Phrase, Entities, Answer, Entity, EntityValue, Synonym
 
-# Register your models here.
+admin.site.register(Question)
