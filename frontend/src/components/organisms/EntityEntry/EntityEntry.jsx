@@ -19,6 +19,7 @@ export default function EntityEntry(props) {
         errorCode={props.errorCode}
         errorMsg={props.errorMsg}
         isShowError={props.isShowError}
+        apiErrorMsg={props.apiErrorMsg}
         actions={props.actions}
       />
       <EntityValueSynonyms

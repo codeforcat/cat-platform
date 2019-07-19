@@ -17,10 +17,11 @@ export default function QuestionNameField(props) {
         onChange={(e) => props.actions.inputQuestionName(e.target.value)}
         required
         fullWidth
-        error={!props.isValid}
+        error={!props.isValid || props.apiErrorMsg !== ''}
         aria-describedby="question-name-error"
       />
       {(!props.isValid && props.isShowError) && <FormHelperText error id="question-name-error">{props.errorMsg[props.errorCode]}</FormHelperText>}
+      {props.apiErrorMsg !== '' && <FormHelperText error id="question-name-error">{props.apiErrorMsg}</FormHelperText>}
     </FormItem>
   );
 }

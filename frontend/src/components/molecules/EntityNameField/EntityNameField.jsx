@@ -17,10 +17,11 @@ export default function EntityNameField(props) {
         onChange={(e) => props.actions.inputEntityName(e.target.value)}
         required
         fullWidth
-        error={!props.isValid}
+        error={!props.isValid || props.apiErrorMsg !== ''}
         aria-describedby="entity-name-error"
       />
       {(!props.isValid && props.isShowError) && <FormHelperText error id="entity-name-error">{props.errorMsg[props.errorCode]}</FormHelperText>}
+      {props.apiErrorMsg !== '' && <FormHelperText error id="entity-name-error">{props.apiErrorMsg}</FormHelperText>}
     </FormItem>
   );
 }

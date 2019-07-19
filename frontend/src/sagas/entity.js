@@ -87,6 +87,6 @@ function* _clearEntity(api_payload,api_error) {
     yield put(entityActions.clearEntity());
   }
   else {
-    yield put(entityActions.fetchEntityError(api_error.response.data.detail));
+    yield put(entityActions.fetchEntityError(api_error.response.data.entity_name[0]));
   }
 }

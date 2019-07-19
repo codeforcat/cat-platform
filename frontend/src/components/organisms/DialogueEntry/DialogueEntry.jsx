@@ -33,6 +33,7 @@ export default function DialogueEntry(props) {
         errorCode={props.errorCode}
         errorMsg={props.errorMsg}
         isShowError={props.isShowError}
+        apiErrorMsg={props.apiErrorMsg}
         actions={props.actions}
       />
       <PhraseFields

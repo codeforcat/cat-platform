@@ -124,7 +124,7 @@ function* _clearDialogue(api_payload,api_error) {
     yield put(dialogueActions.setAnswers(payload));
   }
   else {
-    yield put(dialogueActions.fetchDialogueError(api_error.response.data.detail));
+    yield put(dialogueActions.fetchDialogueError(api_error.response.data.question_name[0]));
   }
 }
 
