@@ -35,9 +35,10 @@ function containEmpty(json_data){
       Object.keys(json_data[key0]).forEach((index) => {
         const obj = json_data[key0][index];
         const keyOrder = ['type', 'label', 'text', 'displayText', 'data'];
-        let orderedObj = keyOrder.map(function(item){
-          return obj[item];
-        });
+        let orderedObj = keyOrder.reduce((map, item) => {
+          map[item] = obj[item] || '';
+          return map;
+        }, {});
 
         let flagType = 0;
         for (let key in orderedObj) {
@@ -48,12 +49,12 @@ function containEmpty(json_data){
             flagType = 2;
           }
           if(flagType === 1) {
-            if(key == 3 || key == 4) {
+            if(key === 'displayText' || key === 'data') {
               continue;
             }
           }
           else if(flagType === 2) {
-            if(key == 2) {
+            if(key === 'text') {
               continue;
             }
           }
@@ -79,10 +80,12 @@ export function isValidAdditionalState(state, data){
 
 export function getDialogueState(state, payload) {
   const removeEmpty = obj => {
-    Object.keys(obj).forEach(key => {
-      if (obj[key] && typeof obj[key] === "object") removeEmpty(obj[key]); // recurse
-      else if (obj[key] === '') delete obj[key]; // delete
-    });
+    if(obj !== null) {
+      Object.keys(obj).forEach(key => {
+        if (obj[key] && typeof obj[key] === "object") removeEmpty(obj[key]);
+        else if (obj[key] === '') delete obj[key];
+      });
+    }
     return obj;
   };
 
