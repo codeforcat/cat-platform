@@ -17,6 +17,10 @@ class QuestionViewSet(viewsets.ViewSet, generics.ListCreateAPIView, generics.Ret
 
     def list(self, request):
         queryset = Question.objects.all()
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
         qs = self.filter_queryset(queryset)
         serializer = QuestionSerializer(qs, many=True)
         return Response(serializer.data)

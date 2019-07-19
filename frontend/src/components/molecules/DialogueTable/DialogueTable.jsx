@@ -24,6 +24,7 @@ export default function DialogueTable(props) {
         header={header}
         editUrl="qa_entry"
         delete={props.actions.preDeleteDialogue}
+        fetchPage={props.actions.fetchPageDialogue}
       />
     </>
   );

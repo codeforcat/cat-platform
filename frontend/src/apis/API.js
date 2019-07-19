@@ -7,10 +7,10 @@ export function read(repository) {
   return access(`/api/v1/${repository}/`,'GET')
 }
 
-// export function readPage(repository,page = 1) {
-//   return access(`/api/v1/${repository}?page=${page}`,'GET')
-// }
-//
+export function readPage(repository,page = 1) {
+  return access(`/api/v1/${repository}/?page=${page}`,'GET')
+}
+
 // export function readWord(repository,word,page = 1) {
 //   return access(`/api/v1/${repository}?word=${word}&page=${page}`,'GET')
 // }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -6,7 +6,6 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableFooter from '@material-ui/core/TableFooter';
-import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import IconButton from '@material-ui/core/IconButton';
 import FirstPageIcon from '@material-ui/icons/FirstPage';
@@ -91,19 +90,22 @@ const useStyles2 = makeStyles(theme => ({
   icon: {
     marginLeft: theme.spacing(1),
   },
+  pagination: {
+    textAlign: 'right',
+  },
 }));
 
 function TableList(props) {
   const classes = useStyles2();
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [page, setPage] = useState(1);
+  const [rowsPerPage, setRowsPerPage] = useState(1);
+
+  useEffect(() => {
+    props.fetchPage(page);
+  },[page]);
 
   function handleChangePage(event, newPage) {
     setPage(newPage);
-  }
-
-  function handleChangeRowsPerPage(event) {
-    setRowsPerPage(parseInt(event.target.value, 10));
   }
 
   function handleToEditPage(id) {
@@ -126,7 +128,7 @@ function TableList(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => (
+          {props.rows.map((row, index) => (
             <TableRow key={index}>
               <TableCell>{row.column1}</TableCell>
               <TableCell>{row.column2}</TableCell>
@@ -152,7 +154,7 @@ function TableList(props) {
         </TableBody>
         <TableFooter>
           <TableRow>
-            <TablePagination
+            {/*<TablePagination
               rowsPerPageOptions={[10, 25, 50]}
               colSpan={4}
               count={props.rows.length}
@@ -163,9 +165,15 @@ function TableList(props) {
                 native: true,
               }}
               onChangePage={handleChangePage}
-              onChangeRowsPerPage={handleChangeRowsPerPage}
+              // onChangeRowsPerPage={handleChangeRowsPerPage}
               ActionsComponent={TablePaginationActions}
-            />
+            />*/}
+            <TableCell colSpan={4} className={classes.pagination}>
+              <TablePaginationActions
+                page={page}
+                onChangePage={handleChangePage}
+              />
+            </TableCell>
           </TableRow>
         </TableFooter>
       </Table>

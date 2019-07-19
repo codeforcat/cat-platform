@@ -8,7 +8,16 @@ export function* initDialogue() {
   while (true) {
     yield take(dialogueActions.INIT_DIALOGUE);
     const { payload, error } = yield call(API.read,'questions');
-    const data = yield select(setDialogueList,payload);
+    const data = yield select(setDialogueList,payload.results);
+    yield put(dialogueActions.setDialogueAll(data));
+  }
+}
+
+export function* fetchPageDialogue() {
+  while (true) {
+    const action = yield take(dialogueActions.FETCH_PAGE_DIALOGUE);
+    const { payload, error } = yield call(API.readPage,'questions',action.payload.page);
+    const data = yield select(setDialogueList,payload.results);
     yield put(dialogueActions.setDialogueAll(data));
   }
 }
@@ -99,14 +108,6 @@ export function* updateDialogue() {
     }
   }
 }
-
-// export function* fetchPageQuestion() {
-//   while (true) {
-//     const action = yield take(questionActions.FETCH_PAGE_ARTICLE);
-//     const { payload, error } = yield call(API.fetchUrl,action.payload.url);
-//     yield call(_setQuestion,payload,error)
-//   }
-// }
 
 export function* deleteDialogue() {
   while (true) {

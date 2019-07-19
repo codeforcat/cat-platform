@@ -1,4 +1,5 @@
 export const INIT_DIALOGUE = 'INIT_DIALOGUE';
+export const FETCH_PAGE_DIALOGUE = 'FETCH_PAGE_DIALOGUE';
 export const FETCH_ANSWERS = 'FETCH_ANSWERS';
 export const SET_ANSWERS = 'SET_ANSWERS';
 export const FETCH_ENTITIES = 'FETCH_ENTITIES';
@@ -49,6 +50,15 @@ export function setDialogueAll(data) {
     type: SET_DIALOGUE_ALL,
     payload:{
       data: data
+    }
+  }
+}
+
+export function fetchPageDialogue(page) {
+  return {
+    type: FETCH_PAGE_DIALOGUE,
+    payload:{
+      page: parseInt(page)
     }
   }
 }
