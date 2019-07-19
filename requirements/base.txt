@@ -5,3 +5,4 @@ drf-writable-nested
 django-filter
 django-mysql
 django-environ
+dialogflow
