@@ -1,4 +1,5 @@
 from django.contrib import admin
-from .models import Question, Phrase, Entities, Answer, Entity, EntityValue, Synonym
+from .models import Question, Entity
 
 admin.site.register(Question)
+admin.site.register(Entity)
