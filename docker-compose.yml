@@ -23,8 +23,8 @@ services:
     command: sh -c "./wait-for-it.sh db:3306; python manage.py runserver 0.0.0.0:8000"
     env_file:
       - ./env/development/.env
-    volumes:
-      - .:/code
+#    volumes:
+#      - .:/code
     ports:
       - "8000:8000"
     depends_on:
