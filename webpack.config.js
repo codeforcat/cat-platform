@@ -35,7 +35,7 @@ module.exports = (env, argv) => {
             {
               loader: 'css-loader',
               options: {
-                sourceMap: argv.mode === 'development' ? true : false,
+                sourceMap: argv.mode === 'development',
                 importLoaders: 2,
                 modules: true,
                 localIdentName: '[name]__[local]___[hash:base64:5]'
@@ -44,7 +44,7 @@ module.exports = (env, argv) => {
             {
               loader: 'postcss-loader',
               options: {
-                sourceMap: argv.mode === 'development' ? true : false,
+                sourceMap: argv.mode === 'development',
                 config: {
                   path: './postcss.config.js'
                 }
@@ -53,7 +53,7 @@ module.exports = (env, argv) => {
             {
               loader: 'sass-loader',
               options: {
-                sourceMap: argv.mode === 'development' ? true : false
+                sourceMap: argv.mode === 'development'
               }
             }
           ]
@@ -68,14 +68,14 @@ module.exports = (env, argv) => {
             {
               loader: 'css-loader',
               options: {
-                sourceMap: argv.mode === 'development' ? true : false,
+                sourceMap: argv.mode === 'development',
                 importLoaders: 2
               }
             },
             {
               loader: 'postcss-loader',
               options: {
-                sourceMap: argv.mode === 'development' ? true : false,
+                sourceMap: argv.mode === 'development',
                 config: {
                   path: './postcss.config.js'
                 }
@@ -84,7 +84,7 @@ module.exports = (env, argv) => {
             {
               loader: 'sass-loader',
               options: {
-                sourceMap: argv.mode === 'development' ? true : false
+                sourceMap: argv.mode === 'development'
               }
             }
           ]
