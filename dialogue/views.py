@@ -61,6 +61,10 @@ class EntityViewSet(viewsets.ViewSet, generics.ListCreateAPIView, generics.Retri
 
     def list(self, request):
         queryset = Entity.objects.all()
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
         qs = self.filter_queryset(queryset)
         serializer = EntitySerializer(qs, many=True)
         return Response(serializer.data)

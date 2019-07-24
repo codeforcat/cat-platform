@@ -8,7 +8,16 @@ export function* initEntity() {
   while (true) {
     yield take(entityActions.INIT_ENTITY);
     const { payload, error } = yield call(API.read,'entities');
-    const data = yield select(setEntityList,payload);
+    const data = yield select(setEntityList,payload.results);
+    yield put(entityActions.setEntityAll(data));
+  }
+}
+
+export function* fetchPageEntity() {
+  while (true) {
+    const action = yield take(entityActions.FETCH_PAGE_ENTITY);
+    const { payload, error } = yield call(API.readPage,'entities',action.payload.page);
+    const data = yield select(setEntityList,payload.results);
     yield put(entityActions.setEntityAll(data));
   }
 }

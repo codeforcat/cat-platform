@@ -1,6 +1,5 @@
-import {SEARCH_DIALOGUE} from "./dialogue";
-
 export const INIT_ENTITY = 'INIT_ENTITY';
+export const FETCH_PAGE_ENTITY = 'FETCH_PAGE_ENTITY';
 export const INPUT_ENTITY_ID = 'INPUT_ENTITY_ID';
 export const INPUT_ENTITY_NAME = 'INPUT_ENTITY_NAME';
 export const INPUT_VALUE_TEXT = 'INPUT_VALUE_TEXT';
@@ -33,6 +32,15 @@ export function setEntityAll(data) {
     type: SET_ENTITY_ALL,
     payload:{
       data: data
+    }
+  }
+}
+
+export function fetchPageEntity(page) {
+  return {
+    type: FETCH_PAGE_ENTITY,
+    payload:{
+      page: parseInt(page)
     }
   }
 }
