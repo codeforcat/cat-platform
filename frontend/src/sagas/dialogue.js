@@ -43,7 +43,7 @@ export function* fetchEntities() {
   while (true) {
     yield take(dialogueActions.FETCH_ENTITIES);
     const { payload, error } = yield call(API.read,'entities');
-    yield put(dialogueActions.setEntities(payload));
+    yield put(dialogueActions.setEntities(payload.results));
   }
 }
 
