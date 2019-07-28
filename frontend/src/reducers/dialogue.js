@@ -87,6 +87,8 @@ const initialState = {
     additional_message: null
   },
   list: [],
+  next: null,
+  previous: null,
   isUpdateStateEnable: false,
   isOpenDeleteDialog: false,
   targetDeleteName: '',
@@ -125,7 +127,7 @@ export default function (state = initialState,action) {
         isValid: action.payload.question_name !== ''
       });
     case actionTypes.SET_DIALOGUE_ALL:
-      return Object.assign({},state,{list: action.payload.data});
+      return Object.assign({},state,{list: action.payload.data, next: action.payload.next, previous: action.payload.previous});
     case actionTypes.SET_ANSWERS:
       return Object.assign({},state,{exists_answers: action.payload.exists_answers});
     case actionTypes.SET_ENTITIES:

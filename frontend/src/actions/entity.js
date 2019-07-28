@@ -1,5 +1,8 @@
 export const INIT_ENTITY = 'INIT_ENTITY';
-export const FETCH_PAGE_ENTITY = 'FETCH_PAGE_ENTITY';
+export const FETCH_FIRST_ENTITY = 'FETCH_FIRST_ENTITY';
+export const FETCH_LAST_ENTITY = 'FETCH_LAST_ENTITY';
+export const FETCH_NEXT_ENTITY = 'FETCH_NEXT_ENTITY';
+export const FETCH_PREVIOUS_ENTITY = 'FETCH_PREVIOUS_ENTITY';
 export const INPUT_ENTITY_ID = 'INPUT_ENTITY_ID';
 export const INPUT_ENTITY_NAME = 'INPUT_ENTITY_NAME';
 export const INPUT_VALUE_TEXT = 'INPUT_VALUE_TEXT';
@@ -27,20 +30,43 @@ export function initEntity() {
   }
 }
 
-export function setEntityAll(data) {
+export function setEntityAll(data, next, previous) {
   return {
     type: SET_ENTITY_ALL,
     payload:{
-      data: data
+      data: data,
+      next: next,
+      previous: previous
     }
   }
 }
 
-export function fetchPageEntity(page) {
+export function fetchFirstEntity() {
   return {
-    type: FETCH_PAGE_ENTITY,
+    type: FETCH_FIRST_ENTITY
+  }
+}
+
+export function fetchLastEntity() {
+  return {
+    type: FETCH_LAST_ENTITY
+  }
+}
+
+export function fetchNextEntity(url) {
+  return {
+    type: FETCH_NEXT_ENTITY,
     payload:{
-      page: parseInt(page)
+      url: url
+    }
+  }
+}
+
+export function fetchPreviousEntity(url) {
+  return {
+    type: FETCH_PREVIOUS_ENTITY,
+    payload:{
+      url: url
     }
   }
 }

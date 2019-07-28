@@ -1,5 +1,8 @@
 export const INIT_DIALOGUE = 'INIT_DIALOGUE';
-export const FETCH_PAGE_DIALOGUE = 'FETCH_PAGE_DIALOGUE';
+export const FETCH_FIRST_DIALOGUE = 'FETCH_FIRST_DIALOGUE';
+export const FETCH_LAST_DIALOGUE = 'FETCH_LAST_DIALOGUE';
+export const FETCH_NEXT_DIALOGUE = 'FETCH_NEXT_DIALOGUE';
+export const FETCH_PREVIOUS_DIALOGUE = 'FETCH_PREVIOUS_DIALOGUE';
 export const FETCH_ANSWERS = 'FETCH_ANSWERS';
 export const SET_ANSWERS = 'SET_ANSWERS';
 export const FETCH_ENTITIES = 'FETCH_ENTITIES';
@@ -45,20 +48,43 @@ export function initDialogue() {
   }
 }
 
-export function setDialogueAll(data) {
+export function setDialogueAll(data, next, previous) {
   return {
     type: SET_DIALOGUE_ALL,
     payload:{
-      data: data
+      data: data,
+      next: next,
+      previous: previous
     }
   }
 }
 
-export function fetchPageDialogue(page) {
+export function fetchFirstDialogue() {
   return {
-    type: FETCH_PAGE_DIALOGUE,
+    type: FETCH_FIRST_DIALOGUE
+  }
+}
+
+export function fetchLastDialogue() {
+  return {
+    type: FETCH_LAST_DIALOGUE
+  }
+}
+
+export function fetchNextDialogue(url) {
+  return {
+    type: FETCH_NEXT_DIALOGUE,
     payload:{
-      page: parseInt(page)
+      url: url
+    }
+  }
+}
+
+export function fetchPreviousDialogue(url) {
+  return {
+    type: FETCH_PREVIOUS_DIALOGUE,
+    payload:{
+      url: url
     }
   }
 }

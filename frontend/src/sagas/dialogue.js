@@ -9,16 +9,43 @@ export function* initDialogue() {
     yield take(dialogueActions.INIT_DIALOGUE);
     const { payload, error } = yield call(API.read,'questions');
     const data = yield select(setDialogueList,payload.results);
-    yield put(dialogueActions.setDialogueAll(data));
+    yield put(dialogueActions.setDialogueAll(data, payload.next, payload.previous));
   }
 }
 
-export function* fetchPageDialogue() {
+export function* fetchFirstDialogue() {
   while (true) {
-    const action = yield take(dialogueActions.FETCH_PAGE_DIALOGUE);
-    const { payload, error } = yield call(API.readPage,'questions',action.payload.page);
+    yield take(dialogueActions.FETCH_FIRST_DIALOGUE);
+    const { payload, error } = yield call(API.readPage,'questions', 1);
     const data = yield select(setDialogueList,payload.results);
-    yield put(dialogueActions.setDialogueAll(data));
+    yield put(dialogueActions.setDialogueAll(data, payload.next, payload.previous));
+  }
+}
+
+export function* fetchLastDialogue() {
+  while (true) {
+    yield take(dialogueActions.FETCH_LAST_DIALOGUE);
+    const { payload, error } = yield call(API.readPage,'questions', 'last');
+    const data = yield select(setDialogueList,payload.results);
+    yield put(dialogueActions.setDialogueAll(data, payload.next, payload.previous));
+  }
+}
+
+export function* fetchNextDialogue() {
+  while (true) {
+    const action = yield take(dialogueActions.FETCH_NEXT_DIALOGUE);
+    const { payload, error } = yield call(API.fetchUrl,action.payload.url);
+    const data = yield select(setDialogueList,payload.results);
+    yield put(dialogueActions.setDialogueAll(data, payload.next, payload.previous));
+  }
+}
+
+export function* fetchPreviousDialogue() {
+  while (true) {
+    const action = yield take(dialogueActions.FETCH_PREVIOUS_DIALOGUE);
+    const { payload, error } = yield call(API.fetchUrl,action.payload.url);
+    const data = yield select(setDialogueList,payload.results);
+    yield put(dialogueActions.setDialogueAll(data, payload.next, payload.previous));
   }
 }
 
@@ -26,8 +53,8 @@ export function* searchDialogue() {
   while (true) {
     const action = yield take(dialogueActions.SEARCH_DIALOGUE);
     const { payload, error } =yield call(API.search,'questions',action.payload.word);
-    const data = yield select(setDialogueList,payload);
-    yield put(dialogueActions.setDialogueAll(data));
+    const data = yield select(setDialogueList,payload.results);
+    yield put(dialogueActions.setDialogueAll(data, payload.next, payload.previous));
   }
 }
 

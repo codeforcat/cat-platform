@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -25,50 +25,52 @@ const useStyles1 = makeStyles(theme => ({
 
 function TablePaginationActions(props) {
   const classes = useStyles1();
-  const theme = useTheme();
-  const { count, page, rowsPerPage, onChangePage } = props;
 
-  function handleFirstPageButtonClick(event) {
-    onChangePage(event, 0);
+  function handleFirstPageButtonClick() {
+    props.onChangeFirstPage();
   }
 
-  function handleBackButtonClick(event) {
-    onChangePage(event, page - 1);
+  function handleBackButtonClick() {
+    props.onChangePreviousPage(props.previous);
   }
 
-  function handleNextButtonClick(event) {
-    onChangePage(event, page + 1);
+  function handleNextButtonClick() {
+    props.onChangeNextPage(props.next);
   }
 
-  function handleLastPageButtonClick(event) {
-    onChangePage(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
+  function handleLastPageButtonClick() {
+    props.onChangeLastPage();
   }
 
   return (
     <div className={classes.root}>
       <IconButton
         onClick={handleFirstPageButtonClick}
-        disabled={page === 0}
+        disabled={props.previous === null}
         aria-label="First Page"
       >
-        {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
+        <FirstPageIcon />
       </IconButton>
-      <IconButton onClick={handleBackButtonClick} disabled={page === 0} aria-label="Previous Page">
-        {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+      <IconButton
+        onClick={handleBackButtonClick}
+        disabled={props.previous === null}
+        aria-label="Previous Page"
+      >
+        <KeyboardArrowLeft />
       </IconButton>
       <IconButton
         onClick={handleNextButtonClick}
-        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+        disabled={props.next === null}
         aria-label="Next Page"
       >
-        {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+        <KeyboardArrowRight />
       </IconButton>
       <IconButton
         onClick={handleLastPageButtonClick}
-        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+        disabled={props.next === null}
         aria-label="Last Page"
       >
-        {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
+        <LastPageIcon />
       </IconButton>
     </div>
   );
@@ -97,16 +99,6 @@ const useStyles2 = makeStyles(theme => ({
 
 function TableList(props) {
   const classes = useStyles2();
-  const [page, setPage] = useState(1);
-  const [rowsPerPage, setRowsPerPage] = useState(1);
-
-  useEffect(() => {
-    props.fetchPage(page);
-  },[page]);
-
-  function handleChangePage(event, newPage) {
-    setPage(newPage);
-  }
 
   function handleToEditPage(id) {
     props.history.push(`/${props.editUrl}/${id}`);
@@ -154,24 +146,14 @@ function TableList(props) {
         </TableBody>
         <TableFooter>
           <TableRow>
-            {/*<TablePagination
-              rowsPerPageOptions={[10, 25, 50]}
-              colSpan={4}
-              count={props.rows.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              SelectProps={{
-                inputProps: { 'aria-label': 'Rows per page' },
-                native: true,
-              }}
-              onChangePage={handleChangePage}
-              // onChangeRowsPerPage={handleChangeRowsPerPage}
-              ActionsComponent={TablePaginationActions}
-            />*/}
             <TableCell colSpan={4} className={classes.pagination}>
               <TablePaginationActions
-                page={page}
-                onChangePage={handleChangePage}
+                onChangeFirstPage={props.fetchFirst}
+                onChangeLastPage={props.fetchLast}
+                onChangeNextPage={props.fetchNext}
+                onChangePreviousPage={props.fetchPrevious}
+                next={props.next}
+                previous={props.previous}
               />
             </TableCell>
           </TableRow>

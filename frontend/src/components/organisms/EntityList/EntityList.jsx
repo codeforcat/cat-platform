@@ -11,6 +11,8 @@ export default function EntityList(props) {
   return (
     <Container>
       <EntityTable
+        next={props.next}
+        previous={props.previous}
         list={props.list}
         actions={props.actions}
       />

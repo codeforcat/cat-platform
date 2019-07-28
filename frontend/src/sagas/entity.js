@@ -9,16 +9,43 @@ export function* initEntity() {
     yield take(entityActions.INIT_ENTITY);
     const { payload, error } = yield call(API.read,'entities');
     const data = yield select(setEntityList,payload.results);
-    yield put(entityActions.setEntityAll(data));
+    yield put(entityActions.setEntityAll(data, payload.next, payload.previous));
   }
 }
 
-export function* fetchPageEntity() {
+export function* fetchFirstEntity() {
   while (true) {
-    const action = yield take(entityActions.FETCH_PAGE_ENTITY);
-    const { payload, error } = yield call(API.readPage,'entities',action.payload.page);
+    yield take(entityActions.FETCH_FIRST_ENTITY);
+    const { payload, error } = yield call(API.readPage,'entities', 1);
     const data = yield select(setEntityList,payload.results);
-    yield put(entityActions.setEntityAll(data));
+    yield put(entityActions.setEntityAll(data, payload.next, payload.previous));
+  }
+}
+
+export function* fetchLastEntity() {
+  while (true) {
+    yield take(entityActions.FETCH_LAST_ENTITY);
+    const { payload, error } = yield call(API.readPage,'entities', 'last');
+    const data = yield select(setEntityList,payload.results);
+    yield put(entityActions.setEntityAll(data, payload.next, payload.previous));
+  }
+}
+
+export function* fetchNextEntity() {
+  while (true) {
+    const action = yield take(entityActions.FETCH_NEXT_ENTITY);
+    const { payload, error } = yield call(API.fetchUrl,action.payload.url);
+    const data = yield select(setEntityList,payload.results);
+    yield put(entityActions.setEntityAll(data, payload.next, payload.previous));
+  }
+}
+
+export function* fetchPreviousEntity() {
+  while (true) {
+    const action = yield take(entityActions.FETCH_PREVIOUS_ENTITY);
+    const { payload, error } = yield call(API.fetchUrl,action.payload.url);
+    const data = yield select(setEntityList,payload.results);
+    yield put(entityActions.setEntityAll(data, payload.next, payload.previous));
   }
 }
 
@@ -26,8 +53,8 @@ export function* searchEntity() {
   while (true) {
     const action = yield take(entityActions.SEARCH_ENTITY);
     const { payload, error } =yield call(API.search,'entities',action.payload.word);
-    const data = yield select(setEntityList,payload);
-    yield put(entityActions.setEntityAll(data));
+    const data = yield select(setEntityList,payload.results);
+    yield put(entityActions.setEntityAll(data, payload.next, payload.previous));
   }
 }
 

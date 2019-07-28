@@ -11,6 +11,8 @@ export default function DialogueList(props) {
   return (
     <Container>
       <DialogueTable
+        next={props.next}
+        previous={props.previous}
         list={props.list}
         actions={props.actions}
       />

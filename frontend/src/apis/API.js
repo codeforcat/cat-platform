@@ -42,11 +42,11 @@ export function destroy(repository,id) {
 // export function restore(repository,id) {
 //   return access(`/api/v1/${repository}/${id}`,'PUT')
 // }
-//
-// export function fetchUrl(url) {
-//   return access(url,'GET')
-// }
-//
+
+export function fetchUrl(url) {
+  return access(url,'GET')
+}
+
 // export function toggle(repository,id,section) {
 //   return data_access(`/api/v1/${repository}/${id}/${section}`,'PATCH')
 // }

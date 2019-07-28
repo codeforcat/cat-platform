@@ -24,7 +24,12 @@ export default function EntityTable(props) {
         header={header}
         editUrl="entity_entry"
         delete={props.actions.preDeleteEntity}
-        fetchPage={props.actions.fetchPageEntity}
+        fetchFirst={props.actions.fetchFirstEntity}
+        fetchLast={props.actions.fetchLastEntity}
+        fetchNext={props.actions.fetchNextEntity}
+        fetchPrevious={props.actions.fetchPreviousEntity}
+        next={props.next}
+        previous={props.previous}
       />
     </>
   );

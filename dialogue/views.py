@@ -16,7 +16,7 @@ class QuestionViewSet(viewsets.ViewSet, generics.ListCreateAPIView, generics.Ret
     ordering = ('question_id',)
 
     def list(self, request):
-        queryset = Question.objects.all()
+        queryset = self.filter_queryset(self.get_queryset())
         page = self.paginate_queryset(queryset)
         if page is not None:
             serializer = self.get_serializer(page, many=True)
@@ -60,7 +60,7 @@ class EntityViewSet(viewsets.ViewSet, generics.ListCreateAPIView, generics.Retri
     ordering = ('entity_id',)
 
     def list(self, request):
-        queryset = Entity.objects.all()
+        queryset = self.filter_queryset(self.get_queryset())
         page = self.paginate_queryset(queryset)
         if page is not None:
             serializer = self.get_serializer(page, many=True)
