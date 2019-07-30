@@ -30,13 +30,15 @@ export function initEntity() {
   }
 }
 
-export function setEntityAll(data, next, previous) {
+export function setEntityAll(data, current, next, previous, count) {
   return {
     type: SET_ENTITY_ALL,
     payload:{
       data: data,
+      current: current,
       next: next,
-      previous: previous
+      previous: previous,
+      count: count
     }
   }
 }
@@ -228,11 +230,13 @@ export function preDeleteEntity(entity_id, entity_name) {
   }
 }
 
-export function deleteEntity(entity_id) {
+export function deleteEntity(entity_id, current, count) {
   return {
     type: DELETE_ENTITY,
     payload:{
-      entity_id: parseInt(entity_id)
+      entity_id: parseInt(entity_id),
+      current: current,
+      count: count
     }
   }
 }

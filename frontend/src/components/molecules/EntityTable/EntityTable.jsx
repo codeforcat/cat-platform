@@ -28,6 +28,7 @@ export default function EntityTable(props) {
         fetchLast={props.actions.fetchLastEntity}
         fetchNext={props.actions.fetchNextEntity}
         fetchPrevious={props.actions.fetchPreviousEntity}
+        current={props.current}
         next={props.next}
         previous={props.previous}
       />

@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework import filters
 from .models import Question, Answer, Entity
 from .serializer import QuestionSerializer, AnswerDisplaySerializer, EntitySerializer
+from .pagination import CustomPageNumber
 
 
 class QuestionViewSet(viewsets.ViewSet, generics.ListCreateAPIView, generics.RetrieveUpdateDestroyAPIView):
@@ -14,6 +15,7 @@ class QuestionViewSet(viewsets.ViewSet, generics.ListCreateAPIView, generics.Ret
     search_fields = ('phrase__phrase_text', 'answer__answer_text')
     ordering_fields = ('question_name', 'phrase__phrase_text', 'answer__answer_text')
     ordering = ('question_id',)
+    pagination_class = CustomPageNumber
 
     def list(self, request):
         queryset = self.filter_queryset(self.get_queryset())
@@ -58,6 +60,7 @@ class EntityViewSet(viewsets.ViewSet, generics.ListCreateAPIView, generics.Retri
     search_fields = ('entity_name', 'entity_value__value_text', 'entity_value__synonym__synonym_text')
     ordering_fields = ('entity_name', 'entity_value__value_text')
     ordering = ('entity_id',)
+    pagination_class = CustomPageNumber
 
     def list(self, request):
         queryset = self.filter_queryset(self.get_queryset())

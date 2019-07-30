@@ -11,6 +11,7 @@ export default function EntityList(props) {
   return (
     <Container>
       <EntityTable
+        current={props.current}
         next={props.next}
         previous={props.previous}
         list={props.list}
@@ -20,6 +21,8 @@ export default function EntityList(props) {
         open={props.isOpenDeleteDialog}
         name={props.targetDeleteName}
         id={props.targetDeleteId}
+        current={props.current}
+        count={props.count}
         close={props.actions.closeDeleteDialog}
         delete={props.actions.deleteEntity}
         actions={props.actions}

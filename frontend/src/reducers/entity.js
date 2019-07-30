@@ -24,8 +24,10 @@ const initialState = {
     entity_values: []
   },
   list: [],
+  current: 1,
   next: null,
   previous: null,
+  count: 0,
   isUpdateStateEnable: false,
   isOpenDeleteDialog: false,
   targetDeleteName: '',
@@ -58,7 +60,13 @@ export default function (state = initialState,action) {
         isValid: action.payload.entity_name !== ''
       });
     case actionTypes.SET_ENTITY_ALL:
-      return Object.assign({},state,{list: action.payload.data, next: action.payload.next, previous: action.payload.previous});
+      return Object.assign({},state,{
+        list: action.payload.data,
+        current: action.payload.current,
+        next: action.payload.next,
+        previous: action.payload.previous,
+        count: action.payload.count
+      });
     case actionTypes.INPUT_ENTITY_ID:
       return Object.assign({},state,{entity_id: action.payload.entity_id});
     case actionTypes.INPUT_ENTITY_NAME:

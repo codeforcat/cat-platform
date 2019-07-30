@@ -28,6 +28,7 @@ export default function DialogueTable(props) {
         fetchLast={props.actions.fetchLastDialogue}
         fetchNext={props.actions.fetchNextDialogue}
         fetchPrevious={props.actions.fetchPreviousDialogue}
+        current={props.current}
         next={props.next}
         previous={props.previous}
       />

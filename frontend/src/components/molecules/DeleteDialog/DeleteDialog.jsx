@@ -32,7 +32,7 @@ export default function DeleteDialog(props) {
           キャンセル
         </Button>
         <Button
-          onClick={() => props.delete(props.id)}
+          onClick={() => props.delete(props.id, props.current, props.count)}
           color="primary"
         >
           削除

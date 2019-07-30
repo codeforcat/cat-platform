@@ -58,6 +58,7 @@ function TablePaginationActions(props) {
       >
         <KeyboardArrowLeft />
       </IconButton>
+      {props.current}
       <IconButton
         onClick={handleNextButtonClick}
         disabled={props.next === null}
@@ -152,6 +153,7 @@ function TableList(props) {
                 onChangeLastPage={props.fetchLast}
                 onChangeNextPage={props.fetchNext}
                 onChangePreviousPage={props.fetchPrevious}
+                current={props.current}
                 next={props.next}
                 previous={props.previous}
               />

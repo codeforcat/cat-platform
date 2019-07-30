@@ -6,8 +6,10 @@ import EntityList from '../../components/organisms/EntityList/EntityList.jsx';
 function mapStateToProps(state) {
   const e = state.entity;
   return {
+    current: e.current,
     next : e.next,
     previous: e.previous,
+    count: e.count,
     list : e.list,
     temp : e.temp,
     isOpenDeleteDialog : e.isOpenDeleteDialog,

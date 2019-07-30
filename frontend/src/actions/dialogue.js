@@ -48,13 +48,15 @@ export function initDialogue() {
   }
 }
 
-export function setDialogueAll(data, next, previous) {
+export function setDialogueAll(data, current, next, previous, count) {
   return {
     type: SET_DIALOGUE_ALL,
     payload:{
       data: data,
+      current: current,
       next: next,
-      previous: previous
+      previous: previous,
+      count: count
     }
   }
 }
@@ -418,11 +420,13 @@ export function preDeleteDialogue(question_id, question_name) {
   }
 }
 
-export function deleteDialogue(question_id) {
+export function deleteDialogue(question_id, current, count) {
   return {
     type: DELETE_DIALOGUE,
     payload:{
-      question_id: parseInt(question_id)
+      question_id: parseInt(question_id),
+      current: current,
+      count: count
     }
   }
 }

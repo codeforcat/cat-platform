@@ -6,8 +6,10 @@ import DialogueList from '../../components/organisms/DialogueList/DialogueList.j
 function mapStateToProps(state) {
   const d = state.dialogue;
   return {
+    current: d.current,
     next : d.next,
     previous: d.previous,
+    count: d.count,
     list : d.list,
     temp : d.temp,
     isOpenDeleteDialog : d.isOpenDeleteDialog,
