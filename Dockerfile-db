@@ -8,6 +8,7 @@ ENV LC_ALL ja_JP.UTF-8
 
 RUN { \
 echo '[mysqld]'; \
+echo 'explicit_defaults_for_timestamp=1'; \
 echo 'character-set-server=utf8mb4'; \
 echo 'collation-server=utf8mb4_general_ci'; \
 echo '[client]'; \
