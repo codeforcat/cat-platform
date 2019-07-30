@@ -8,10 +8,11 @@ class CustomPageNumber(pagination.PageNumberPagination):
 
     def get_paginated_response(self, data):
         return Response(OrderedDict([
-             ('lastPage', self.page.paginator.count),
-             ('countItemsOnPage', self.page_size),
-             ('current', self.page.number),
-             ('next', self.get_next_link()),
-             ('previous', self.get_previous_link()),
-             ('results', data)
-         ]))
+            ('lastPage', self.page.paginator.count),
+            ('countLastPage',
+             self.page_size if self.page.paginator.count % self.page_size == 0 else self.page.paginator.count % self.page_size),
+            ('current', self.page.number),
+            ('next', self.get_next_link()),
+            ('previous', self.get_previous_link()),
+            ('results', data)
+        ]))

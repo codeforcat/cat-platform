@@ -1,7 +1,7 @@
 import { take, call, put, select } from 'redux-saga/effects';
 import * as dialogueActions from '../actions/dialogue';
 import { showError } from '../actions/error';
-import { setDialogueList, isValidAdditionalState, getDialogueState, setDialogueTemp, isValidState } from '../selectors/dialogue';
+import { setDialogueList, isValidAdditionalState, getDialogueState, setDialogueTemp, isValidState, getPage } from '../selectors/dialogue';
 import * as API from '../apis/API';
 
 export function* initDialogue() {
@@ -9,7 +9,7 @@ export function* initDialogue() {
     yield take(dialogueActions.INIT_DIALOGUE);
     const { payload, error } = yield call(API.read,'questions');
     const data = yield select(setDialogueList,payload.results);
-    yield put(dialogueActions.setDialogueAll(data, payload.current, payload.next, payload.previous, payload.countItemsOnPage));
+    yield put(dialogueActions.setDialogueAll(data, payload.current, payload.next, payload.previous, payload.countLastPage));
   }
 }
 
@@ -18,7 +18,7 @@ export function* fetchFirstDialogue() {
     yield take(dialogueActions.FETCH_FIRST_DIALOGUE);
     const { payload, error } = yield call(API.readPage,'questions', 1);
     const data = yield select(setDialogueList,payload.results);
-    yield put(dialogueActions.setDialogueAll(data, payload.current, payload.next, payload.previous, payload.countItemsOnPage));
+    yield put(dialogueActions.setDialogueAll(data, payload.current, payload.next, payload.previous, payload.countLastPage));
   }
 }
 
@@ -27,7 +27,7 @@ export function* fetchLastDialogue() {
     yield take(dialogueActions.FETCH_LAST_DIALOGUE);
     const { payload, error } = yield call(API.readPage,'questions', 'last');
     const data = yield select(setDialogueList,payload.results);
-    yield put(dialogueActions.setDialogueAll(data, payload.current, payload.next, payload.previous, payload.countItemsOnPage));
+    yield put(dialogueActions.setDialogueAll(data, payload.current, payload.next, payload.previous, payload.countLastPage));
   }
 }
 
@@ -36,7 +36,7 @@ export function* fetchNextDialogue() {
     const action = yield take(dialogueActions.FETCH_NEXT_DIALOGUE);
     const { payload, error } = yield call(API.fetchUrl,action.payload.url);
     const data = yield select(setDialogueList,payload.results);
-    yield put(dialogueActions.setDialogueAll(data, payload.current, payload.next, payload.previous, payload.countItemsOnPage));
+    yield put(dialogueActions.setDialogueAll(data, payload.current, payload.next, payload.previous, payload.countLastPage));
   }
 }
 
@@ -45,7 +45,7 @@ export function* fetchPreviousDialogue() {
     const action = yield take(dialogueActions.FETCH_PREVIOUS_DIALOGUE);
     const { payload, error } = yield call(API.fetchUrl,action.payload.url);
     const data = yield select(setDialogueList,payload.results);
-    yield put(dialogueActions.setDialogueAll(data, payload.current, payload.next, payload.previous, payload.countItemsOnPage));
+    yield put(dialogueActions.setDialogueAll(data, payload.current, payload.next, payload.previous, payload.countLastPage));
   }
 }
 
@@ -54,7 +54,7 @@ export function* searchDialogue() {
     const action = yield take(dialogueActions.SEARCH_DIALOGUE);
     const { payload, error } =yield call(API.search,'questions',action.payload.word);
     const data = yield select(setDialogueList,payload.results);
-    yield put(dialogueActions.setDialogueAll(data, payload.current, payload.next, payload.previous, payload.countItemsOnPage));
+    yield put(dialogueActions.setDialogueAll(data, payload.current, payload.next, payload.previous, payload.countLastPage));
   }
 }
 
@@ -141,9 +141,10 @@ export function* deleteDialogue() {
     const action = yield take(dialogueActions.DELETE_DIALOGUE);
     yield call(API.destroy,'questions',action.payload.question_id);
     yield put(dialogueActions.closeDeleteDialog());
-    const { payload, error } = yield call(API.readPage,'questions', action.payload.count > 2 ? action.payload.current : action.payload.current - 1);
+    const page = yield select(getPage,action.payload);
+    const { payload, error } = yield call(API.readPage,'questions',page);
     const data = yield select(setDialogueList,payload.results);
-    yield put(dialogueActions.setDialogueAll(data, payload.current, payload.next, payload.previous, payload.countItemsOnPage));
+    yield put(dialogueActions.setDialogueAll(data, payload.current, payload.next, payload.previous, payload.countLastPage));
   }
 }
 

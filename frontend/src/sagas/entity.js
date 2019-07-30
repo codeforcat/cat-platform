@@ -1,7 +1,7 @@
 import { take, call, put, select } from 'redux-saga/effects';
 import * as entityActions from '../actions/entity';
 import { showError } from '../actions/error';
-import { setEntityList, getEntityState, setEntityTemp, isValidState } from '../selectors/entity';
+import { setEntityList, getEntityState, setEntityTemp, isValidState, getPage } from '../selectors/entity';
 import * as API from '../apis/API';
 
 export function* initEntity() {
@@ -9,7 +9,7 @@ export function* initEntity() {
     yield take(entityActions.INIT_ENTITY);
     const { payload, error } = yield call(API.read,'entities');
     const data = yield select(setEntityList,payload.results);
-    yield put(entityActions.setEntityAll(data, payload.current, payload.next, payload.previous, payload.countItemsOnPage));
+    yield put(entityActions.setEntityAll(data, payload.current, payload.next, payload.previous, payload.countLastPage));
   }
 }
 
@@ -18,7 +18,7 @@ export function* fetchFirstEntity() {
     yield take(entityActions.FETCH_FIRST_ENTITY);
     const { payload, error } = yield call(API.readPage,'entities', 1);
     const data = yield select(setEntityList,payload.results);
-    yield put(entityActions.setEntityAll(data, payload.current, payload.next, payload.previous, payload.countItemsOnPage));
+    yield put(entityActions.setEntityAll(data, payload.current, payload.next, payload.previous, payload.countLastPage));
   }
 }
 
@@ -27,7 +27,7 @@ export function* fetchLastEntity() {
     yield take(entityActions.FETCH_LAST_ENTITY);
     const { payload, error } = yield call(API.readPage,'entities', 'last');
     const data = yield select(setEntityList,payload.results);
-    yield put(entityActions.setEntityAll(data, payload.current, payload.next, payload.previous, payload.countItemsOnPage));
+    yield put(entityActions.setEntityAll(data, payload.current, payload.next, payload.previous, payload.countLastPage));
   }
 }
 
@@ -36,7 +36,7 @@ export function* fetchNextEntity() {
     const action = yield take(entityActions.FETCH_NEXT_ENTITY);
     const { payload, error } = yield call(API.fetchUrl,action.payload.url);
     const data = yield select(setEntityList,payload.results);
-    yield put(entityActions.setEntityAll(data, payload.current, payload.next, payload.previous, payload.countItemsOnPage));
+    yield put(entityActions.setEntityAll(data, payload.current, payload.next, payload.previous, payload.countLastPage));
   }
 }
 
@@ -45,7 +45,7 @@ export function* fetchPreviousEntity() {
     const action = yield take(entityActions.FETCH_PREVIOUS_ENTITY);
     const { payload, error } = yield call(API.fetchUrl,action.payload.url);
     const data = yield select(setEntityList,payload.results);
-    yield put(entityActions.setEntityAll(data, payload.current, payload.next, payload.previous, payload.countItemsOnPage));
+    yield put(entityActions.setEntityAll(data, payload.current, payload.next, payload.previous, payload.countLastPage));
   }
 }
 
@@ -54,7 +54,7 @@ export function* searchEntity() {
     const action = yield take(entityActions.SEARCH_ENTITY);
     const { payload, error } =yield call(API.search,'entities',action.payload.word);
     const data = yield select(setEntityList,payload.results);
-    yield put(entityActions.setEntityAll(data, payload.current, payload.next, payload.previous, payload.countItemsOnPage));
+    yield put(entityActions.setEntityAll(data, payload.current, payload.next, payload.previous, payload.countLastPage));
   }
 }
 
@@ -114,11 +114,10 @@ export function* deleteEntity() {
     const action = yield take(entityActions.DELETE_ENTITY);
     yield call(API.destroy,'entities',action.payload.entity_id);
     yield put(entityActions.closeDeleteDialog());
-    console.log(action);
-    const {payload, error} = yield call(API.readPage, 'entities', action.payload.count > 2 ? action.payload.current : action.payload.current - 1);
-    console.log(payload);
+    const page = yield select(getPage,action.payload);
+    const { payload, error } = yield call(API.readPage,'entities',page);
     const data = yield select(setEntityList,payload.results);
-    yield put(entityActions.setEntityAll(data, payload.current, payload.next, payload.previous, payload.countItemsOnPage));
+    yield put(entityActions.setEntityAll(data, payload.current, payload.next, payload.previous, payload.countLastPage));
   }
 }
 

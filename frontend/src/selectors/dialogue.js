@@ -180,3 +180,15 @@ export function isValidState(state) {
     state.dialogue.answers.filter(item=>item.isValid === true).length === state.dialogue.answers.length
   ].every(item=>item);
 }
+
+export function getPage(state, payload) {
+  if(payload.current >= 2 && payload.count > 1) {
+    return payload.current;
+  }
+  else if(payload.current >= 2 && payload.count <= 1) {
+    return payload.current - 1;
+  }
+  else {
+    return 1;
+  }
+}
