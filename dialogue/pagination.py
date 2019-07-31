@@ -10,7 +10,7 @@ class CustomPageNumber(pagination.PageNumberPagination):
         divPage = divmod(self.page.paginator.count, self.page_size)
         return Response(OrderedDict([
             ('lastPage', self.page.paginator.count),
-            ('countLastPage', self.page_size if divPage[0] >= self.page.number else divPage[1]),
+            ('countItemOnPage', self.page_size if divPage[0] >= self.page.number else divPage[1]),
             ('current', self.page.number),
             ('next', self.get_next_link()),
             ('previous', self.get_previous_link()),
