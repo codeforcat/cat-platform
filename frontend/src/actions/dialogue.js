@@ -3,13 +3,10 @@ export const FETCH_FIRST_DIALOGUE = 'FETCH_FIRST_DIALOGUE';
 export const FETCH_LAST_DIALOGUE = 'FETCH_LAST_DIALOGUE';
 export const FETCH_NEXT_DIALOGUE = 'FETCH_NEXT_DIALOGUE';
 export const FETCH_PREVIOUS_DIALOGUE = 'FETCH_PREVIOUS_DIALOGUE';
-export const FETCH_ANSWERS = 'FETCH_ANSWERS';
-export const SET_ANSWERS = 'SET_ANSWERS';
 export const FETCH_ENTITIES = 'FETCH_ENTITIES';
 export const SET_ENTITIES = 'SET_ENTITIES';
 export const INPUT_QUESTION_ID = 'INPUT_QUESTION_ID';
 export const INPUT_QUESTION_NAME = 'INPUT_QUESTION_NAME';
-export const INPUT_PARENT_ANSWER_ID = 'INPUT_PARENT_ANSWER_ID';
 export const INPUT_PHRASE_TEXT = 'INPUT_PHRASE_TEXT';
 export const ADD_PHRASE_TEXT = 'ADD_PHRASE_TEXT';
 export const DELETE_PHRASE_TEXT = 'DELETE_PHRASE_TEXT';
@@ -91,21 +88,6 @@ export function fetchPreviousDialogue(url) {
   }
 }
 
-export function fetchAnswers() {
-  return {
-    type: FETCH_ANSWERS
-  }
-}
-
-export function setAnswers(answers) {
-  return {
-    type: SET_ANSWERS,
-    payload:{
-      exists_answers: answers
-    }
-  }
-}
-
 export function fetchEntities() {
   return {
     type: FETCH_ENTITIES
@@ -135,15 +117,6 @@ export function inputQuestionName(question_name) {
     type: INPUT_QUESTION_NAME,
     payload:{
       question_name: question_name
-    }
-  }
-}
-
-export function inputParentAnswerId(parent_answer_id) {
-  return {
-    type: INPUT_PARENT_ANSWER_ID,
-    payload:{
-      parent_answer_id: parseInt(parent_answer_id)
     }
   }
 }
@@ -327,12 +300,11 @@ export function inputImagePreview(url) {
   }
 }
 
-export function createDialogue(question_name, parent_answer_id, phrases, entities, answers, additional_state, additional_message) {
+export function createDialogue(question_name, phrases, entities, answers, additional_state, additional_message) {
   return {
     type: CREATE_DIALOGUE,
     payload:{
       question_name: question_name,
-      parent_answer_id: parseInt(parent_answer_id),
       phrases: phrases,
       entities: entities,
       answers: answers,
@@ -357,12 +329,11 @@ export function setDialogueState(question_id) {
   }
 }
 
-export function setDialogue(question_name, parent_answer_id, phrases, entities, answers, additional_state, buttons, confirm, image) {
+export function setDialogue(question_name, phrases, entities, answers, additional_state, buttons, confirm, image) {
   return {
     type: SET_DIALOGUE,
     payload:{
       question_name: question_name,
-      parent_answer_id: parseInt(parent_answer_id),
       phrases: phrases,
       entities: entities,
       answers: answers,
@@ -374,13 +345,12 @@ export function setDialogue(question_name, parent_answer_id, phrases, entities, 
   }
 }
 
-export function updateDialogue(question_id, question_name, parent_answer_id, phrases, entities, answers, additional_state, additional_message) {
+export function updateDialogue(question_id, question_name, phrases, entities, answers, additional_state, additional_message) {
   return {
     type: UPDATE_DIALOGUE,
     payload:{
       question_id: parseInt(question_id),
       question_name: question_name,
-      parent_answer_id: parseInt(parent_answer_id),
       phrases: phrases,
       entities: entities,
       answers: answers,

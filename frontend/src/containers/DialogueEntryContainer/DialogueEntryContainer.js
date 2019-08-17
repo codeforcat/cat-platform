@@ -8,8 +8,6 @@ function mapStateToProps(state) {
   return {
     question_id      : d.question_id,
     question_name    : d.question_name,
-    parent_answer_id : d.parent_answer_id,
-    exists_answers   : d.exists_answers,
     entities         : d.entities,
     exists_entities  : d.exists_entities,
     phrases          : d.phrases,

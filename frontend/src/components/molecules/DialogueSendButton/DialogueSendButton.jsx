@@ -38,7 +38,6 @@ export default function DialogueSendButton(props) {
             fullWidth
             onClick={() => props.actions.createDialogue(
               props.question_name,
-              props.parent_answer_id,
               props.phrases,
               props.entities,
               props.answers,
@@ -55,7 +54,6 @@ export default function DialogueSendButton(props) {
             onClick={() => props.actions.updateDialogue(
               props.question_id,
               props.question_name,
-              props.parent_answer_id,
               props.phrases,
               props.entities,
               props.answers,

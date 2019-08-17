@@ -11,7 +11,6 @@ import DialogueSendButton from '../../molecules/DialogueSendButton/DialogueSendB
 
 export default function DialogueEntry(props) {
   useEffect(() => {
-    props.actions.fetchAnswers();
     props.actions.fetchEntities();
   },[props.question_id]);
 
@@ -20,11 +19,6 @@ export default function DialogueEntry(props) {
       <QuestionIdField
         id={props.question_id}
         params={props.match.params.id}
-        actions={props.actions}
-      />
-      <ParentAnswerIdField
-        parent_answer_id={props.parent_answer_id}
-        exists_answers={props.exists_answers}
         actions={props.actions}
       />
       <QuestionNameField

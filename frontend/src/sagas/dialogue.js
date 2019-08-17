@@ -58,14 +58,6 @@ export function* searchDialogue() {
   }
 }
 
-export function* fetchAnswers() {
-  while (true) {
-    yield take(dialogueActions.FETCH_ANSWERS);
-    const { payload, error } = yield call(API.read,'answers');
-    yield put(dialogueActions.setAnswers(payload));
-  }
-}
-
 export function* fetchEntities() {
   while (true) {
     yield take(dialogueActions.FETCH_ENTITIES);
@@ -101,7 +93,6 @@ export function* setDialogue() {
       const data = yield select(setDialogueTemp,payload);
       yield put(dialogueActions.setDialogue(
         data.question_name,
-        data.parent_answer_id,
         data.phrases,
         data.entities,
         data.answers,
@@ -151,8 +142,6 @@ export function* deleteDialogue() {
 function* _clearDialogue(api_payload,api_error) {
   if (api_payload && !api_error) {
     yield put(dialogueActions.clearDialogue());
-    const { payload, error } = yield call(API.read,'answers');
-    yield put(dialogueActions.setAnswers(payload));
   }
   else {
     yield put(dialogueActions.fetchDialogueError(api_error.response.data.question_name[0]));
