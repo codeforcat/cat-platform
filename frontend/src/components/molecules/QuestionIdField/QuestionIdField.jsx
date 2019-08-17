@@ -1,6 +1,4 @@
 import React, { useEffect } from 'react';
-import Input from '@material-ui/core/Input';
-import FormItem from '../FormItem/FormItem.jsx';
 
 export default function QuestionIdField(props) {
   useEffect(() => {
