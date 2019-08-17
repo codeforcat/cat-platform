@@ -24,6 +24,7 @@ export default function PhraseFields(props) {
         <PhraseTextField
           key={index}
           first={index === 0}
+          length={phrase_list.length}
           text={item.phrase_text}
           idx={index}
           temp_id={item.phrase_temp_id}

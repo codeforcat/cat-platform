@@ -13,7 +13,7 @@ export default function PhraseTextField(props) {
       alignItems="center"
       spacing={3}
     >
-      <Grid item xs={10}>
+      <Grid item xs={props.length > 1 ? 10 : 12}>
         <TextField
           value={props.text}
           onChange={(e) => props.actions.inputPhraseText(e.target.value, props.idx)}
@@ -26,14 +26,14 @@ export default function PhraseTextField(props) {
         />
         {(!props.isValid && props.isShowError) && <FormHelperText error id="`phrase-text-error${props.idx}`">{props.errorMsg[props.errorCode]}</FormHelperText>}
       </Grid>
-      <Grid item xs={2}>
+      {props.length > 1 && <Grid item xs={2}>
         <Button
           variant="contained"
           onClick={() => props.actions.deletePhraseText(props.idx, props.phrase_temp_id)}
         >
           delete
         </Button>
-      </Grid>
+      </Grid>}
     </Grid>
   );
 }
