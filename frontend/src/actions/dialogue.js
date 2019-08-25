@@ -13,6 +13,7 @@ export const DELETE_PHRASE_TEXT = 'DELETE_PHRASE_TEXT';
 export const INPUT_ENTITY = 'INPUT_ENTITY';
 export const INPUT_ANSWER_TEXT = 'INPUT_ANSWER_TEXT';
 export const INPUT_ADDITIONAL_STATE = 'INPUT_ADDITIONAL_STATE';
+export const INPUT_TEXT_MESSAGE = 'INPUT_TEXT_MESSAGE';
 export const INPUT_BUTTONS_NUMBER = 'INPUT_BUTTONS_NUMBER';
 export const INPUT_BUTTONS_ALTTEXT = 'INPUT_BUTTONS_ALTTEXT';
 export const INPUT_BUTTONS_TYPE = 'INPUT_BUTTONS_TYPE';
@@ -171,6 +172,15 @@ export function inputAdditionalState(state) {
     type: INPUT_ADDITIONAL_STATE,
     payload:{
       state: state
+    }
+  }
+}
+
+export function inputTextMessage(text) {
+  return {
+    type: INPUT_TEXT_MESSAGE,
+    payload:{
+      text: text
     }
   }
 }

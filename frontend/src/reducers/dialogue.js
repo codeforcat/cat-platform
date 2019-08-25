@@ -28,6 +28,10 @@ const initialState = {
   additional_state: 'none',
   isValidAdditional: true,
   errorCodeAdditional: 'additional_empty_error',
+  text: {
+    type: 'text',
+    text: ''
+  },
   buttons_number: 1,
   buttons: {
     type: 'template',
