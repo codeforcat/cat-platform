@@ -1,18 +1,24 @@
 from rest_framework import serializers
 from drf_writable_nested import WritableNestedModelSerializer
-from .models import Question, Phrase, Entities, Answer, Entity, EntityValue, Synonym
+from .models import Question, Phrase, Entities, Payload, Entity, EntityValue, Synonym
 
 
-class AnswerSerializer(serializers.ModelSerializer):
+class PayloadSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Answer
-        fields = ('answer_text',)
+        model = Payload
+        fields = ('state', 'message')
 
 
-class AnswerDisplaySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Answer
-        fields = ('answer_id', 'answer_text')
+# class AnswerSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Answer
+#         fields = ('answer_text',)
+
+
+# class AnswerDisplaySerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Answer
+#         fields = ('answer_id', 'answer_text')
 
 
 class EntitiesSerializer(serializers.ModelSerializer):
@@ -28,14 +34,14 @@ class PhraseSerializer(serializers.ModelSerializer):
 
 
 class QuestionSerializer(WritableNestedModelSerializer):
-    answers = AnswerSerializer(many=True, required=False, allow_null=True, source='answer')
+    # answers = AnswerSerializer(many=True, required=False, allow_null=True, source='answer')
+    payloads = PayloadSerializer(many=True, required=False, allow_null=True, source='payload')
     entities = EntitiesSerializer(many=True, required=False, allow_null=True)
     phrases = PhraseSerializer(many=True, required=False, allow_null=True, source='phrase')
 
     class Meta:
         model = Question
-        fields = ('question_id', 'question_name', 'phrases', 'entities', 'answers',
-                  'additional_state', 'additional_message')
+        fields = ('question_id', 'question_name', 'phrases', 'entities', 'payloads')
 
 
 class SynonymSerializer(serializers.ModelSerializer):

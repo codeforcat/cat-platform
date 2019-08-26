@@ -21,7 +21,7 @@ from dialogue import views
 
 router = routers.DefaultRouter()
 router.register('questions', views.QuestionViewSet)
-router.register('answers', views.AnswerDisplayViewSet)
+# router.register('answers', views.AnswerDisplayViewSet)
 router.register('entities', views.EntityViewSet)
 
 urlpatterns = [

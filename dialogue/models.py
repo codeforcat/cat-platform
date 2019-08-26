@@ -9,8 +9,8 @@ class Question(Model):
     question_id = models.AutoField(db_column='QUESTION ID', primary_key=True)
     question_name = models.CharField(max_length=100, unique=True)
     intent_id = models.CharField(max_length=100, null=True, blank=True)
-    additional_state = models.CharField(max_length=20, default='none')
-    additional_message = JSONField(default=dict, null=True, blank=True)
+    # additional_state = models.CharField(max_length=20, default='none')
+    # additional_message = JSONField(default=dict, null=True, blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
 
@@ -48,18 +48,33 @@ class Entities(models.Model):
         return self.entity_name
 
 
-class Answer(models.Model):
-    class Meta:
-        db_table = 'answer'
+# class Answer(models.Model):
+#     class Meta:
+#         db_table = 'answer'
+#
+#     answer_id = models.AutoField(db_column='ANSWER ID', primary_key=True)
+#     question_id = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='answer')
+#     answer_text = models.TextField()
+#     created_date = models.DateTimeField(auto_now_add=True)
+#     modified_date = models.DateTimeField(auto_now=True)
+#
+#     def __str__(self):
+#         return self.answer_text
 
-    answer_id = models.AutoField(db_column='ANSWER ID', primary_key=True)
-    question_id = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='answer')
-    answer_text = models.TextField()
+
+class Payload(Model):
+    class Meta:
+        db_table = 'payload'
+
+    payload_id = models.AutoField(db_column='PAYLOAD ID', primary_key=True)
+    question_id = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='payload')
+    state = models.CharField(max_length=20, default='none')
+    message = JSONField(default=dict, null=True, blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.answer_text
+        return self.payload_id
 
 
 class Entity(models.Model):

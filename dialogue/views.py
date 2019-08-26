@@ -2,8 +2,8 @@ from rest_framework import viewsets, generics
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 from rest_framework import filters
-from .models import Question, Answer, Entity
-from .serializer import QuestionSerializer, AnswerDisplaySerializer, EntitySerializer
+from .models import Question, Entity
+from .serializer import QuestionSerializer, EntitySerializer
 from .pagination import CustomPageNumber
 
 
@@ -12,8 +12,8 @@ class QuestionViewSet(viewsets.ViewSet, generics.ListCreateAPIView, generics.Ret
     queryset = Question.objects.filter()
     serializer_class = QuestionSerializer
     filter_backends = (filters.SearchFilter, filters.OrderingFilter)
-    search_fields = ('phrase__phrase_text', 'answer__answer_text')
-    ordering_fields = ('question_name', 'phrase__phrase_text', 'answer__answer_text')
+    search_fields = ('phrase__phrase_text',)
+    ordering_fields = ('question_name', 'phrase__phrase_text')
     ordering = ('-question_id',)
     pagination_class = CustomPageNumber
 
@@ -34,22 +34,22 @@ class QuestionViewSet(viewsets.ViewSet, generics.ListCreateAPIView, generics.Ret
         return Response(serializer.data)
 
 
-class AnswerDisplayViewSet(viewsets.ViewSet, generics.ListCreateAPIView):
-    # permission_classes = (IsAuthenticatedOrReadOnly,)
-    queryset = Answer.objects.all()
-    serializer_class = AnswerDisplaySerializer
-
-    def list(self, request):
-        queryset = Answer.objects.all()
-        qs = self.filter_queryset(queryset)
-        serializer = AnswerDisplaySerializer(qs, many=True)
-        return Response(serializer.data)
-
-    def retrieve(self, request, pk=None):
-        queryset = Answer.objects.filter(pk=pk)
-        answer = generics.get_object_or_404(queryset, pk=pk)
-        serializer = AnswerDisplaySerializer(answer)
-        return Response(serializer.data)
+# class AnswerDisplayViewSet(viewsets.ViewSet, generics.ListCreateAPIView):
+#     # permission_classes = (IsAuthenticatedOrReadOnly,)
+#     queryset = Answer.objects.all()
+#     serializer_class = AnswerDisplaySerializer
+#
+#     def list(self, request):
+#         queryset = Answer.objects.all()
+#         qs = self.filter_queryset(queryset)
+#         serializer = AnswerDisplaySerializer(qs, many=True)
+#         return Response(serializer.data)
+#
+#     def retrieve(self, request, pk=None):
+#         queryset = Answer.objects.filter(pk=pk)
+#         answer = generics.get_object_or_404(queryset, pk=pk)
+#         serializer = AnswerDisplaySerializer(answer)
+#         return Response(serializer.data)
 
 
 class EntityViewSet(viewsets.ViewSet, generics.ListCreateAPIView, generics.RetrieveUpdateDestroyAPIView):
