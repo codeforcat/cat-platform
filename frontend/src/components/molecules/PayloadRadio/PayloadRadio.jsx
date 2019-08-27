@@ -7,12 +7,12 @@ export default function PayloadRadio(props) {
   return (
     <div className={props.className}>
       <RadioGroup
-        name="addition"
+        name="payload"
         value={props.state}
-        onChange={(e) => props.actions.inputAdditionalState(e.target.value)}
+        onChange={(e) => props.actions.inputPayloadState(e.target.value, props.idx)}
         row
       >
-        <FormControlLabel value="none" control={<Radio color="primary" />} label="なし"/>
+        <FormControlLabel value="text" control={<Radio color="primary" />} label="テキスト"/>
         <FormControlLabel value="buttons" control={<Radio color="primary" />} label="選択肢ボタン"/>
         <FormControlLabel value="confirm" control={<Radio color="primary" />} label="２択ボタン"/>
         <FormControlLabel value="image" control={<Radio color="primary" />} label="画像"/>

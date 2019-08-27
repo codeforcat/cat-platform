@@ -23,14 +23,21 @@ export default function Payloads(props) {
       titleAlign="flex-start"
       titleClass={classes.label}
     >
-      {phrase_list.map((item, index)=>
-        <PayloadMessage/>
+      {props.payloads.map((item, index)=>
+        <PayloadMessage
+          key={index}
+          idx={index}
+          length={props.payloads.length}
+          state={item.contents.state}
+          payloadTempId={item.payloadTempId}
+          actions={props.actions}
+        />
       )}
       <Button
         variant="contained"
         color="primary"
         className={classes.button}
-        onClick={() => props.actions.addPhraseText()}
+        onClick={() => props.actions.addPayloadState()}
       >
         add
       </Button>

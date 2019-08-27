@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import PayloadRadio from '../PayloadRadio/PayloadRadio.jsx';
+import PayloadTextField from '../PayloadTextField/PayloadTextField.jsx';
 import PayloadButtonsField from '../PayloadButtonsField/PayloadButtonsField.jsx';
 import PayloadConfirmField from '../PayloadConfirmField/PayloadConfirmField.jsx';
 import PayloadImageField from '../PayloadImageField/PayloadImageField.jsx';
@@ -31,21 +32,23 @@ export default function PayloadMessage(props) {
       <Grid item xs={props.length > 1 ? 10 : 12}>
         <PayloadRadio
           className={classes.radio}
-          state={props.additional_state}
+          idx={props.idx}
+          state={props.state}
           actions={props.actions}
         />
-        {props.additional_state === 'buttons' && <PayloadButtonsField
+        {props.state === 'text' && <PayloadTextField/>}
+        {props.state === 'buttons' && <PayloadButtonsField
           buttons_number={props.buttons_number}
           buttons={props.buttons}
           isValid={props.isValid}
           actions={props.actions}
         />}
-        {props.additional_state === 'confirm' && <PayloadConfirmField
+        {props.state === 'confirm' && <PayloadConfirmField
           confirm={props.confirm}
           isValid={props.isValid}
           actions={props.actions}
         />}
-        {props.additional_state === 'image' && <PayloadImageField
+        {props.state === 'image' && <PayloadImageField
           image={props.image}
           isValid={props.isValid}
           actions={props.actions}
@@ -55,7 +58,7 @@ export default function PayloadMessage(props) {
       {props.length > 1 && <Grid item xs={2}>
         <Button
           variant="contained"
-          onClick={() => props.actions.deletePhraseText(props.idx, props.phrase_temp_id)}
+          onClick={() => props.actions.deletePayloadState(props.idx, props.payloadTempId)}
         >
           delete
         </Button>
