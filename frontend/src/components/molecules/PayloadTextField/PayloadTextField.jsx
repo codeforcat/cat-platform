@@ -1,0 +1,21 @@
+import React from 'react';
+import InputLabel from '@material-ui/core/InputLabel';
+import TextField from '@material-ui/core/TextField';
+
+export default function PayloadTextField(props) {
+  return (
+    <div className={props.className}>
+      <InputLabel htmlFor="`text${props.idx}`">テキスト</InputLabel>
+      <TextField
+        id="`text${props.idx}`"
+        value={props.answer_text}
+        onChange={(e) => props.actions.inputTextMessage(e.target.value, props.idx)}
+        fullWidth
+        multiline
+        rows={3}
+        error={!props.isValid}
+        aria-describedby="`text-error${props.idx}`"
+      />
+    </div>
+  );
+}

@@ -4,7 +4,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import FormHelperText from '@material-ui/core/FormHelperText';
 
-export default function AdditionalImageField(props) {
+export default function PayloadImageField(props) {
   return (
     <div className={props.className}>
       <Grid

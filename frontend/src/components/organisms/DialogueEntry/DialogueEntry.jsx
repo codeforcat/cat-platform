@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import Container from '@material-ui/core/Container';
 import QuestionIdField from '../../molecules/QuestionIdField/QuestionIdField.jsx';
-import ParentAnswerIdField from '../../molecules/ParentAnswerIdField/ParentAnswerIdField.jsx';
 import QuestionNameField from '../../molecules/QuestionNameField/QuestionNameField.jsx';
 import PhraseFields from '../../molecules/PhraseFields/PhraseFields.jsx';
 import EntityIdFieldForDialogue from '../../molecules/EntityIdFieldForDialogue/EntityIdFieldForDialogue.jsx';
 import AnswerTextField from '../../molecules/AnswerTextField/AnswerTextField.jsx';
-import AdditionalMessage from '../../molecules/AdditionalMessage/AdditionalMessage.jsx';
+import PayloadContainer from '../../../containers/PayloadContainer/PayloadContainer';
 import DialogueSendButton from '../../molecules/DialogueSendButton/DialogueSendButton.jsx';
 
 export default function DialogueEntry(props) {
@@ -53,18 +52,7 @@ export default function DialogueEntry(props) {
           actions={props.actions}
         />
       )}
-      <AdditionalMessage
-        additional_state={props.additional_state}
-        buttons_number={props.buttons_number}
-        buttons={props.buttons}
-        confirm={props.confirm}
-        image={props.image}
-        isValid={props.isValidAdditional}
-        errorCode={props.errorCodeAdditional}
-        errorMsg={props.errorMsg}
-        isShowError={props.isShowError}
-        actions={props.actions}
-      />
+      <PayloadContainer/>
       <DialogueSendButton
         isUpdateStateEnable={props.isUpdateStateEnable}
         question_id={props.question_id}

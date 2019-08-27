@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
-import AdditionalLabelText from '../AdditionalLabelText/AdditionalLabelText.jsx';
+import PayloadLabelText from '../PayloadLabelText/PayloadLabelText.jsx';
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 
@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function AdditionalButtonsField(props) {
+export default function PayloadButtonsField(props) {
   const classes = useStyles();
 
   return (
@@ -51,7 +51,7 @@ export default function AdditionalButtonsField(props) {
             <MenuItem value="4">4</MenuItem>
           </Select>
           {props.buttons.template.actions.map((item, index)=>
-            <AdditionalLabelText
+            <PayloadLabelText
               key={index}
               item={item}
               idx={index}

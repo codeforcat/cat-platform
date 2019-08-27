@@ -3,7 +3,7 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-export default function AdditionalRadio(props) {
+export default function PayloadRadio(props) {
   return (
     <div className={props.className}>
       <RadioGroup

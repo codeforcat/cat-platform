@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 
-export default function AdditionalLabelText(props) {
+export default function PayloadLabelText(props) {
   return (
     <div className={props.className}>
       <Grid
