@@ -13,7 +13,7 @@ export default function PayloadTextField(props) {
         fullWidth
         multiline
         rows={3}
-        error={!props.isValid}
+        error={props.text === '' && !props.isValid}
         aria-describedby="`text-error${props.idx}`"
       />
     </>
