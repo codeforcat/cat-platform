@@ -26,7 +26,7 @@ export default function PayloadMessage(props) {
       container
       direction="row"
       justify="flex-start"
-      alignItems="center"
+      alignItems="flex-start"
       spacing={3}
     >
       <Grid item xs={props.length > 1 ? 10 : 12}>

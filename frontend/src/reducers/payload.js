@@ -74,7 +74,10 @@ const payloadReducer = (state = initialState, action) =>
         });
         return;
       case actionTypes.DELETE_PAYLOAD_STATE:
-        draft.payloads.splice(draft.payloads.findIndex(elm => elm.payloadTempId === action.payload.payloadTempIdx), 1)
+        draft.payloads.splice(draft.payloads.findIndex(elm => elm.payloadTempId === action.payload.payloadTempIdx), 1);
+        return;
+      case actionTypes.SORT_PAYLOAD_STATE:
+        draft.payloads = action.payload.array;
         return;
       case actionTypes.INPUT_TEXT_MESSAGE:
         draft.payloads[action.payload.idx].contents.text = action.payload.text;

@@ -1,6 +1,7 @@
 export const INPUT_PAYLOAD_STATE = 'INPUT_PAYLOAD_STATE';
 export const ADD_PAYLOAD_STATE = 'ADD_PAYLOAD_STATE';
 export const DELETE_PAYLOAD_STATE = 'DELETE_PAYLOAD_STATE';
+export const SORT_PAYLOAD_STATE = 'SORT_PAYLOAD_STATE';
 export const INPUT_TEXT_MESSAGE = 'INPUT_TEXT_MESSAGE';
 export const INPUT_BUTTONS_NUMBER = 'INPUT_BUTTONS_NUMBER';
 export const INPUT_BUTTONS_ALTTEXT = 'INPUT_BUTTONS_ALTTEXT';
@@ -40,6 +41,15 @@ export function deletePayloadState(payloadTempIdx) {
     type: DELETE_PAYLOAD_STATE,
     payload:{
       payloadTempIdx: parseInt(payloadTempIdx)
+    }
+  }
+}
+
+export function sortPayloadState(payloadArr) {
+  return {
+    type: SORT_PAYLOAD_STATE,
+    payload:{
+      array: payloadArr
     }
   }
 }

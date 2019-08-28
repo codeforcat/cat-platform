@@ -5,7 +5,6 @@ import Payloads from '../../components/molecules/Payloads/Payloads.jsx';
 
 function mapStateToProps(state) {
   const p = state.payload;
-  console.log(p);
   return {
     payloads   : p.payloads,
     isShowError: p.isShowError,
