@@ -2,6 +2,7 @@ import { take, call, put, select } from 'redux-saga/effects';
 import * as dialogueActions from '../actions/dialogue';
 import { showError } from '../actions/error';
 import { setDialogueList, isValidAdditionalState, getDialogueState, setDialogueTemp, isValidState, getPage } from '../selectors/dialogue';
+import { createPayloadArray } from '../selectors/payload';
 import * as API from '../apis/API';
 
 export function* initDialogue() {
@@ -68,20 +69,23 @@ export function* fetchEntities() {
 
 export function* createDialogue() {
   while (true) {
-    const action = yield take(dialogueActions.CREATE_DIALOGUE);
-    const isValidAdditional = action.payload.additional_message ? yield select(isValidAdditionalState,action.payload.additional_message) : true;
-    const isValid  = yield select(isValidState);
-    if (isValid && isValidAdditional) {
-      const state = yield select(getDialogueState,action.payload);
-      const { payload, error } = yield call(API.create,'questions',state.temp);
-      yield call(_clearDialogue,payload,error);
-    }
-    else {
-      if(!isValidAdditional) {
-        yield put(dialogueActions.setAdditionalError());
-      }
-      yield put(showError());
-    }
+    yield take(dialogueActions.CREATE_DIALOGUE);
+    const data = yield select(createPayloadArray);
+    console.log(data);
+    // const action = yield take(dialogueActions.CREATE_DIALOGUE);
+    // const isValidAdditional = action.payload.additional_message ? yield select(isValidAdditionalState,action.payload.additional_message) : true;
+    // const isValid  = yield select(isValidState);
+    // if (isValid && isValidAdditional) {
+    //   const state = yield select(getDialogueState,action.payload);
+    //   const { payload, error } = yield call(API.create,'questions',state.temp);
+    //   yield call(_clearDialogue,payload,error);
+    // }
+    // else {
+    //   if(!isValidAdditional) {
+    //     yield put(dialogueActions.setAdditionalError());
+    //   }
+    //   yield put(showError());
+    // }
   }
 }
 
