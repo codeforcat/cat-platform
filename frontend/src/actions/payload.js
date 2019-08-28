@@ -8,11 +8,13 @@ export const INPUT_BUTTONS_TYPE = 'INPUT_BUTTONS_TYPE';
 export const INPUT_BUTTONS_DATA = 'INPUT_BUTTONS_DATA';
 export const INPUT_BUTTONS_LABEL = 'INPUT_BUTTONS_LABEL';
 export const INPUT_BUTTONS_TEXT = 'INPUT_BUTTONS_TEXT';
+export const INPUT_BUTTONS_DISPLAYTEXT = 'INPUT_BUTTONS_DISPLAYTEXT';
 export const INPUT_CONFIRM_ALTTEXT = 'INPUT_CONFIRM_ALTTEXT';
 export const INPUT_CONFIRM_TYPE = 'INPUT_CONFIRM_TYPE';
 export const INPUT_CONFIRM_DATA = 'INPUT_CONFIRM_DATA';
 export const INPUT_CONFIRM_LABEL = 'INPUT_CONFIRM_LABEL';
 export const INPUT_CONFIRM_TEXT = 'INPUT_CONFIRM_TEXT';
+export const INPUT_CONFIRM_DISPLAYTEXT = 'INPUT_CONFIRM_DISPLAYTEXT';
 export const INPUT_IMAGE_ORIGINAL = 'INPUT_IMAGE_ORIGINAL';
 export const INPUT_IMAGE_PREVIEW = 'INPUT_IMAGE_PREVIEW';
 export const SET_PAYLOAD_ERROR = 'SET_PAYLOAD_ERROR';
@@ -33,146 +35,181 @@ export function addPayloadState() {
   }
 }
 
-export function deletePayloadState(idx, payload_temp_idx) {
+export function deletePayloadState(payloadTempIdx) {
   return {
     type: DELETE_PAYLOAD_STATE,
     payload:{
-      idx: parseInt(idx),
-      payload_temp_idx: parseInt(payload_temp_idx)
+      payloadTempIdx: parseInt(payloadTempIdx)
     }
   }
 }
 
-export function inputTextMessage(text) {
+export function inputTextMessage(text, idx) {
   return {
     type: INPUT_TEXT_MESSAGE,
     payload:{
-      text: text
+      text: text,
+      idx: parseInt(idx)
     }
   }
 }
 
-export function inputButtonsNumber(number) {
+export function inputButtonsNumber(number, idx) {
   return {
     type: INPUT_BUTTONS_NUMBER,
     payload:{
-      number: parseInt(number)
+      number: parseInt(number),
+      idx: parseInt(idx)
     }
   }
 }
 
-export function inputButtonsAltText(altText) {
+export function inputButtonsAltText(altText, idx) {
   return {
     type: INPUT_BUTTONS_ALTTEXT,
     payload:{
-      altText: altText
+      altText: altText,
+      idx: parseInt(idx)
     }
   }
 }
 
-export function inputButtonsType(type, idx) {
+export function inputButtonsType(type, idx, payloadIdx) {
   return {
     type: INPUT_BUTTONS_TYPE,
     payload:{
       type: type,
-      idx: parseInt(idx)
+      idx: parseInt(idx),
+      payloadIdx: parseInt(payloadIdx)
     }
   }
 }
 
-export function inputButtonsData(data, idx) {
+export function inputButtonsData(data, idx, payloadIdx) {
   return {
     type: INPUT_BUTTONS_DATA,
     payload:{
       data: data,
-      idx: parseInt(idx)
+      idx: parseInt(idx),
+      payloadIdx: parseInt(payloadIdx)
     }
   }
 }
 
-export function inputButtonsLabel(label, idx) {
+export function inputButtonsLabel(label, idx, payloadIdx) {
   return {
     type: INPUT_BUTTONS_LABEL,
     payload:{
       label: label,
-      idx: parseInt(idx)
+      idx: parseInt(idx),
+      payloadIdx: parseInt(payloadIdx)
     }
   }
 }
 
-export function inputButtonsText(text, idx) {
+export function inputButtonsText(text, idx, payloadIdx) {
   return {
     type: INPUT_BUTTONS_TEXT,
     payload:{
       text: text,
+      idx: parseInt(idx),
+      payloadIdx: parseInt(payloadIdx)
+    }
+  }
+}
+
+export function inputButtonsDisplayText(displayText, idx, payloadIdx) {
+  return {
+    type: INPUT_BUTTONS_DISPLAYTEXT,
+    payload:{
+      displayText: displayText,
+      idx: parseInt(idx),
+      payloadIdx: parseInt(payloadIdx)
+    }
+  }
+}
+
+export function inputConfirmAltText(altText, idx) {
+  return {
+    type: INPUT_CONFIRM_ALTTEXT,
+    payload:{
+      altText: altText,
       idx: parseInt(idx)
     }
   }
 }
 
-export function inputConfirmAltText(altText) {
-  return {
-    type: INPUT_CONFIRM_ALTTEXT,
-    payload:{
-      altText: altText
-    }
-  }
-}
-
-export function inputConfirmType(type, idx) {
+export function inputConfirmType(type, idx, payloadIdx) {
   return {
     type: INPUT_CONFIRM_TYPE,
     payload:{
       type: type,
-      idx: parseInt(idx)
+      idx: parseInt(idx),
+      payloadIdx: parseInt(payloadIdx)
     }
   }
 }
 
-export function inputConfirmData(data, idx) {
+export function inputConfirmData(data, idx, payloadIdx) {
   return {
     type: INPUT_CONFIRM_DATA,
     payload:{
       data: data,
-      idx: parseInt(idx)
+      idx: parseInt(idx),
+      payloadIdx: parseInt(payloadIdx)
     }
   }
 }
 
-export function inputConfirmLabel(label, idx) {
+export function inputConfirmLabel(label, idx, payloadIdx) {
   return {
     type: INPUT_CONFIRM_LABEL,
     payload:{
       label: label,
-      idx: parseInt(idx)
+      idx: parseInt(idx),
+      payloadIdx: parseInt(payloadIdx)
     }
   }
 }
 
-export function inputConfirmText(text, idx) {
+export function inputConfirmText(text, idx, payloadIdx) {
   return {
     type: INPUT_CONFIRM_TEXT,
     payload:{
       text: text,
+      idx: parseInt(idx),
+      payloadIdx: parseInt(payloadIdx)
+    }
+  }
+}
+
+export function inputConfirmDisplayText(displayText, idx, payloadIdx) {
+  return {
+    type: INPUT_CONFIRM_DISPLAYTEXT,
+    payload:{
+      displayText: displayText,
+      idx: parseInt(idx),
+      payloadIdx: parseInt(payloadIdx)
+    }
+  }
+}
+
+export function inputImageOriginal(url, idx) {
+  return {
+    type: INPUT_IMAGE_ORIGINAL,
+    payload:{
+      url: url,
       idx: parseInt(idx)
     }
   }
 }
 
-export function inputImageOriginal(url) {
-  return {
-    type: INPUT_IMAGE_ORIGINAL,
-    payload:{
-      url: url
-    }
-  }
-}
-
-export function inputImagePreview(url) {
+export function inputImagePreview(url, idx) {
   return {
     type: INPUT_IMAGE_PREVIEW,
     payload:{
-      url: url
+      url: url,
+      idx: parseInt(idx)
     }
   }
 }

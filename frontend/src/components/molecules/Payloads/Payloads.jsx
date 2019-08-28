@@ -28,8 +28,10 @@ export default function Payloads(props) {
           key={index}
           idx={index}
           length={props.payloads.length}
-          state={item.contents.state}
+          contents={item.contents}
           payloadTempId={item.payloadTempId}
+          isShowError={props.isShowError}
+          errorMsg={props.errorMsg}
           actions={props.actions}
         />
       )}

@@ -4,11 +4,11 @@ import TextField from '@material-ui/core/TextField';
 
 export default function PayloadTextField(props) {
   return (
-    <div className={props.className}>
+    <>
       <InputLabel htmlFor="`text${props.idx}`">テキスト</InputLabel>
       <TextField
         id="`text${props.idx}`"
-        value={props.answer_text}
+        value={props.text}
         onChange={(e) => props.actions.inputTextMessage(e.target.value, props.idx)}
         fullWidth
         multiline
@@ -16,6 +16,6 @@ export default function PayloadTextField(props) {
         error={!props.isValid}
         aria-describedby="`text-error${props.idx}`"
       />
-    </div>
+    </>
   );
 }

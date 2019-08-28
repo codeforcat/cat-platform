@@ -33,24 +33,35 @@ export default function PayloadMessage(props) {
         <PayloadRadio
           className={classes.radio}
           idx={props.idx}
-          state={props.state}
+          state={props.contents.state}
           actions={props.actions}
         />
-        {props.state === 'text' && <PayloadTextField/>}
-        {props.state === 'buttons' && <PayloadButtonsField
-          buttons_number={props.buttons_number}
-          buttons={props.buttons}
-          isValid={props.isValid}
+        {props.contents.state === 'text' && <PayloadTextField
+          idx={props.idx}
+          text={props.contents.text}
+          isValid={props.contents.isValid}
           actions={props.actions}
         />}
-        {props.state === 'confirm' && <PayloadConfirmField
-          confirm={props.confirm}
-          isValid={props.isValid}
+        {props.contents.state === 'buttons' && <PayloadButtonsField
+          idx={props.idx}
+          number={props.contents.buttonsNumber}
+          altText={props.contents.buttonsAltText}
+          buttonsActions={props.contents.buttonsActions}
+          isValid={props.contents.isValid}
           actions={props.actions}
         />}
-        {props.state === 'image' && <PayloadImageField
-          image={props.image}
-          isValid={props.isValid}
+        {props.contents.state === 'confirm' && <PayloadConfirmField
+          idx={props.idx}
+          altText={props.contents.confirmAltText}
+          confirmActions={props.contents.confirmActions}
+          isValid={props.contents.isValid}
+          actions={props.actions}
+        />}
+        {props.contents.state === 'image' && <PayloadImageField
+          idx={props.idx}
+          original={props.contents.originalContentUrl}
+          preview={props.contents.previewImageUrl}
+          isValid={props.contents.isValid}
           actions={props.actions}
         />}
         {(!props.isValid && props.isShowError) && <FormHelperText error>{props.errorMsg[props.errorCode]}</FormHelperText>}
@@ -58,7 +69,7 @@ export default function PayloadMessage(props) {
       {props.length > 1 && <Grid item xs={2}>
         <Button
           variant="contained"
-          onClick={() => props.actions.deletePayloadState(props.idx, props.payloadTempId)}
+          onClick={() => props.actions.deletePayloadState(props.payloadTempId)}
         >
           delete
         </Button>

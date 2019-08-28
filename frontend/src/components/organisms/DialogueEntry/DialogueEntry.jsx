@@ -4,7 +4,6 @@ import QuestionIdField from '../../molecules/QuestionIdField/QuestionIdField.jsx
 import QuestionNameField from '../../molecules/QuestionNameField/QuestionNameField.jsx';
 import PhraseFields from '../../molecules/PhraseFields/PhraseFields.jsx';
 import EntityIdFieldForDialogue from '../../molecules/EntityIdFieldForDialogue/EntityIdFieldForDialogue.jsx';
-import AnswerTextField from '../../molecules/AnswerTextField/AnswerTextField.jsx';
 import PayloadContainer from '../../../containers/PayloadContainer/PayloadContainer';
 import DialogueSendButton from '../../molecules/DialogueSendButton/DialogueSendButton.jsx';
 
@@ -40,24 +39,11 @@ export default function DialogueEntry(props) {
         exists_entities={props.exists_entities}
         actions={props.actions}
       />
-      {props.answers.map((item, index) =>
-        <AnswerTextField
-          key={index}
-          answer_text={item.answer_text}
-          idx={index}
-          isValid={item.isValid}
-          errorCode={item.errorCode}
-          errorMsg={props.errorMsg}
-          isShowError={props.isShowError}
-          actions={props.actions}
-        />
-      )}
       <PayloadContainer/>
       <DialogueSendButton
         isUpdateStateEnable={props.isUpdateStateEnable}
         question_id={props.question_id}
         question_name={props.question_name}
-        parent_answer_id={props.parent_answer_id}
         phrases={props.phrases}
         entities={props.entities}
         answers={props.answers}
