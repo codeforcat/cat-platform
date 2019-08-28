@@ -12,8 +12,11 @@ const useStyles = makeStyles(theme => ({
   label: {
     paddingTop: '1em',
   },
-  radio: {
-    marginBottom: '1.5em',
+  button: {
+    marginTop: '1.5em',
+  },
+  payloadWrapper: {
+    marginTop: '1.5em',
   }
 }));
 
@@ -23,15 +26,19 @@ export default function Payloads(props) {
     const newArray = arrayMove(props.payloads, removedIndex, addedIndex);
     props.actions.sortPayloadState(newArray);
   };
+
   return (
     <FormItem
       titleText="応答メッセージ"
-      titleAlign="flex-start"
+      titleAlign="baseline"
       titleClass={classes.label}
     >
       <Container onDrop={onDrop} lockAxis="y" dragHandleSelector=".drag-handle">
         {props.payloads.map((item, index)=>
-          <Draggable key={index}>
+          <Draggable
+            key={index}
+            className={classes.payloadWrapper}
+          >
             <Grid
               container
               direction="row"
