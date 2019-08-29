@@ -1,5 +1,3 @@
-import {CLEAR_DIALOGUE} from "./dialogue";
-
 export const INPUT_PAYLOAD_STATE = 'INPUT_PAYLOAD_STATE';
 export const ADD_PAYLOAD_STATE = 'ADD_PAYLOAD_STATE';
 export const DELETE_PAYLOAD_STATE = 'DELETE_PAYLOAD_STATE';
@@ -22,6 +20,7 @@ export const INPUT_IMAGE_ORIGINAL = 'INPUT_IMAGE_ORIGINAL';
 export const INPUT_IMAGE_PREVIEW = 'INPUT_IMAGE_PREVIEW';
 export const SET_PAYLOAD_ERROR = 'SET_PAYLOAD_ERROR';
 export const CLEAR_PAYLOAD = 'CLEAR_PAYLOAD';
+export const SET_PAYLOAD = 'SET_PAYLOAD';
 
 export function inputPayloadState(state, idx) {
   return {
@@ -239,5 +238,14 @@ export function setPayloadError(array) {
 export function clearPayload() {
   return {
     type: CLEAR_PAYLOAD
+  }
+}
+
+export function setPayload(payloads) {
+  return {
+    type: SET_PAYLOAD,
+    payload: {
+      payloads: payloads
+    }
   }
 }

@@ -2,8 +2,8 @@ import { take, call, put, select, all } from 'redux-saga/effects';
 import * as dialogueActions from '../actions/dialogue';
 import * as payloadActions from '../actions/payload';
 import { showError } from '../actions/error';
-import { setDialogueList, isValidAdditionalState, getDialogueState, setDialogueTemp, isValidState, getPage } from '../selectors/dialogue';
-import { createPayloadArray, isValidPayloadState } from '../selectors/payload';
+import { setDialogueList, getDialogueState, setDialogueTemp, isValidState, getPage } from '../selectors/dialogue';
+import { createPayloadArray, isValidPayloadState, setPayloadTemp } from '../selectors/payload';
 import * as API from '../apis/API';
 
 export function* initDialogue() {
@@ -91,17 +91,16 @@ export function* setDialogue() {
     const action = yield take(dialogueActions.SET_DIALOGUE_STATE);
     const { payload, error } = yield call(API.set,'questions',action.payload.question_id);
     if (payload && !error) {
-      const data = yield select(setDialogueTemp,payload);
-      yield put(dialogueActions.setDialogue(
-        data.question_name,
-        data.phrases,
-        data.entities,
-        data.answers,
-        data.additional_state,
-        data.buttons,
-        data.confirm,
-        data.image
-      ));
+      const data = yield select(setDialogueTemp, payload);
+      const payloadArray = yield select(setPayloadTemp, payload.payloads);
+      yield all([
+        put(dialogueActions.setDialogue(
+          data.question_name,
+          data.phrases,
+          data.entities
+        )),
+        put(payloadActions.setPayload(payloadArray))
+      ]);
     }
     else {
       yield put(dialogueActions.fetchDialogueError(error.response.data.detail));
@@ -112,19 +111,18 @@ export function* setDialogue() {
 export function* updateDialogue() {
   while (true) {
     const action = yield take(dialogueActions.UPDATE_DIALOGUE);
-    const isValidAdditional = action.payload.additional_message ? yield select(isValidAdditionalState,action.payload.additional_message) : true;
+    const payloadArray = yield select(createPayloadArray);
+    const { isValidJson, validArray } = yield select(isValidPayloadState, payloadArray);
+    yield put(payloadActions.setPayloadError(validArray));
     const isValid  = yield select(isValidState);
-    if (isValid && isValidAdditional) {
-      const state = yield select(getDialogueState,action.payload);
+    if (isValid && isValidJson) {
+      const state = yield select(getDialogueState, action.payload, payloadArray);
       const { payload, error } = yield call(API.update,'questions',action.payload.question_id,state.temp);
       yield call(_clearDialogue,payload,error);
     }
-    // else {
-    //   if(!isValidAdditional) {
-    //     yield put(dialogueActions.setAdditionalError());
-    //   }
-    //   yield put(showError());
-    // }
+    else {
+      yield put(showError());
+    }
   }
 }
 

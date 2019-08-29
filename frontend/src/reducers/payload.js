@@ -138,6 +138,9 @@ const payloadReducer = (state = initialState, action) =>
       case actionTypes.SET_PAYLOAD_ERROR:
         action.payload.array.forEach((elm, idx) => draft.payloads[idx].contents.isValid = elm);
         return;
+      case actionTypes.SET_PAYLOAD:
+        draft.payloads = action.payload.payloads;
+        return;
       case SHOW_ERROR:
         draft.isShowError = true;
         return;

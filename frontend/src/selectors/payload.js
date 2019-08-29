@@ -95,8 +95,6 @@ function containEmpty(json_data){
       flag = true;
     }
   }
-  // const isValidJson = targetIndex.filter(item=>item === true).length === 0;
-
   return flag;
 }
 
@@ -105,6 +103,54 @@ export function isValidPayloadState(state, data){
   Object.keys(data).forEach((index) => {
     validArray.push(!containEmpty(data[index]));
   });
-  const isValidJson = validArray.filter(item=>item === false).length === 0;
+  const isValidJson = validArray.filter(item => item === false).length === 0;
   return {isValidJson, validArray};
+}
+
+export function setPayloadTemp(state, payload) {
+  let payloadArray = [];
+  Object.keys(payload).forEach((index) => {
+    const pld = payload[index];
+    let payloads = {
+      payloadTempId: pld.payload_temp_id,
+      contents: {
+        state: pld.state,
+        isValid: false,
+        errorCode: 'payload_empty_error',
+        text: pld.state === 'text' ? pld.message.text : '',
+        buttonsNumber: pld.state === 'buttons' ? pld.message.template.actions.length : 1,
+        buttonsAltText: pld.state === 'buttons' ? pld.message.altText : '',
+        buttonsActions: pld.state === 'buttons' ? pld.message.template.actions : [
+          {
+            type: 'message',
+            label: '',
+            text: '',
+            displayText: '',
+            data: ''
+          }
+        ],
+        confirmAltText: pld.state === 'confirm' ? pld.message.altText : '',
+        confirmActions: pld.state === 'confirm' ? pld.message.template.actions : [
+          {
+            type: 'message',
+            label: '',
+            text: '',
+            displayText: '',
+            data: ''
+          },
+          {
+            type: 'message',
+            label: '',
+            text: '',
+            displayText: '',
+            data: ''
+          }
+        ],
+        originalContentUrl: pld.state === 'image' ? pld.message.originalContentUrl : '',
+        previewImageUrl: pld.state === 'image' ? pld.message.previewImageUrl : ''
+      }
+    };
+    payloadArray.push(payloads);
+  });
+  return payloadArray;
 }

@@ -6,7 +6,7 @@ from .models import Question, Phrase, Entities, Payload, Entity, EntityValue, Sy
 class PayloadSerializer(serializers.ModelSerializer):
     class Meta:
         model = Payload
-        fields = ('state', 'message')
+        fields = ('payload_temp_id', 'state', 'message')
 
 
 # class AnswerSerializer(serializers.ModelSerializer):
