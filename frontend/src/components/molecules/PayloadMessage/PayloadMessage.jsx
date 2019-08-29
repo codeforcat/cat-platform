@@ -64,7 +64,7 @@ export default function PayloadMessage(props) {
           isValid={props.contents.isValid}
           actions={props.actions}
         />}
-        {(!props.isValid && props.isShowError) && <FormHelperText error>{props.errorMsg[props.errorCode]}</FormHelperText>}
+        {(!props.contents.isValid && props.isShowError) && <FormHelperText error>{props.errorMsg[props.contents.errorCode]}</FormHelperText>}
       </Grid>
       {props.length > 1 && <Grid item xs={2}>
         <Button

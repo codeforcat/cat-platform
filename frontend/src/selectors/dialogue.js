@@ -78,25 +78,13 @@ export function isValidAdditionalState(state, data){
   return !containEmpty(data);
 }
 
-export function getDialogueState(state, payload) {
-  const removeEmpty = obj => {
-    if(obj !== null) {
-      Object.keys(obj).forEach(key => {
-        if (obj[key] && typeof obj[key] === "object") removeEmpty(obj[key]);
-        else if (obj[key] === '') delete obj[key];
-      });
-    }
-    return obj;
-  };
-
+export function getDialogueState(state, payload, payloadArray) {
   return Object.assign({},state,{
     temp:{
       question_name: payload.question_name,
       phrases: payload.phrases,
       entities: payload.entities,
-      answers: payload.answers,
-      additional_state: payload.additional_state,
-      additional_message: removeEmpty(payload.additional_message)
+      payloads: payloadArray
     }
   });
 }
@@ -174,8 +162,7 @@ export function setDialogueTemp(state, payload) {
 export function isValidState(state) {
   return [
     state.dialogue.isValid,
-    state.dialogue.phrases.filter(item=>item.isValid === true).length === state.dialogue.phrases.length,
-    state.dialogue.answers.filter(item=>item.isValid === true).length === state.dialogue.answers.length
+    state.dialogue.phrases.filter(item=>item.isValid === true).length === state.dialogue.phrases.length
   ].every(item=>item);
 }
 

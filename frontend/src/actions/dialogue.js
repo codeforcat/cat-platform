@@ -11,24 +11,7 @@ export const INPUT_PHRASE_TEXT = 'INPUT_PHRASE_TEXT';
 export const ADD_PHRASE_TEXT = 'ADD_PHRASE_TEXT';
 export const DELETE_PHRASE_TEXT = 'DELETE_PHRASE_TEXT';
 export const INPUT_ENTITY = 'INPUT_ENTITY';
-export const INPUT_ANSWER_TEXT = 'INPUT_ANSWER_TEXT';
-export const INPUT_ADDITIONAL_STATE = 'INPUT_ADDITIONAL_STATE';
-export const INPUT_TEXT_MESSAGE = 'INPUT_TEXT_MESSAGE';
-export const INPUT_BUTTONS_NUMBER = 'INPUT_BUTTONS_NUMBER';
-export const INPUT_BUTTONS_ALTTEXT = 'INPUT_BUTTONS_ALTTEXT';
-export const INPUT_BUTTONS_TYPE = 'INPUT_BUTTONS_TYPE';
-export const INPUT_BUTTONS_DATA = 'INPUT_BUTTONS_DATA';
-export const INPUT_BUTTONS_LABEL = 'INPUT_BUTTONS_LABEL';
-export const INPUT_BUTTONS_TEXT = 'INPUT_BUTTONS_TEXT';
-export const INPUT_CONFIRM_ALTTEXT = 'INPUT_CONFIRM_ALTTEXT';
-export const INPUT_CONFIRM_TYPE = 'INPUT_CONFIRM_TYPE';
-export const INPUT_CONFIRM_DATA = 'INPUT_CONFIRM_DATA';
-export const INPUT_CONFIRM_LABEL = 'INPUT_CONFIRM_LABEL';
-export const INPUT_CONFIRM_TEXT = 'INPUT_CONFIRM_TEXT';
-export const INPUT_IMAGE_ORIGINAL = 'INPUT_IMAGE_ORIGINAL';
-export const INPUT_IMAGE_PREVIEW = 'INPUT_IMAGE_PREVIEW';
 export const CREATE_DIALOGUE = 'CREATE_DIALOGUE';
-export const SET_ADDITIONAL_ERROR = 'SET_ADDITIONAL_ERROR';
 export const SET_DIALOGUE_STATE = 'SET_DIALOGUE_STATE';
 export const SET_DIALOGUE = 'SET_DIALOGUE';
 export const SET_DIALOGUE_ALL = 'SET_DIALOGUE_ALL';
@@ -157,176 +140,14 @@ export function inputEntity(entity) {
   }
 }
 
-export function inputAnswerText(answer_text, idx) {
-  return {
-    type: INPUT_ANSWER_TEXT,
-    payload:{
-      answer_text: answer_text,
-      idx: parseInt(idx)
-    }
-  }
-}
-
-export function inputAdditionalState(state) {
-  return {
-    type: INPUT_ADDITIONAL_STATE,
-    payload:{
-      state: state
-    }
-  }
-}
-
-export function inputTextMessage(text) {
-  return {
-    type: INPUT_TEXT_MESSAGE,
-    payload:{
-      text: text
-    }
-  }
-}
-
-export function inputButtonsNumber(number) {
-  return {
-    type: INPUT_BUTTONS_NUMBER,
-    payload:{
-      number: parseInt(number)
-    }
-  }
-}
-
-export function inputButtonsAltText(altText) {
-  return {
-    type: INPUT_BUTTONS_ALTTEXT,
-    payload:{
-      altText: altText
-    }
-  }
-}
-
-export function inputButtonsType(type, idx) {
-  return {
-    type: INPUT_BUTTONS_TYPE,
-    payload:{
-      type: type,
-      idx: parseInt(idx)
-    }
-  }
-}
-
-export function inputButtonsData(data, idx) {
-  return {
-    type: INPUT_BUTTONS_DATA,
-    payload:{
-      data: data,
-      idx: parseInt(idx)
-    }
-  }
-}
-
-export function inputButtonsLabel(label, idx) {
-  return {
-    type: INPUT_BUTTONS_LABEL,
-    payload:{
-      label: label,
-      idx: parseInt(idx)
-    }
-  }
-}
-
-export function inputButtonsText(text, idx) {
-  return {
-    type: INPUT_BUTTONS_TEXT,
-    payload:{
-      text: text,
-      idx: parseInt(idx)
-    }
-  }
-}
-
-export function inputConfirmAltText(altText) {
-  return {
-    type: INPUT_CONFIRM_ALTTEXT,
-    payload:{
-      altText: altText
-    }
-  }
-}
-
-export function inputConfirmType(type, idx) {
-  return {
-    type: INPUT_CONFIRM_TYPE,
-    payload:{
-      type: type,
-      idx: parseInt(idx)
-    }
-  }
-}
-
-export function inputConfirmData(data, idx) {
-  return {
-    type: INPUT_CONFIRM_DATA,
-    payload:{
-      data: data,
-      idx: parseInt(idx)
-    }
-  }
-}
-
-export function inputConfirmLabel(label, idx) {
-  return {
-    type: INPUT_CONFIRM_LABEL,
-    payload:{
-      label: label,
-      idx: parseInt(idx)
-    }
-  }
-}
-
-export function inputConfirmText(text, idx) {
-  return {
-    type: INPUT_CONFIRM_TEXT,
-    payload:{
-      text: text,
-      idx: parseInt(idx)
-    }
-  }
-}
-
-export function inputImageOriginal(url) {
-  return {
-    type: INPUT_IMAGE_ORIGINAL,
-    payload:{
-      url: url
-    }
-  }
-}
-
-export function inputImagePreview(url) {
-  return {
-    type: INPUT_IMAGE_PREVIEW,
-    payload:{
-      url: url
-    }
-  }
-}
-
-export function createDialogue(question_name, phrases, entities, answers, additional_state, additional_message) {
+export function createDialogue(question_name, phrases, entities) {
   return {
     type: CREATE_DIALOGUE,
     payload:{
       question_name: question_name,
       phrases: phrases,
-      entities: entities,
-      answers: answers,
-      additional_state: additional_state,
-      additional_message: additional_message
+      entities: entities
     }
-  }
-}
-
-export function setAdditionalError() {
-  return {
-    type: SET_ADDITIONAL_ERROR
   }
 }
 
@@ -339,33 +160,25 @@ export function setDialogueState(question_id) {
   }
 }
 
-export function setDialogue(question_name, phrases, entities, answers, additional_state, buttons, confirm, image) {
+export function setDialogue(question_name, phrases, entities) {
   return {
     type: SET_DIALOGUE,
     payload:{
       question_name: question_name,
       phrases: phrases,
-      entities: entities,
-      answers: answers,
-      additional_state: additional_state,
-      buttons: buttons,
-      confirm: confirm,
-      image: image
+      entities: entities
     }
   }
 }
 
-export function updateDialogue(question_id, question_name, phrases, entities, answers, additional_state, additional_message) {
+export function updateDialogue(question_id, question_name, phrases, entities) {
   return {
     type: UPDATE_DIALOGUE,
     payload:{
       question_id: parseInt(question_id),
       question_name: question_name,
       phrases: phrases,
-      entities: entities,
-      answers: answers,
-      additional_state: additional_state,
-      additional_message: additional_message
+      entities: entities
     }
   }
 }

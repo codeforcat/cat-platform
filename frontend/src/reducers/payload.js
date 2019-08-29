@@ -5,7 +5,7 @@ import {
 import produce from 'immer';
 
 const contents = {
-  state: 'none',
+  state: 'text',
   isValid: false,
   errorCode: 'payload_empty_error',
   text: '',
@@ -50,7 +50,7 @@ const initialState = {
   ],
   isShowError: false,
   errorMsg: {
-    payload_empty_error: 'このpayloadのすべての欄に入力してください'
+    payload_empty_error: 'この応答メッセージのすべての欄に入力してください'
   }
 };
 
@@ -130,6 +130,16 @@ const payloadReducer = (state = initialState, action) =>
         return;
       case actionTypes.INPUT_IMAGE_PREVIEW:
         draft.payloads[action.payload.idx].contents.previewImageUrl = action.payload.url;
+        return;
+      case actionTypes.CLEAR_PAYLOAD:
+        draft.payloads = [{payloadTempId: 0, contents: contents}];
+        draft.isShowError = false;
+        return;
+      case actionTypes.SET_PAYLOAD_ERROR:
+        action.payload.array.forEach((elm, idx) => draft.payloads[idx].contents.isValid = elm);
+        return;
+      case SHOW_ERROR:
+        draft.isShowError = true;
         return;
     }
   });
