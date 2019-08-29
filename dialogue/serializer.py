@@ -41,7 +41,7 @@ class QuestionSerializer(WritableNestedModelSerializer):
 
     class Meta:
         model = Question
-        fields = ('question_id', 'question_name', 'phrases', 'entities', 'payloads')
+        fields = ('question_id', 'question_name', 'phrases', 'entities', 'random', 'payloads')
 
 
 class SynonymSerializer(serializers.ModelSerializer):

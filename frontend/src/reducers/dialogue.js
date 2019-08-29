@@ -18,10 +18,12 @@ const initialState = {
       errorCode: 'phrase_empty_error'
     }
   ],
+  random: false,
   temp: {
     question_name: '',
     phrases: [],
     entities: [],
+    random: false,
     payloads: []
   },
   list: [],
@@ -56,6 +58,7 @@ export default function (state = initialState,action) {
         question_name: action.payload.question_name,
         phrases: action.payload.phrases,
         entities: action.payload.entities,
+        random: action.payload.random,
         isValid: action.payload.question_name !== ''
       });
     case actionTypes.SET_DIALOGUE_ALL:
@@ -123,10 +126,12 @@ export default function (state = initialState,action) {
             isValid: false
           }
         ],
+        random: false,
         temp: {
           question_name: '',
           phrases: [],
           entities: [],
+          random: false,
           payloads: []
         },
         isUpdateStateEnable: false,
@@ -150,6 +155,8 @@ export default function (state = initialState,action) {
         targetDeleteName: '',
         targetDeleteId: 0
       });
+    case actionTypes.INPUT_RANDOM_STATE:
+      return Object.assign({},state,{random: action.payload.random});
     case SHOW_ERROR:
       return Object.assign({},state,{isShowError: true});
   }

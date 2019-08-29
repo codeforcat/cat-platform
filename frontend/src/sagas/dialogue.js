@@ -97,7 +97,8 @@ export function* setDialogue() {
         put(dialogueActions.setDialogue(
           data.question_name,
           data.phrases,
-          data.entities
+          data.entities,
+          data.random
         )),
         put(payloadActions.setPayload(payloadArray))
       ]);

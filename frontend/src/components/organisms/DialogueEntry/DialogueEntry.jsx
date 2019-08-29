@@ -4,6 +4,7 @@ import QuestionIdField from '../../molecules/QuestionIdField/QuestionIdField.jsx
 import QuestionNameField from '../../molecules/QuestionNameField/QuestionNameField.jsx';
 import PhraseFields from '../../molecules/PhraseFields/PhraseFields.jsx';
 import EntityIdFieldForDialogue from '../../molecules/EntityIdFieldForDialogue/EntityIdFieldForDialogue.jsx';
+import RandomCheckbox from '../../molecules/RandomCheckbox/RandomCheckbox.jsx';
 import PayloadContainer from '../../../containers/PayloadContainer/PayloadContainer';
 import DialogueSendButton from '../../molecules/DialogueSendButton/DialogueSendButton.jsx';
 
@@ -39,6 +40,10 @@ export default function DialogueEntry(props) {
         exists_entities={props.exists_entities}
         actions={props.actions}
       />
+      <RandomCheckbox
+        random={props.random}
+        actions={props.actions}
+      />
       <PayloadContainer/>
       <DialogueSendButton
         isUpdateStateEnable={props.isUpdateStateEnable}
@@ -46,11 +51,7 @@ export default function DialogueEntry(props) {
         question_name={props.question_name}
         phrases={props.phrases}
         entities={props.entities}
-        answers={props.answers}
-        additional_state={props.additional_state}
-        buttons={props.buttons}
-        confirm={props.confirm}
-        image={props.image}
+        random={props.random}
         actions={props.actions}
       />
     </Container>

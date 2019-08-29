@@ -22,6 +22,7 @@ export const PRE_DELETE_DIALOGUE = 'PRE_DELETE_DIALOGUE';
 export const DELETE_DIALOGUE = 'DELETE_DIALOGUE';
 export const CLOSE_DELETE_DIALOG = 'CLOSE_DELETE_DIALOG';
 export const SEARCH_DIALOGUE = 'SEARCH_DIALOGUE';
+export const INPUT_RANDOM_STATE = 'INPUT_RANDOM_STATE';
 
 export function initDialogue() {
   return {
@@ -140,13 +141,14 @@ export function inputEntity(entity) {
   }
 }
 
-export function createDialogue(question_name, phrases, entities) {
+export function createDialogue(question_name, phrases, entities, random) {
   return {
     type: CREATE_DIALOGUE,
     payload:{
       question_name: question_name,
       phrases: phrases,
-      entities: entities
+      entities: entities,
+      random: random
     }
   }
 }
@@ -160,25 +162,27 @@ export function setDialogueState(question_id) {
   }
 }
 
-export function setDialogue(question_name, phrases, entities) {
+export function setDialogue(question_name, phrases, entities, random) {
   return {
     type: SET_DIALOGUE,
     payload:{
       question_name: question_name,
       phrases: phrases,
-      entities: entities
+      entities: entities,
+      random: random
     }
   }
 }
 
-export function updateDialogue(question_id, question_name, phrases, entities) {
+export function updateDialogue(question_id, question_name, phrases, entities, random) {
   return {
     type: UPDATE_DIALOGUE,
     payload:{
       question_id: parseInt(question_id),
       question_name: question_name,
       phrases: phrases,
-      entities: entities
+      entities: entities,
+      random: random
     }
   }
 }
@@ -235,6 +239,15 @@ export function searchDialogue(word) {
     type: SEARCH_DIALOGUE,
     payload:{
       word: word
+    }
+  }
+}
+
+export function inputRandomState(random) {
+  return {
+    type: INPUT_RANDOM_STATE,
+    payload:{
+      random: random
     }
   }
 }

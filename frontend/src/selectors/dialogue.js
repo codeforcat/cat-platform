@@ -25,6 +25,7 @@ export function getDialogueState(state, payload, payloadArray) {
       question_name: payload.question_name,
       phrases: payload.phrases,
       entities: payload.entities,
+      random: payload.random,
       payloads: payloadArray
     }
   });
@@ -41,7 +42,8 @@ export function setDialogueTemp(state, payload) {
   return Object.assign({}, state, {
     question_name: payload.question_name,
     phrases: phrases,
-    entities: payload.entities
+    entities: payload.entities,
+    random: payload.random
   });
 }
 

@@ -11,18 +11,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function DialogueSendButton(props) {
   const classes = useStyles();
-  const additional_message = () => {
-    switch (props.additional_state) {
-      case 'buttons':
-        return props.buttons;
-      case 'confirm':
-        return props.confirm;
-      case 'image':
-        return props.image;
-      default:
-        return null;
-    }
-  };
 
   return (
     <div className={classes.field}>
@@ -40,9 +28,7 @@ export default function DialogueSendButton(props) {
               props.question_name,
               props.phrases,
               props.entities,
-              props.answers,
-              props.additional_state,
-              additional_message()
+              props.random
             )}
           >
             create
@@ -56,9 +42,7 @@ export default function DialogueSendButton(props) {
               props.question_name,
               props.phrases,
               props.entities,
-              props.answers,
-              props.additional_state,
-              additional_message()
+              props.random
             )}
           >
             update
