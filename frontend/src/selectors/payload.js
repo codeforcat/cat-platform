@@ -3,6 +3,30 @@ export function createPayloadArray(state) {
   let newPayloadArray = [];
   Object.keys(items).forEach((index) => {
     const contents = items[index].contents;
+    let newActionsArray = [];
+    const shapedActions = (actionsArray) => {
+      Object.keys(actionsArray).forEach((idx) => {
+        const actions = () => {
+          switch (actionsArray[idx].type) {
+            case 'message':
+              return {
+                type: actionsArray[idx].type,
+                label: actionsArray[idx].label,
+                text: actionsArray[idx].text
+              };
+            case 'postback':
+              return {
+                type: actionsArray[idx].type,
+                label: actionsArray[idx].label,
+                displayText: actionsArray[idx].displayText,
+                data: actionsArray[idx].data
+              };
+          };
+        };
+        newActionsArray.push(actions());
+      });
+      return newActionsArray;
+    };
     const shapedPayload = () => {
       switch (contents.state) {
         case 'text':
@@ -17,7 +41,7 @@ export function createPayloadArray(state) {
             template: {
               type: 'buttons',
               text: contents.buttonsAltText,
-              actions: contents.buttonsActions
+              actions: shapedActions(contents.buttonsActions)
             }
           };
         case 'confirm':
@@ -27,7 +51,7 @@ export function createPayloadArray(state) {
             template: {
               type: 'confirm',
               text: contents.confirmAltText,
-              actions: contents.confirmActions
+              actions: shapedActions(contents.confirmActions)
             }
           };
         case 'image':
