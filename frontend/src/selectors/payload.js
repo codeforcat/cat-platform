@@ -3,6 +3,7 @@ export function createPayloadArray(state) {
   let newPayloadArray = [];
   Object.keys(items).forEach((index) => {
     const contents = items[index].contents;
+    const payloadTempId = items[index].payloadTempId;
     let newActionsArray = [];
     const shapedActions = (actionsArray) => {
       Object.keys(actionsArray).forEach((idx) => {
@@ -31,6 +32,7 @@ export function createPayloadArray(state) {
       switch (contents.state) {
         case 'text':
           return {
+            payload_temp_id: payloadTempId,
             state: 'text',
             message: {
               type: 'text',
@@ -39,6 +41,7 @@ export function createPayloadArray(state) {
           };
         case 'buttons':
           return {
+            payload_temp_id: payloadTempId,
             state: 'buttons',
             message: {
               type: 'template',
@@ -52,6 +55,7 @@ export function createPayloadArray(state) {
           };
         case 'confirm':
           return {
+            payload_temp_id: payloadTempId,
             state: 'confirm',
             message: {
               type: 'template',
@@ -65,6 +69,7 @@ export function createPayloadArray(state) {
           };
         case 'image':
           return {
+            payload_temp_id: payloadTempId,
             state: 'confirm',
             message: {
               type: 'image',
