@@ -4,7 +4,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import SearchIcon from '@material-ui/icons/Search';
 import TableList from '../../atoms/TableList/TableList.jsx';
 
-const header = ['Questionの名前', 'Phrases', 'Answer']
+const header = ['Questionの名前', 'Phrases', 'Payload']
 
 export default function DialogueTable(props) {
   return (

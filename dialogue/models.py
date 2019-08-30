@@ -70,8 +70,9 @@ class Payload(Model):
     payload_id = models.AutoField(db_column='PAYLOAD ID', primary_key=True)
     question_id = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='payload')
     payload_temp_id = models.IntegerField(null=True, blank=True)
-    state = models.CharField(max_length=20, default='none')
+    state = models.CharField(max_length=20, default='text')
     message = JSONField(default=dict, null=True, blank=True)
+    text = models.TextField(null=True, blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
 

@@ -37,7 +37,8 @@ export function createPayloadArray(state) {
             message: {
               type: 'text',
               text: contents.text
-            }
+            },
+            text: contents.text
           };
         case 'buttons':
           return {
@@ -51,7 +52,8 @@ export function createPayloadArray(state) {
                 text: contents.buttonsAltText,
                 actions: shapedActions(contents.buttonsActions)
               }
-            }
+            },
+            text: contents.buttonsAltText
           };
         case 'confirm':
           return {
@@ -65,7 +67,8 @@ export function createPayloadArray(state) {
                 text: contents.confirmAltText,
                 actions: shapedActions(contents.confirmActions)
               }
-            }
+            },
+            text: contents.confirmAltText
           };
         case 'image':
           return {
@@ -122,6 +125,7 @@ export function setPayloadTemp(state, payload) {
         state: pld.state,
         isValid: false,
         errorCode: 'payload_empty_error',
+        payloadText: pld.text,
         text: pld.state === 'text' ? pld.message.text : '',
         buttonsNumber: pld.state === 'buttons' ? pld.message.template.actions.length : 1,
         buttonsAltText: pld.state === 'buttons' ? pld.message.altText : '',

@@ -10,11 +10,11 @@ export function setDialogueList(state, payload) {
     dialogueObj[index].phrases.map((item, i) => {
       phraseTexts.push(item.phrase_text)
     });
-    let answerTexts = [];
-    // dialogueObj[index].answers.map((item, i) => {
-    //   answerTexts.push(item.answer_text)
-    // });
-    rows.push(createData(dialogueObj[index].question_id, dialogueObj[index].question_name, phraseTexts.join(', '), answerTexts.join(', ')));
+    let payloadTexts = [];
+    dialogueObj[index].payloads.map((item, i) => {
+      payloadTexts.push(item.text)
+    });
+    rows.push(createData(dialogueObj[index].question_id, dialogueObj[index].question_name, phraseTexts.join(', '), payloadTexts.join(', ')));
   });
   return rows;
 }

@@ -8,6 +8,7 @@ const contents = {
   state: 'text',
   isValid: false,
   errorCode: 'payload_empty_error',
+  payloadText: '',
   text: '',
   buttonsNumber: 1,
   buttonsAltText: '',

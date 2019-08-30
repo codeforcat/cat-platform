@@ -12,7 +12,7 @@ class QuestionViewSet(viewsets.ViewSet, generics.ListCreateAPIView, generics.Ret
     queryset = Question.objects.filter()
     serializer_class = QuestionSerializer
     filter_backends = (filters.SearchFilter, filters.OrderingFilter)
-    search_fields = ('phrase__phrase_text',)
+    search_fields = ('phrase__phrase_text', 'payload__text')
     ordering_fields = ('question_name', 'phrase__phrase_text')
     ordering = ('-question_id',)
     pagination_class = CustomPageNumber
