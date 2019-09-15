@@ -2,15 +2,13 @@ from django.db import models
 from django_mysql.models import JSONField, Model
 
 
-class Question(Model):
+class Question(models.Model):
     class Meta:
         db_table = 'question'
 
     question_id = models.AutoField(db_column='QUESTION ID', primary_key=True)
     question_name = models.CharField(max_length=100, unique=True)
     intent_id = models.CharField(max_length=100, null=True, blank=True)
-    # additional_state = models.CharField(max_length=20, default='none')
-    # additional_message = JSONField(default=dict, null=True, blank=True)
     random = models.BooleanField(default=False)
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
@@ -47,20 +45,6 @@ class Entities(models.Model):
 
     def __str__(self):
         return self.entity_name
-
-
-# class Answer(models.Model):
-#     class Meta:
-#         db_table = 'answer'
-#
-#     answer_id = models.AutoField(db_column='ANSWER ID', primary_key=True)
-#     question_id = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='answer')
-#     answer_text = models.TextField()
-#     created_date = models.DateTimeField(auto_now_add=True)
-#     modified_date = models.DateTimeField(auto_now=True)
-#
-#     def __str__(self):
-#         return self.answer_text
 
 
 class Payload(Model):
